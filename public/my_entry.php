@@ -6,19 +6,21 @@ ini_set('display_startup_errors', 1);
 
 header('Access-Control-Allow-Origin: *');
 
-$dbservername = "localhost";
+/*$dbservername = "localhost";
 $dbusername = "root";
 $dbpassword = "";
 $dbport = "3306";
-$dbname = "my-entry";
+$dbname = "my-entry";*/
 
 $action = $_GET['action'];
+$userNameID = $_GET['userNameID'];
 
-/*$dbservername = "localhost";
+
+$dbservername = "localhost";
 $dbusername = "root";
 $dbpassword = "123";
 $dbport = "7188";
-$dbname = "instagram_smm";*/
+$dbname = "instagram_smm";
 
 /*$dbservername = "localhost";
 $dbusername = "cm94574_smarttoy";
