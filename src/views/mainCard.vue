@@ -74,7 +74,8 @@ export default {
   name: 'mainCard',
   data () {
     return {
-      avatar: false
+      avatar: false,
+      user: ''
      }
   },
   methods:{
@@ -99,11 +100,14 @@ export default {
           this.linkButtonHref = response.data.userLinkButtonHref;
           this.footer = false;
         }
-      });
+        if (this.mainCardName){alert('123')}
+        
+      })
     }
   },
   created(){
-    this.loadMainCardInf('dima');
+    this.user = this.$router.currentRoute.params['user'];
+    this.loadMainCardInf(this.user);
   }
 }
 </script>

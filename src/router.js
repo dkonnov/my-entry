@@ -12,7 +12,7 @@ export default new Router({
       component: hollowCard
     },
     {
-      path: '/dima',
+      path: '/:user',
       component: mainCard
     }
   ],

@@ -153,16 +153,18 @@ if ($action == 'addAvatar'){
 
 // get info for main card
 if ($action == 'loadMainCard'){
-    $result  = $link->query("SELECT background, avatar, userInfoName, userInfoSpecialization, userInfoAbout, userLinkButtonAction, userInfoEMail, userLinkButtonName, userInfoPhone, userInfoWhatsApp, userInfoWhatsAppText from my_entry_users WHERE name = '$userNameID'");
+    $result  = $link->query("SELECT id, background, avatar, userInfoName, userInfoSpecialization, userInfoAbout, userLinkButtonAction, userInfoEMail, userLinkButtonName, userInfoPhone, userInfoWhatsApp, userInfoWhatsAppText from my_entry_users WHERE name = '$userNameID'");
     $row = $result->fetch_assoc();
-    if ($row[userLinkButtonAction] == 'notShow'){$userLinkButtonHref = "";}
-    if ($row[userLinkButtonAction] == 'wa'){
-        $row[userInfoWhatsAppText] = urlencode($row[userInfoWhatsAppText]);
-        $userLinkButtonHref = "https://wa.me/$row[userInfoWhatsApp]?text=$row[userInfoWhatsAppText]";
-    }
-    if ($row[userLinkButtonAction] == 'tel'){$userLinkButtonHref = "tel:$row[userInfoPhone]";}
-    if ($row[userLinkButtonAction] == 'email'){$userLinkButtonHref = "mailto:$row[userInfoEMail]";}
-    echo "{\"background\": \"$row[background]\", \"avatar\": \"$row[avatar]\", \"userInfoName\": \"$row[userInfoName]\", \"userInfoSpecialization\": \"$row[userInfoSpecialization]\", \"userInfoAbout\": \"$row[userInfoAbout]\", \"userLinkButtonAction\": \"$row[userLinkButtonAction]\", \"userLinkButtonName\": \"$row[userLinkButtonName]\",\"userLinkButtonHref\": \"$userLinkButtonHref\"}";
+ 
+        if ($row[userLinkButtonAction] == 'notShow'){$userLinkButtonHref = "";}
+        if ($row[userLinkButtonAction] == 'wa'){
+            $row[userInfoWhatsAppText] = urlencode($row[userInfoWhatsAppText]);
+            $userLinkButtonHref = "https://wa.me/$row[userInfoWhatsApp]?text=$row[userInfoWhatsAppText]";
+        }
+        if ($row[userLinkButtonAction] == 'tel'){$userLinkButtonHref = "tel:$row[userInfoPhone]";}
+        if ($row[userLinkButtonAction] == 'email'){$userLinkButtonHref = "mailto:$row[userInfoEMail]";}
+        echo "{\"background\": \"$row[background]\", \"avatar\": \"$row[avatar]\", \"userInfoName\": \"$row[userInfoName]\", \"userInfoSpecialization\": \"$row[userInfoSpecialization]\", \"userInfoAbout\": \"$row[userInfoAbout]\", \"userLinkButtonAction\": \"$row[userLinkButtonAction]\", \"userLinkButtonName\": \"$row[userLinkButtonName]\",\"userLinkButtonHref\": \"$userLinkButtonHref\"}";
+   
 }
 if ($action == 'loadUserSocButtons'){
     $result  = $link->query("SELECT userInfoInstagram, userInfoWhatsApp, userInfoWhatsAppText, userInfoFacebook, userInfoVK, userInfoEMail, userInfoPhone from my_entry_users WHERE name = '$userNameID'");
