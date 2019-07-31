@@ -39,7 +39,7 @@ export default {
   },
   beforeMount(){ 
     axios
-      .get('./my-entry/my_entry.php?action=getRandomBackground')
+      .get('public/my_entry.php?action=getRandomBackground')
       .then(response => {
         document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/'+response.data+'\')';
       })

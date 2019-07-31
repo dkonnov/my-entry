@@ -1,8 +1,8 @@
 module.exports = {
   devServer: {
     proxy: {
-      '^/my-entry/': {
-        target: 'http://localhost:3000/',
+      '^/public': {
+        target: 'http://10.28.11.66:4001/my-entry-3/',
         changeOrigin: true, // so CORS doesn't bite us. 
       }
     }

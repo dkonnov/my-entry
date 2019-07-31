@@ -65,7 +65,7 @@ export default {
     },
     login(){
       axios
-      .get('./my-entry/my_entry.php?action=authorization&email=' + this.emailLogin + '&password=' + this.password)
+      .get('public/my_entry.php?action=authorization&email=' + this.emailLogin + '&password=' + this.password)
       .then(response => {
         if (response.data == false) {
           eventEmitter.$emit('showMessage', 'Такой пользователь не обнаружен. Пожалуйста, проверьте вводимые данные и попробуйте снова. Если вы не зарегистрированы, то мы будем рады, если вы станете частью нашей системы.', 'toRegistration');
@@ -81,7 +81,7 @@ export default {
           eventEmitter.$emit('showMessage', 'Привет! Рады видеть тебя!');
           // загрузим фон
           axios
-          .get('./my-entry/my_entry.php?action=getBackground')
+          .get('public/my_entry.php?action=getBackground')
           .then(response => {
             // сменим фон
             if (response.data) {document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/'+response.data+'\')';}

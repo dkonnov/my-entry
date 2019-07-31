@@ -57,7 +57,7 @@ export default {
   methods: {
     changeLoginNameFormSave: function(){
       axios
-      .get('./my-entry/my_entry.php?action=changeLoginNameFormSave&name=' + this.nameRegistration)
+      .get('public/my_entry.php?action=changeLoginNameFormSave&name=' + this.nameRegistration)
       .then(response => {
         $("#addressChangeForm").modal('hide');
         this.nameRegistration = '';
@@ -68,7 +68,7 @@ export default {
     nameRegistrationCheck() {
       if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.nameRegistration)){
         axios
-        .get('./my-entry/my_entry.php?action=nameRegistrationCheck&name=' + this.nameRegistration)
+        .get('public/my_entry.php?action=nameRegistrationCheck&name=' + this.nameRegistration)
         .then(response => {
           if (response.data == true) {
             this.nameRegistrationOk = false;

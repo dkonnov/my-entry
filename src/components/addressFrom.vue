@@ -39,7 +39,7 @@ export default {
   created(){
     eventEmitter.$on('showAddressFrom', () => {
       axios
-      .get('./my-entry/my_entry.php?action=getUserName')
+      .get('public/my_entry.php?action=getUserName')
       .then(response => {
         if (response.data){
           document.getElementById('QRCodeImg').src = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=http://my-entry.ru/' + response.data + '&chld=H&choe=UTF-8';

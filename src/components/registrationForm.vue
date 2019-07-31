@@ -146,7 +146,7 @@ export default {
     nameRegistrationCheck() {
       if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.nameRegistration)){
         axios
-        .get('./my-entry/my_entry.php?action=nameRegistrationCheck&name=' + this.nameRegistration)
+        .get('public/my_entry.php?action=nameRegistrationCheck&name=' + this.nameRegistration)
         .then(response => {
           if (response.data == true) {
             this.nameRegistrationOk = false;
@@ -167,7 +167,7 @@ export default {
       if (checkEmail(this.emailRegistration))
       {
         axios
-        .get('./my-entry/my_entry.php?action=emailRegistrationCheck&email=' + this.emailRegistration)
+        .get('public/my_entry.php?action=emailRegistrationCheck&email=' + this.emailRegistration)
         .then(response => {
           if (response.data == true) {this.emailRegistrationOk = false;}
         });

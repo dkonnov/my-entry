@@ -55,7 +55,7 @@ export default {
   methods:{
     showUserInfoSave() {
       axios
-      .get('./my-entry/my_entry.php?action=showUserInfoSave&userInfoName=' + this.userInfoName + '&userInfoSpecialization=' + this.userInfoSpecialization + '&userInfoAbout=' + this.userInfoAbout)
+      .get('public/my_entry.php?action=showUserInfoSave&userInfoName=' + this.userInfoName + '&userInfoSpecialization=' + this.userInfoSpecialization + '&userInfoAbout=' + this.userInfoAbout)
       .then(response => {
         $("#aboutUserForm").modal('hide');
         //this.loadMainCard();
@@ -65,7 +65,7 @@ export default {
   created() {
     eventEmitter.$on('showAboutUserForm', () => {
       axios
-      .get('./my-entry/my_entry.php?action=showUserInfo')
+      .get('public/my_entry.php?action=showUserInfo')
       .then(response => {
         this.userInfoName = response.data.userInfoName;
         this.userInfoSpecialization = response.data.userInfoSpecialization;

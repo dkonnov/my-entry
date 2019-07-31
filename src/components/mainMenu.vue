@@ -107,7 +107,7 @@ export default {
     },
     logout() {
       axios
-      .get('./my-entry/my_entry.php?action=logout')
+      .get('public/my_entry.php?action=logout')
       .then(response => {
         this.buttonLogin = true;
         eventEmitter.$emit('showMessage', 'Надеемся вы скоро вернетесь!');        
@@ -119,7 +119,7 @@ export default {
       this.buttonLogin  = false;
       // имя 
       axios
-        .get('./my-entry/my_entry.php?action=getUserName')
+        .get('public/my_entry.php?action=getUserName')
         .then(response => {
         if (response.data) {this.userName = response.data;}
       });

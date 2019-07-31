@@ -133,7 +133,7 @@ export default {
   methods: {
     showUserInfoSocialSave() {
       axios
-      .get('./my-entry/my_entry.php?action=showUserInfoSocialSave&userInfoInstagram=' + this.userInfoInstagram + '&userInfoWhatsApp=' + this.userInfoWhatsApp + '&userInfoEMail=' + this.userInfoEMail + '&userInfoPhone=' + this.userInfoPhone + '&userInfoWhatsAppText=' + this.userInfoWhatsAppText  + '&userInfoFacebook=' + this.userInfoFacebook  + '&userInfoVK=' + this.userInfoVK)
+      .get('public/my_entry.php?action=showUserInfoSocialSave&userInfoInstagram=' + this.userInfoInstagram + '&userInfoWhatsApp=' + this.userInfoWhatsApp + '&userInfoEMail=' + this.userInfoEMail + '&userInfoPhone=' + this.userInfoPhone + '&userInfoWhatsAppText=' + this.userInfoWhatsAppText  + '&userInfoFacebook=' + this.userInfoFacebook  + '&userInfoVK=' + this.userInfoVK)
       .then(response => {
         $("#contactsForm").modal('hide');
         //this.loadMainCard();
@@ -143,7 +143,7 @@ export default {
   created(){
     eventEmitter.$on('showContactsForm', () => {
       axios
-      .get('./my-entry/my_entry.php?action=showUserInfoSocialForm')
+      .get('public/my_entry.php?action=showUserInfoSocialForm')
       .then(response => {
         this.userInfoInstagram = response.data.userInfoInstagram;
         this.userInfoWhatsApp = response.data.userInfoWhatsApp;
