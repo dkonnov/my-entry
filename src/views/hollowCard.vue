@@ -107,6 +107,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import {eventEmitter} from "./../main"
 
 export default {
@@ -125,6 +126,13 @@ export default {
     eventEmitter.$on('hideHollowCard', () => {
       this.hollowCard = false;
     });
+  },
+  beforeMount(){ 
+    axios
+      .get('public/my_entry.php?action=getRandomBackground')
+      .then(response => {
+        document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/'+response.data+'\')';
+      })
   }
 }
 </script>

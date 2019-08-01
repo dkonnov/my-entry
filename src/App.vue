@@ -36,14 +36,6 @@ export default {
   components: {
     mainMenu, avatarForm, loginForm, registrationForm, modalWindow,
     addressFrom, addressChangeFrom, aboutUserForm, contactsForm
-  },
-  beforeMount(){ 
-    axios
-      .get('public/my_entry.php?action=getRandomBackground')
-      .then(response => {
-        document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/'+response.data+'\')';
-      })
-    
   }
 }
 </script>

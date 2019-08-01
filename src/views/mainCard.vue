@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row" v-show="mainCard">
   
       <div class="card card-profile" style="max-width: 500px">
 
@@ -75,7 +75,9 @@ export default {
   data () {
     return {
       avatar: false,
-      user: ''
+      user: '',
+      mainCard: true,
+      userInfoSoc: ''
      }
   },
   methods:{
@@ -99,9 +101,24 @@ export default {
           this.linkButtonName = response.data.userLinkButtonName;
           this.linkButtonHref = response.data.userLinkButtonHref;
           this.footer = false;
+          // загрузим соц сети
+          axios
+          .get('public/my_entry.php?action=loadUserSocButtons&userNameID=' + value)
+          .then(response => {
+            this.userInfoSoc = response.data;
+          });
+          // загрузим услуги
+          axios
+          .get('public/my_entry.php?action=loadServices&userNameID=' + value)
+          .then(response => {
+            this.userServices = response.data;
+          });
         }
-        if (this.mainCardName){alert('123')}
-        
+        //такой страници не существует
+        if (!this.mainCardName){
+          this.$router.push('/')
+          eventEmitter.$emit('showMessage', 'Ой! Такой страницы не существует :(');
+        }
       })
     }
   },
