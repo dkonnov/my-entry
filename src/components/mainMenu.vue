@@ -110,8 +110,10 @@ export default {
       .get('public/my_entry.php?action=logout')
       .then(response => {
         this.buttonLogin = true;
-        eventEmitter.$emit('showMessage', 'Надеемся вы скоро вернетесь!');        
+        eventEmitter.$emit('showMessage', 'Надеемся вы скоро вернетесь!');
+        this.$router.push('/');
       });
+      
     }
   },
   created() {

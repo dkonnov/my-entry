@@ -1,5 +1,5 @@
 <template>
- <div class="card" v-show="hollowCard"> 
+<div class="card"> 
 <div class="card-body">
   <div class="row">
   <div class="col-md-6">
@@ -114,18 +114,13 @@ export default {
   name: 'hollowCard',
   data () {
     return {
-      hollowCard: true
+    //  hollowCard: true
      }
   },
   methods: {
     showRegistrationForm() {
-      eventEmitter.$emit('showAvatarForm');
+      eventEmitter.$emit('showRegistrationForm');
     }
-  },
-  created() {
-    eventEmitter.$on('hideHollowCard', () => {
-      this.hollowCard = false;
-    });
   },
   beforeMount(){ 
     axios
@@ -136,4 +131,3 @@ export default {
   }
 }
 </script>
-

@@ -40,4 +40,8 @@ export default {
 }
 </script>
 
-
+<style>
+.login-page .page-header .container {
+    padding-top: 15vh;
+}
+</style>

@@ -85,8 +85,12 @@ export default {
           .then(response => {
             // сменим фон
             if (response.data) {document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/'+response.data+'\')';}
-            // уберем приветсвенное окно
-            eventEmitter.$emit('hideHollowCard');
+            axios
+            .get('public/my_entry.php?action=getUserName')
+            .then(response => {
+              if (response.data) {this.$router.push('/' + response.data);}
+            });
+            //this.$router.push('/dima');
             // покажем меню
             eventEmitter.$emit('showMenu');
           });
