@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <integrationPixel />
     <mainMenu />
     <div id="backgroundDiv" class="page-header header-filter" style="background-size: cover; background-position: top center;">
       <!-- Desktop -->  
@@ -15,10 +16,12 @@
     <addressChangeFrom />
     <aboutUserForm />
     <contactsForm />
+    <integrationForm />
   </div>
 </template>
 
 <script>
+import integrationPixel from './components/integrationPixel.vue'
 import mainMenu from './components/mainMenu.vue'
 import avatarForm from './components/avatarForm.vue'
 import loginForm from './components/loginForm.vue'
@@ -28,14 +31,13 @@ import addressFrom from './components/addressFrom.vue'
 import addressChangeFrom from './components/addressChangeFrom.vue'
 import aboutUserForm from './components/aboutUserForm.vue'
 import contactsForm from './components/contactsForm.vue'
-
-import axios from 'axios'
+import integrationForm from './components/integrationForm.vue'
 
 export default {
   name: 'app',
   components: {
     mainMenu, avatarForm, loginForm, registrationForm, modalWindow,
-    addressFrom, addressChangeFrom, aboutUserForm, contactsForm
+    addressFrom, addressChangeFrom, aboutUserForm, contactsForm, integrationForm, integrationPixel
   }
 }
 </script>
@@ -45,7 +47,6 @@ export default {
   .page-header 
     .container
       padding-top: 15vh
-
 .fa-instagram 
   color: #125688
 .fa-facebook-square 

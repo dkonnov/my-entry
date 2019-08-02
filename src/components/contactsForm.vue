@@ -134,9 +134,8 @@ export default {
     showUserInfoSocialSave() {
       axios
       .get('public/my_entry.php?action=showUserInfoSocialSave&userInfoInstagram=' + this.userInfoInstagram + '&userInfoWhatsApp=' + this.userInfoWhatsApp + '&userInfoEMail=' + this.userInfoEMail + '&userInfoPhone=' + this.userInfoPhone + '&userInfoWhatsAppText=' + this.userInfoWhatsAppText  + '&userInfoFacebook=' + this.userInfoFacebook  + '&userInfoVK=' + this.userInfoVK)
-      .then(response => {
+      .then(() => {
         $("#contactsForm").modal('hide');
-        //this.loadMainCard();
       });
     }
   },

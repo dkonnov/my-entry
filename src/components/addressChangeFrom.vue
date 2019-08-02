@@ -58,7 +58,7 @@ export default {
     changeLoginNameFormSave: function(){
       axios
       .get('public/my_entry.php?action=changeLoginNameFormSave&name=' + this.nameRegistration)
-      .then(response => {
+      .then(() => {
         $("#addressChangeForm").modal('hide');
         this.nameRegistration = '';
         this.nameRegistrationOk = false;

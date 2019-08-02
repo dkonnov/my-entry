@@ -20,7 +20,7 @@
             <i class="material-icons">gesture</i> Оформление
           </a>
           <div class="dropdown-menu dropdown-with-icons">
-            <a href="#" class="dropdown-item"@click="showUserAvatar()">
+            <a href="#" class="dropdown-item" @click="showUserAvatar()">
               <i class="material-icons">face</i> Аватар
             </a>
             <a href="#" class="dropdown-item" @click="showAboutUserForm()">
@@ -58,6 +58,8 @@
             <i class="material-icons">code</i> QR-код и адрес</a>
             <a href="#" class="dropdown-item" @click="showAddressChangeForm()">
             <i class="material-icons">code</i> Сменить адрес</a>
+            <a href="#" class="dropdown-item" @click="integrationFormShow()">
+            <i class="material-icons">code</i> Интеграция</a>
             <a href="#" class="dropdown-item" @click="showZoneRu()">
             <i class="material-icons">language</i> Создать визитку в зоне RU</a>
             <a href="#" class="dropdown-item" @click="logout()">
@@ -108,12 +110,14 @@ export default {
     logout() {
       axios
       .get('public/my_entry.php?action=logout')
-      .then(response => {
+      .then(() => {
         this.buttonLogin = true;
         eventEmitter.$emit('showMessage', 'Надеемся вы скоро вернетесь!');
         this.$router.push('/');
       });
-      
+    },
+    integrationFormShow(){
+      eventEmitter.$emit('integrationFormShow');
     }
   },
   created() {

@@ -56,9 +56,8 @@ export default {
     showUserInfoSave() {
       axios
       .get('public/my_entry.php?action=showUserInfoSave&userInfoName=' + this.userInfoName + '&userInfoSpecialization=' + this.userInfoSpecialization + '&userInfoAbout=' + this.userInfoAbout)
-      .then(response => {
+      .then(() => {
         $("#aboutUserForm").modal('hide');
-        //this.loadMainCard();
       });
     },
   },
@@ -77,8 +76,4 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-
-</style>
 

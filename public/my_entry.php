@@ -33,6 +33,8 @@ $dbname = "cm94574_smarttoy";*/
 // connetcion to DB
 $link = new mysqli($dbservername, $dbusername, $dbpassword, $dbname, $dbport);
 $link->set_charset("utf8");
+
+
 // if connection errod
 if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
@@ -100,6 +102,16 @@ if ($action == 'showUserInfoSocialForm'){
 // save info for main card
 if ($action == 'showUserInfoSocialSave'){
     $result  = $link->query("update my_entry_users set userInfoPhone = '$userInfoPhone', userInfoEMail = '$userInfoEMail', userInfoInstagram = '$userInfoInstagram', userInfoWhatsApp = '$userInfoWhatsApp', userInfoWhatsAppText = '$userInfoWhatsAppText', userInfoFacebook = '$userInfoFacebook', userInfoVK = '$userInfoVK' WHERE email = '$_SESSION[user]'");    
+}
+// get info for integration
+if ($action == 'integrationFormShow'){
+    $result  = $link->query("SELECT integrationPixel from my_entry_users WHERE email = '$_SESSION[user]'");
+    $row = $result->fetch_assoc();
+    echo "{\"integrationPixel\": \"$row[integrationPixel]\"}";
+}
+// save info for integration
+if ($action == 'integrationFormSave'){
+    $result  = $link->query("update my_entry_users set integrationPixel = '$_GET[integrationPixel]' WHERE email = '$_SESSION[user]'");    
 }
 // get Src for Avatar form
 if ($action == 'showUserAvatarGetSrc'){
