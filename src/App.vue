@@ -40,8 +40,25 @@ export default {
 }
 </script>
 
-<style>
-.login-page .page-header .container {
-    padding-top: 15vh;
-}
+<style lang="sass">
+.login-page 
+  .page-header 
+    .container
+      padding-top: 15vh
+
+.fa-instagram 
+  color: #125688
+.fa-facebook-square 
+  color: #3b5998
+.fa-whatsapp 
+  color: #128c7e
+.fa-vk 
+  color: #0099e5
+.fa-phone-square 
+  color: #68217a
+.fa-envelope 
+  color: #239ab9
+.wa-white
+	color: white
 </style>
+

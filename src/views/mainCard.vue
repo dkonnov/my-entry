@@ -116,7 +116,7 @@ export default {
         }
         //такой страници не существует
         if (!this.mainCardName){
-          this.$router.push('/')
+          this.$router.push('/');
           eventEmitter.$emit('showMessage', 'Ой! Такой страницы не существует :(');
         }
       })

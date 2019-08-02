@@ -7,20 +7,47 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.png">
     <title>My Entry - Онлайн визитки бесплатно!</title>
 
+    <!-- WOW JS -->
+    <link rel="stylesheet" type="text/css" href="css/animate.min.css">
+    <script src="js/wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script> 
+
     <!--  Fonts and icons  -->
-    <link href="fontawesome5/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="fontawesome5/css/all.min.css" >
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   
     <!-- CSS Files -->
     <link href="css/material-kit.min.css" rel="stylesheet" />
  
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2394012147354021');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2394012147354021&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+
   </head>
   <body class="login-page sidebar-collapse">
     <noscript>
       <strong>We're sorry but test doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    
     <!-- built files will be auto injected -->
  
     <!--   Core JS Files   -->
