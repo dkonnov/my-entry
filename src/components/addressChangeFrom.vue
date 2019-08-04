@@ -89,3 +89,9 @@ export default {
 }
 </script>
 
+<style lang="sass" scoped>
+.form-control-feedback
+  margin-top: -28px
+</style>
+
+

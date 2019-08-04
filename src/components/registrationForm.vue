@@ -203,6 +203,7 @@ function checkEmail(value){
     max-width: 750px
 .card-login
 	min-height: 500px
+
 </style>
 
 
