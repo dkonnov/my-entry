@@ -133,7 +133,21 @@ export default {
         if (response.data) {this.userName = response.data;}
       });
     });
-  }
+  },
+  beforeMount(){
+    axios
+      .get('public/my_entry.php?action=authorizationOnStart')
+      .then(response => {
+        if (response.data > 0){
+          eventEmitter.$emit('showMenu');
+          axios
+          .get('public/my_entry.php?action=getUserName')
+          .then(response => {
+            if (response.data) {this.$router.push('/' + response.data);}
+          });
+        }
+      });
+  }  
 }
 </script>
 

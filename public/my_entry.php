@@ -285,9 +285,7 @@ if ($action == 'authorization'){
     }
 } 
 if ($action == 'authorizationOnStart'){
-    $user_name = $_SESSION["user"];
-    $user_password = $_SESSION["password"];
-    $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$_GET[user_name]' and password = '$_GET[user_password]' and confirmed = 1");
+    $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$_SESSION[user]' and password = '$_SESSION[password]' and confirmed = 1");
     $row = $result->fetch_assoc();
     if (isset($row[id])) {
         echo $row[id];
