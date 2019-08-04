@@ -125,6 +125,9 @@ export default {
   created(){
     this.user = this.$router.currentRoute.params['user'];
     this.loadMainCardInf(this.user);
+    eventEmitter.$on('reloadMainCard', () => {
+      this.loadMainCardInf(this.user);
+    });
   }
 }
 </script>

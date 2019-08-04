@@ -17,27 +17,30 @@
     <aboutUserForm />
     <contactsForm />
     <integrationForm />
+    <linkButton />
   </div>
 </template>
 
 <script>
-import integrationPixel from './components/integrationPixel.vue'
-import mainMenu from './components/mainMenu.vue'
-import avatarForm from './components/avatarForm.vue'
-import loginForm from './components/loginForm.vue'
-import registrationForm from './components/registrationForm.vue'
-import modalWindow from './components/modalWindow.vue'
-import addressFrom from './components/addressFrom.vue'
-import addressChangeFrom from './components/addressChangeFrom.vue'
-import aboutUserForm from './components/aboutUserForm.vue'
-import contactsForm from './components/contactsForm.vue'
-import integrationForm from './components/integrationForm.vue'
+import integrationPixel from './components/integrationPixel'
+import mainMenu from './components/mainMenu'
+import avatarForm from './components/avatarForm'
+import loginForm from './components/loginForm'
+import registrationForm from './components/registrationForm'
+import modalWindow from './components/modalWindow'
+import addressFrom from './components/addressFrom'
+import addressChangeFrom from './components/addressChangeFrom'
+import aboutUserForm from './components/aboutUserForm'
+import contactsForm from './components/contactsForm'
+import integrationForm from './components/integrationForm'
+import linkButton from './components/linkButton'
 
 export default {
   name: 'app',
   components: {
     mainMenu, avatarForm, loginForm, registrationForm, modalWindow,
-    addressFrom, addressChangeFrom, aboutUserForm, contactsForm, integrationForm, integrationPixel
+    addressFrom, addressChangeFrom, aboutUserForm, contactsForm, integrationForm, integrationPixel,
+    linkButton
   }
 }
 </script>

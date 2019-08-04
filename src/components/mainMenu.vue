@@ -89,6 +89,9 @@ export default {
     showAboutUserForm(){
       eventEmitter.$emit('showAboutUserForm');
     },
+    showlinkButton(){
+      eventEmitter.$emit('linkButtonShow');
+    },
     showUserAvatar(){
       eventEmitter.$emit('showAvatarForm');
     },

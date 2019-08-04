@@ -85,13 +85,13 @@ if ($action == 'showUserInfoSave'){
 // link button form SAVE
 if ($action == 'showlinkButtonSave'){
     $result  = $link->query("UPDATE my_entry_users set userLinkButtonAction = '$_GET[linkButtonAction]', userLinkButtonName = '$_GET[linkButtonName]' WHERE email = '$_SESSION[user]'");
-    echo "save - $linkButtonAction";
+    echo "save - $_GET[linkButtonAction], $_GET[linkButtonName]";
 }
 // link button form
 if ($action == 'showlinkButton'){
     $result  = $link->query("SELECT userLinkButtonAction, userLinkButtonName from my_entry_users WHERE email = '$_SESSION[user]'");
     $row = $result->fetch_assoc();
-    echo "{\"userLinkButtonAction\": \"$row[userLinkButtonAction]\",\"userLinkButtonName\": \"$row[userLinkName]\"}";
+    echo "{\"userLinkButtonAction\": \"$row[userLinkButtonAction]\",\"userLinkButtonName\": \"$row[userLinkButtonName]\"}";
 }
 // get info for user info form
 if ($action == 'showUserInfoSocialForm'){
