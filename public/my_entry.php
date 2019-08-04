@@ -1,26 +1,26 @@
 <?php
-session_start();
+if (session_id() == '') {session_start();}
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 1);
 
 header('Access-Control-Allow-Origin: *');
 
-/*$dbservername = "localhost";
+$dbservername = "localhost";
 $dbusername = "root";
 $dbpassword = "";
 $dbport = "3306";
-$dbname = "my-entry";*/
+$dbname = "my-entry";
 
 $action = $_GET['action'];
 $userNameID = $_GET['userNameID'];
 
-
+/*
 $dbservername = "localhost";
 $dbusername = "root";
 $dbpassword = "123";
 $dbport = "7188";
-$dbname = "instagram_smm";
+$dbname = "instagram_smm";*/
 
 /*$dbservername = "localhost";
 $dbusername = "cm94574_smarttoy";
@@ -41,7 +41,7 @@ if ($link->connect_error) {
 } 
 // change user name
 if ($action == 'changeLoginNameFormSave'){
-    $result  = $link->query("UPDATE my_entry_users set name = '$name' WHERE email = '$_SESSION[user]'");
+    $result  = $link->query("UPDATE my_entry_users set name = '$_GET[name]' WHERE email = '$_SESSION[user]'");
     echo "save - $linkButtonAction";
 }
 // get User Name
@@ -80,11 +80,11 @@ if ($action == 'showUserInfo'){
 }
 // save info for user info form
 if ($action == 'showUserInfoSave'){
-    $result  = $link->query("update my_entry_users set userInfoName = '$userInfoName', userInfoSpecialization = '$userInfoSpecialization', userInfoAbout = '$userInfoAbout' WHERE email = '$_SESSION[user]'");    
+    $result  = $link->query("update my_entry_users set userInfoName = '$_GET[userInfoName]', userInfoSpecialization = '$_GET[userInfoSpecialization]', userInfoAbout = $_GET[userInfoAbout]' WHERE email = '$_SESSION[user]'");    
 }
 // link button form SAVE
 if ($action == 'showlinkButtonSave'){
-    $result  = $link->query("UPDATE my_entry_users set userLinkButtonAction = '$linkButtonAction', userLinkButtonName = '$linkButtonName' WHERE email = '$_SESSION[user]'");
+    $result  = $link->query("UPDATE my_entry_users set userLinkButtonAction = '$_GET[linkButtonAction]', userLinkButtonName = '$_GET[linkButtonName]' WHERE email = '$_SESSION[user]'");
     echo "save - $linkButtonAction";
 }
 // link button form
@@ -101,7 +101,7 @@ if ($action == 'showUserInfoSocialForm'){
 }
 // save info for main card
 if ($action == 'showUserInfoSocialSave'){
-    $result  = $link->query("update my_entry_users set userInfoPhone = '$userInfoPhone', userInfoEMail = '$userInfoEMail', userInfoInstagram = '$userInfoInstagram', userInfoWhatsApp = '$userInfoWhatsApp', userInfoWhatsAppText = '$userInfoWhatsAppText', userInfoFacebook = '$userInfoFacebook', userInfoVK = '$userInfoVK' WHERE email = '$_SESSION[user]'");    
+    $result  = $link->query("update my_entry_users set userInfoPhone = '$_GET[userInfoPhone]', userInfoEMail = '$_GET[userInfoEMail]', userInfoInstagram = '$_GET[userInfoInstagram]', userInfoWhatsApp = '$_GET[userInfoWhatsApp]', userInfoWhatsAppText = '$_GET[userInfoWhatsAppTex]', userInfoFacebook = '$_GET[userInfoFacebook]', userInfoVK = '$_GET[userInfoVK]' WHERE email = '$_SESSION[user]'");    
 }
 // get info for integration
 if ($action == 'integrationFormShow'){
@@ -158,7 +158,7 @@ if ($action == 'addAvatar'){
         // save name file in db
         
         resize_image("$uploadfile",300);
-        $result  = $link->query("UPDATE my_entry_users set avatar = '$avatarfilename' WHERE email = '$_SESSION[user]'");
+        $result  = $link->query("UPDATE my_entry_users set avatar = '$_GET[avatarfilename]' WHERE email = '$_SESSION[user]'");
         echo "true";
     }
 }
@@ -179,7 +179,7 @@ if ($action == 'loadMainCard'){
    
 }
 if ($action == 'loadUserSocButtons'){
-    $result  = $link->query("SELECT userInfoInstagram, userInfoWhatsApp, userInfoWhatsAppText, userInfoFacebook, userInfoVK, userInfoEMail, userInfoPhone from my_entry_users WHERE name = '$userNameID'");
+    $result  = $link->query("SELECT userInfoInstagram, userInfoWhatsApp, userInfoWhatsAppText, userInfoFacebook, userInfoVK, userInfoEMail, userInfoPhone from my_entry_users WHERE name = '$_GET[userNameID]'");
     $row = $result->fetch_assoc();
     echo "[";
     if ($row[userInfoInstagram]){
@@ -215,7 +215,7 @@ if ($action == 'loadServices'){
     echo "[";
     $nEl = 0;
     # get user id
-    $result  = $link->query("SELECT id from my_entry_users WHERE name = '$userNameID'");
+    $result  = $link->query("SELECT id from my_entry_users WHERE name = '$_GET[userNameID]'");
     $row = $result->fetch_assoc();
     #
     $result  = $link->query("SELECT id, name, description, price from my_entry_services WHERE user = '$row[id]' and deleted is null");
@@ -228,25 +228,25 @@ if ($action == 'loadServices'){
 }
 if ($action == 'addServiceFormSave'){
     if ($id_service){
-        $result  = $link->query("update my_entry_services set name = '$name', description = '$description', price = '$price' where user = '$_SESSION[id]' and id = '$id_service'");
+        $result  = $link->query("update my_entry_services set name = '$_GET[name]', description = '$_GET[description]', price = '$_GET[price]' where user = '$_SESSION[id]' and id = '$_GET[id_service]'");
     } else {
-        $result  = $link->query("insert into my_entry_services (user, name, description, price) values ('$_SESSION[id]', '$name', '$description', '$price')");
+        $result  = $link->query("insert into my_entry_services (user, name, description, price) values ('$_SESSION[id]', '$_GET[name]', '$_GET[description]', '$_GET[price]')");
     }
     echo "$id_service";
 }
 if ($action == 'deleteService'){
-    $result  = $link->query("update my_entry_services set deleted = 1 where id = $id_service and user = $_SESSION[id]");
+    $result  = $link->query("update my_entry_services set deleted = 1 where id = $_GET[id_service] and user = $_SESSION[id]");
     echo "ok";
 }
 if  ($action == 'getService'){
-    $result  = $link->query("SELECT name, description, price from my_entry_services WHERE user = $_SESSION[id] and id = $id_service");
+    $result  = $link->query("SELECT name, description, price from my_entry_services WHERE user = $_SESSION[id] and id = $_GET[id_service]");
     $row = $result->fetch_assoc();
     echo "{\"name\":\"$row[name]\", \"description\":\"$row[description]\", \"price\":\"$row[price]\"}";
 }
 // chengeBackground
 if ($action == 'changeBackground'){
     echo  $_SESSION[user];
-    $result  = $link->query("update my_entry_users set background = '$backgroundfile' WHERE email = '$_SESSION[user]'");
+    $result  = $link->query("update my_entry_users set background = '$_GET[backgroundfile]' WHERE email = '$_SESSION[user]'");
 }
 // set background
 if ($action == 'getBackground'){
@@ -263,20 +263,20 @@ if ($action == 'logout'){
 }
 // user authorization
 if ($action == 'authorization'){
-    $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$email' and password = '$password' and confirmed = 1");
+    $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$_GET[email]' and password = '$_GET[password]' and confirmed = 1");
     $row = $result->fetch_assoc();
     if (isset($row[id])) {
         // start session
-        $_SESSION["user"] = "$email";
+        $_SESSION["user"] = "$_GET[email]";
         $_SESSION["id"] = "$row[id]";
-        $_SESSION["password"] = "$password";
+        $_SESSION["password"] = "$_GET[password]";
         echo "true";
     } else {
-        $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$email' and password = '$password'");
+        $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$_GET[email]' and password = '$_GET[password]'");
         $row = $result->fetch_assoc();
         if (isset($row[id])) {echo "notconfirmed";} 
         else {
-            $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$email'");
+            $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$_GET[email]'");
             $row = $result->fetch_assoc();
             if (isset($row[id])) {echo "restore";} else {
                 echo "false";
@@ -287,7 +287,7 @@ if ($action == 'authorization'){
 if ($action == 'authorizationOnStart'){
     $user_name = $_SESSION["user"];
     $user_password = $_SESSION["password"];
-    $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$user_name' and password = '$user_password' and confirmed = 1");
+    $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$_GET[user_name]' and password = '$_GET[user_password]' and confirmed = 1");
     $row = $result->fetch_assoc();
     if (isset($row[id])) {
         echo $row[id];
@@ -295,26 +295,26 @@ if ($action == 'authorizationOnStart'){
 }
 // check email in current users
 if ($action == 'emailRegistrationCheck'){
-    $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$email'");
+    $result  = $link->query("SELECT id FROM my_entry_users WHERE email = '$_GET[email]'");
     $row = $result->fetch_assoc();
     if (isset($row[id])) {echo "true";} else {echo "false";}
 }
 
 // check name in current usert
 if ($action == 'nameRegistrationCheck'){
-    $result  = $link->query("SELECT id FROM my_entry_users WHERE name = '$name'");
+    $result  = $link->query("SELECT id FROM my_entry_users WHERE name = '$_GET[name]'");
     $row = $result->fetch_assoc();
     if (isset($row[id])) {echo "true";} else {echo "false";}
 }
 
 // user registration
 if ($action == 'registration'){
-    $result  = $link->query("insert into my_entry_users (name, email, password, background, userInfoName, userInfoSpecialization, userInfoAbout, userInfoEMail, userLinkButtonAction, userLinkButtonName) values ('$name', '$email', '$password', 'ethan-dow-1509463-unsplash.jpg', 'Ваше Имя', 'Ваша профессия / специализация', 'Коротко о Вас', '$email', 'email', 'Связаться')");
+    $result  = $link->query("insert into my_entry_users (name, email, password, background, userInfoName, userInfoSpecialization, userInfoAbout, userInfoEMail, userLinkButtonAction, userLinkButtonName) values ('$_GET[name]', '$_GET[email]', '$_GET[password]', 'ethan-dow-1509463-unsplash.jpg', 'Ваше Имя', 'Ваша профессия / специализация', 'Коротко о Вас', '$_GET[email]', 'email', 'Связаться')");
     $file = fopen("templates/mail.html", "r");
     while (!feof($file)) {
         $str = fgets($file);
         if (strpos($str, "confirmed=")){
-            $lines .= "\"http://my-entry.ru/confirmed=$email\"";
+            $lines .= "\"http://my-entry.ru/confirmed=$_GET[email]\"";
         } else {
             $lines .= $str;
         }
@@ -327,10 +327,10 @@ if ($action == 'registration'){
     mail($email, 'My-Entry - подтверждение регистрации', $lines, $headers);
 }
 if ($action == 'registration2'){
-    $result  = $link->query("SELECT id, confirmed FROM my_entry_users WHERE email = '$confirmed'");
+    $result  = $link->query("SELECT id, confirmed FROM my_entry_users WHERE email = '$_GET[confirmed]'");
     $row = $result->fetch_assoc();
     if (!$row[confirmed] && $row[id]){
-        $result  = $link->query("update my_entry_users set confirmed = 1 WHERE email = '$confirmed'");
+        $result  = $link->query("update my_entry_users set confirmed = 1 WHERE email = '$_GET[confirmed]'");
         echo "confirmed";
     }
 }

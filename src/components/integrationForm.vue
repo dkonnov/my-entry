@@ -67,7 +67,7 @@ export default {
       .get('public/my_entry.php?action=integrationFormShow')
       .then(response => {
         this.integrationPixel = response.data.integrationPixel;
-        $("#integrationForm").modal('show'); 
+        $("#integrationFormShow").modal('show'); 
       });
     })
   }
