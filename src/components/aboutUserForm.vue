@@ -57,6 +57,7 @@ export default {
       axios
       .get('public/my_entry.php?action=showUserInfoSave&userInfoName=' + this.userInfoName + '&userInfoSpecialization=' + this.userInfoSpecialization + '&userInfoAbout=' + this.userInfoAbout)
       .then(() => {
+        eventEmitter.$emit('reloadMainCard');
         $("#aboutUserForm").modal('hide');
       });
     },

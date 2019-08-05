@@ -140,11 +140,13 @@ export default {
       .then(response => {
         if (response.data > 0){
           eventEmitter.$emit('showMenu');
-          axios
-          .get('public/my_entry.php?action=getUserName')
-          .then(response => {
-            if (response.data) {this.$router.push('/' + response.data);}
-          });
+          if (!this.$router.currentRoute.params['user']){
+            axios
+            .get('public/my_entry.php?action=getUserName')
+            .then(response => {
+              if (response.data) {this.$router.push('/' + response.data);}
+            });
+          }
         }
       });
   }  

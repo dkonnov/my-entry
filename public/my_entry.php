@@ -81,7 +81,7 @@ if ($action == 'showUserInfo'){
 }
 // save info for user info form
 if ($action == 'showUserInfoSave'){
-    $result  = $link->query("update my_entry_users set userInfoName = '$_GET[userInfoName]', userInfoSpecialization = '$_GET[userInfoSpecialization]', userInfoAbout = $_GET[userInfoAbout]' WHERE email = '$_SESSION[user]'");    
+    $result  = $link->query("update my_entry_users set userInfoName = '$_GET[userInfoName]', userInfoSpecialization = '$_GET[userInfoSpecialization]', userInfoAbout = '$_GET[userInfoAbout]' WHERE email = '$_SESSION[user]'");    
 }
 // link button form SAVE
 if ($action == 'showlinkButtonSave'){

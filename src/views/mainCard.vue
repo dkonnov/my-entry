@@ -121,12 +121,18 @@ export default {
           .then(response => {
             this.userServices = response.data;
           });
-        }
-        //такой страници не существует
-        if (!this.mainCardName){
-          this.$router.push('/');
-          eventEmitter.$emit('showMessage', 'Ой! Такой страницы не существует :(');
-        }
+          // имя 
+          axios
+            .get('public/my_entry.php?action=getUserName')
+            .then(response => {
+            if (response.data == value) {this.ifLogined = true;}
+            });
+          }
+          //такой страницы не существует
+          if (!this.mainCardName){
+            this.$router.push('/');
+            eventEmitter.$emit('showMessage', 'Ой! Такой страницы не существует :(');
+          }
       })
     }
   },
@@ -134,7 +140,14 @@ export default {
     this.user = this.$router.currentRoute.params['user'];
     this.loadMainCardInf(this.user);
     eventEmitter.$on('reloadMainCard', () => {
-      this.loadMainCardInf(this.user);
+       axios
+       .get('public/my_entry.php?action=getUserName')
+       .then(response => {
+         if (response.data) {
+           this.$router.push('/' + response.data);
+           this.loadMainCardInf(response.data);
+           }
+        });
     });
   }
 }
