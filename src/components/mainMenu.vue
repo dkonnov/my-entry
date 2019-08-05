@@ -108,7 +108,7 @@ export default {
       eventEmitter.$emit('showAddressChangeFrom');        
     },
     showLoginForm() {
-      $("#loginForm").modal('show');
+      eventEmitter.$emit('showLoginForm');
     },
     logout() {
       axios

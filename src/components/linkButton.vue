@@ -49,7 +49,8 @@ export default {
   name: 'linkButton',
   data () {
     return {
-      linkButtonName: ''  
+      linkButtonName: '',
+      linkButtonAction: '' 
     }
   },
   methods: {

@@ -47,6 +47,7 @@
 import axios from 'axios'
 import {eventEmitter} from "./../main"
 
+
 export default {
   name: 'loginForm',
   data () {
@@ -99,6 +100,11 @@ export default {
 
       });
     }
+  },
+  created(){
+    eventEmitter.$on('showLoginForm', () => {
+      $("#loginForm").modal('show'); 
+    })
   }
 }
 /*Check is email or not*/

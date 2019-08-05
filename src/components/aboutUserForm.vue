@@ -71,7 +71,6 @@ export default {
         this.userInfoAbout = response.data.userInfoAbout;
         $("#aboutUserForm").modal('show');
       });
-      
     })
   }
 }

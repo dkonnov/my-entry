@@ -13,7 +13,9 @@ export default {
      }
   },
   mounted(){
-    document.getElementById('srcPixel').src = 'https://www.facebook.com/tr?id=' + this.counter + '&ev=PageView&noscript=1';
+    fbq('init', '2394012147354021');
+    fbq('track', 'PageView');
+  //  document.getElementById('srcPixel').src = 'https://www.facebook.com/tr?id=' + this.counter + '&ev=PageView&noscript=1';
   }
 
 }

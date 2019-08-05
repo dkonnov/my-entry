@@ -43,6 +43,11 @@ export default {
       deleteAvatarButton: false
     }
   },
+  methods:{
+    addAvatar(){
+
+    }
+  },
   created() {
     eventEmitter.$on('showAvatarForm', () => {
       $("#userAvatar").modal('show');

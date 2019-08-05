@@ -15,7 +15,7 @@
           </div>
           
           <template v-for="userSocButton in userInfoSoc">
-            <a class="btn btn-just-icon btn-link wow fadeInUp" data-wow-duration="2s" :data-wow-delay="userSocButton.delay" :href="userSocButton.href" target=new>
+            <a class="btn btn-just-icon btn-link wow fadeInUp" data-wow-duration="2s" :data-wow-delay="userSocButton.delay" :href="userSocButton.href" :key="userSocButton" target=new>
               <i :class="userSocButton.icon"></i>        
               <div class="ripple-container"></div>
             </a>
@@ -31,7 +31,7 @@
           <div id="accordion" role="tablist" aria-multiselectable="false" class="card-collapse">
 
           <template v-for="userService in userServices">
-            <div class="card card-plain wow fadeInUp" data-wow-duration="1s" :data-wow-delay="userService.delay">
+            <div class="card card-plain wow fadeInUp" data-wow-duration="1s" :data-wow-delay="userService.delay" :key="userService">
               <div class="card-header" role="tab" :id="userService.heading" style="padding-top: 0px;padding-right: 0px;">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" :href="userService.href" aria-expanded="flase" aria-controls="collapseOne" style="padding-left: 24px;">
                   {{ userService.name }} {{ userService.price }}
@@ -77,7 +77,15 @@ export default {
       avatar: false,
       user: '',
       mainCard: true,
-      userInfoSoc: ''
+      userInfoSoc: '',
+      mainCardName: '',
+      mainСardSpecialization: '',
+      mainCardAbout: '',
+      linkButton: false,
+      linkButtonHref: '',
+      linkButtonName: '',
+      userServices: '',
+      ifLogined: false
      }
   },
   methods:{

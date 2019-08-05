@@ -118,8 +118,8 @@
 </template>
 
 <script>
-import {eventEmitter} from "./../main"
 import axios from 'axios'
+import {eventEmitter} from "./../main"
 
 export default {
   name: 'registrationForm',
