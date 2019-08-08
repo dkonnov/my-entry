@@ -86,6 +86,9 @@ export default {
      }
   },
   methods: {
+    showAddServiceForm(){
+      eventEmitter.$emit('showServiceForm');
+    },
     showAboutUserForm(){
       eventEmitter.$emit('showAboutUserForm');
     },
