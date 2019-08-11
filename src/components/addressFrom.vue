@@ -5,7 +5,7 @@
      <div class="col-lg-8 col-md-6 ml-auto mr-auto">  
       <div class="card card-signup" style="padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;">
 				<h2 class="card-title text-center">QR Code</h2>
-          <div class="row">
+        <div class="row">
           <div class="card-body">
           <center>
             <img width=150 id="QRCodeImg">
@@ -16,7 +16,7 @@
             <br>
             <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
           </center>
-        </div>
+          </div>
         </div>
       </div>
     </div>

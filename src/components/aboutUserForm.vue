@@ -8,6 +8,7 @@
           <div class="row">
           <div class="card-body">
             <form>
+
             <div class="form-group">
               <label>Имя</label>
               <input type="text" v-model="userInfoName" class="form-control" aria-describedby="userInfoName" placeholder="Отображаемое имя ...">
@@ -28,8 +29,8 @@
               <button type="submit" class="btn btn-primary btn-round" @click="showUserInfoSave()">Сохранить</button>
               <a href="#pablo" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
             </center>
-          </form>
-
+            
+            </form>
         </div>
         </div>
       </div>

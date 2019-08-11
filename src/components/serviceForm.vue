@@ -10,7 +10,7 @@
           <form>
           <div class="form-group">
               <label>Название услуги</label>
-              <input type="text" v-model="addServiceFormName" v-on:input="addServiceFormNameCheck" class="form-control">
+              <input type="text" v-model="addServiceFormName" @input="addServiceFormNameCheck" class="form-control">
               <small id="emailHelp" class="form-text text-muted">Обязательное поле</small>
           </div>
           <div class="form-group">
@@ -42,17 +42,33 @@
 <script>
 import axios from 'axios'
 import {eventEmitter} from "./../main"
-import { isIP } from 'net';
 
 export default {
   name: 'aboutUserForm',
   data () {
     return {
       addServiceWindowName: '',
-      addServiceWindowButton: ''
+      addServiceWindowButton: '',
+      addServiceFormName: '',
+      addServiceFormPrice: '',
+      userSeviceId: ''
     }
   },
   methods:{
+    addServiceFormNameCheck: function(){
+      if (this.addServiceFormName) {this.addServiceFormOk = true} else {this.addServiceFormOk = false}
+    },
+    addServiceFormSave: function(){
+      axios
+      .get('public/my_entry.php?action=addServiceFormSave&id_service=' + this.userSeviceId + '&name=' + this.addServiceFormName + '&description=' + this.addServiceFormDescription + '&price=' + this.addServiceFormPrice)
+      .then(response => {
+        eventEmitter.$emit('reloadMainCard');
+        $("#serviceForm").modal('hide');
+        this.addServiceFormName = '';
+        this.addServiceFormDescription = '';
+        this.addServiceFormPrice = '';
+      });
+    },
    },
   created() {
     eventEmitter.$on('showServiceForm', (value) => {
