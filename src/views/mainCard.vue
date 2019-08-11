@@ -137,6 +137,9 @@ export default {
     },
     deleteService(value){
       eventEmitter.$emit('deleteService', value);
+    },
+    showAddServiceForm(value){
+      eventEmitter.$emit('showServiceForm', value);
     }
   },
   created(){

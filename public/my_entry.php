@@ -227,12 +227,12 @@ if ($action == 'loadServices'){
     echo "]";
 }
 if ($action == 'addServiceFormSave'){
-    if ($id_service){
+    if ($_GET[id_service]){
         $result  = $link->query("update my_entry_services set name = '$_GET[name]', description = '$_GET[description]', price = '$_GET[price]' where user = '$_SESSION[id]' and id = '$_GET[id_service]'");
     } else {
         $result  = $link->query("insert into my_entry_services (user, name, description, price) values ('$_SESSION[id]', '$_GET[name]', '$_GET[description]', '$_GET[price]')");
     }
-    echo "$id_service";
+    echo "$_GET[id_service]";
 }
 if ($action == 'deleteService'){
     $result  = $link->query("update my_entry_services set deleted = 1 where id = $_GET[id_service] and user = $_SESSION[id]");
