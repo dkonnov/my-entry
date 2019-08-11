@@ -71,6 +71,16 @@ export default {
     },
    },
   created() {
+    eventEmitter.$on('deleteService', (value) => {
+      axios
+      .get('public/my_entry.php?action=deleteService&id_service=' + value)
+      .then(response => {
+        if (response.data){
+          eventEmitter.$emit('showMessage', 'Услуга удалена!');
+          eventEmitter.$emit('reloadMainCard');
+        }
+      });
+    });
     eventEmitter.$on('showServiceForm', (value) => {
       if (value){
         this.addServiceWindowName = "Услуга";
@@ -94,7 +104,7 @@ export default {
         this.addServiceFormPrice = '';
       }
       $("#serviceForm").modal('show');
-    })
+    });
   }
 }
 </script>

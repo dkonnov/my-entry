@@ -134,6 +134,9 @@ export default {
             eventEmitter.$emit('showMessage', 'Ой! Такой страницы не существует :(');
           }
       })
+    },
+    deleteService(value){
+      eventEmitter.$emit('deleteService', value);
     }
   },
   created(){
