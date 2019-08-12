@@ -26,7 +26,7 @@
             <a href="#" class="dropdown-item" @click="showAboutUserForm()">
               <i class="material-icons">list_alt</i> О себе
             </a>
-            <a href="#" class="dropdown-item" @click="showDesignForm()">
+            <a href="#" class="dropdown-item" @click="showBackgroundForm()">
               <i class="material-icons">insert_photo</i> Фон
             </a>
             <a href="#" class="dropdown-item" @click="showUserInfoSocial()">
@@ -86,6 +86,9 @@ export default {
      }
   },
   methods: {
+    showBackgroundForm(){
+      eventEmitter.$emit('showBackgroundForm');
+    },
     showAddServiceForm(){
       eventEmitter.$emit('showServiceForm');
     },

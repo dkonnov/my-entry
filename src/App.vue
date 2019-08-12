@@ -19,6 +19,7 @@
     <integrationForm />
     <linkButton />
     <serviceForm />
+    <backgroundForm />
   </div>
 </template>
 
@@ -36,13 +37,14 @@ import contactsForm from './components/contactsForm'
 import integrationForm from './components/integrationForm'
 import linkButton from './components/linkButton'
 import serviceForm from './components/serviceForm'
+import backgroundForm from './components/backgroundForm'
 
 export default {
   name: 'app',
   components: {
     mainMenu, avatarForm, loginForm, registrationForm, modalWindow,
     addressFrom, addressChangeFrom, aboutUserForm, contactsForm, integrationForm, integrationPixel,
-    linkButton, serviceForm
+    linkButton, serviceForm, backgroundForm
   }
 }
 </script>
