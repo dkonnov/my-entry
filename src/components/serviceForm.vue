@@ -47,11 +47,13 @@ export default {
   name: 'aboutUserForm',
   data () {
     return {
+      addServiceFormDescription: '',
       addServiceWindowName: '',
       addServiceWindowButton: '',
       addServiceFormName: '',
       addServiceFormPrice: '',
-      userSeviceId: ''
+      userSeviceId: '',
+      addServiceFormOk: false
     }
   },
   methods:{

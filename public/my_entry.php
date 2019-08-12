@@ -6,21 +6,21 @@ ini_set('display_startup_errors', 1);
 
 header('Access-Control-Allow-Origin: *');
 
-$dbservername = "localhost";
+/*$dbservername = "localhost";
 $dbusername = "root";
 $dbpassword = "";
 $dbport = "3306";
 $dbname = "my-entry";
 
 $action = $_GET['action'];
-$userNameID = $_GET['userNameID'];
+$userNameID = $_GET['userNameID'];*/
 
 
-/*$dbservername = "localhost";
+$dbservername = "localhost";
 $dbusername = "root";
 $dbpassword = "123";
 $dbport = "7188";
-$dbname = "instagram_smm";*/
+$dbname = "instagram_smm";
 
 /*$dbservername = "localhost";
 $dbusername = "cm94574_smarttoy";
@@ -156,9 +156,8 @@ if ($action == 'addAvatar'){
     $uploadfile = 'img/avatars/' . $avatarfilename;
     if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)){
         // save name file in db
-        
         resize_image("$uploadfile",300);
-        $result  = $link->query("UPDATE my_entry_users set avatar = '$_GET[avatarfilename]' WHERE email = '$_SESSION[user]'");
+        $result  = $link->query("UPDATE my_entry_users set avatar = '$avatarfilename' WHERE email = '$_SESSION[user]'");
         echo "true";
     }
 }

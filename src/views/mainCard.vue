@@ -140,6 +140,16 @@ export default {
     },
     showAddServiceForm(value){
       eventEmitter.$emit('showServiceForm', value);
+    },
+    showUserAvatarIfLogined(){
+      if (this.ifLogined){
+        eventEmitter.$emit('showAvatarForm');
+      }
+    },
+    showUserInfoIfLogined(){
+      if (this.ifLogined){
+        eventEmitter.$emit('showAboutUserForm');
+      }
     }
   },
   created(){

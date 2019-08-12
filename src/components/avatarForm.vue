@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import {eventEmitter} from "./../main"
 
 export default {
@@ -44,13 +45,45 @@ export default {
     }
   },
   methods:{
+    deleteAvatar: function(){
+      axios
+      .get('public/my_entry.php?action=deleteAvatar')
+        .then(response => {
+          document.getElementById('avatarimgform').src = 'img/placeholder.jpg';  
+          document.getElementById('avatarimg').src = 'img/placeholder.jpg';
+          this.avatar = false;
+          this.deleteAvatarButton = false;
+        });
+    },
     addAvatar(){
-
+      var formData = new FormData();
+      var imagefile = document.querySelector('#userfile');
+      formData.append("image", imagefile.files[0]);
+      axios.post('public/my_entry.php?action=addAvatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(response => {
+       // eventEmitter.$emit('showAvatarForm');
+       // this.loadMainCard();
+      });
     }
   },
   created() {
     eventEmitter.$on('showAvatarForm', () => {
-      $("#userAvatar").modal('show');
+      axios
+      .get('public/my_entry.php?action=showUserAvatarGetSrc')
+        .then(response => {
+            if (response.data.avatar){
+              document.getElementById('avatarimgform').src = 'img/avatars/' + response.data.avatar;
+              this.deleteAvatarButton = true;
+            } else {
+              document.getElementById('avatarimgform').src = 'img/placeholder.jpg';
+              this.deleteAvatarButton = false;
+            }
+            $("#userAvatar").modal('show');
+        });
     })
   }
 }
