@@ -8,31 +8,29 @@
 				<h2 class="card-title text-center">Фон</h2>
 				<div class="card-body">
           <div class="row">
-            <div class="tab-content tab-space">
-            
-            <div class="tab-pane active" id="link0" aria-expanded="true">
-              <div class="row">
-                images1
-              </div>
-            </div>
-            <div class="tab-pane" id="link1" aria-expanded="true">
-              <div class="row">
-                images2
-              </div>
-            </div>
+     
+            <template v-for="index in 6">
+              <div class="col-md-4" @click="changeBackground(index)">
+                      <div class="card card-plain">
+                        <div class="card-header card-header-image">
+                          <div class="card-header-image-bg"></div>
+                          <img :id="'img' + index" src="img/backgrounds/scott-webb-266121-unsplash.jpg">
+                          <div class="colored-shadow" style='background-image: url("img/backgrounds/scott-webb-266121-unsplash.jpg"); opacity: 1;'></div>
+                        </div>
+                      </div>
+                      </div>
+            </template>
 
-              </div>
+     
             </div>
             </div>
             
             <center>
             <div width=100% style="display: flex;align-items: center; justify-content: center;">
             <ul class="pagination nav nav-pills nav-pills-primary" role="tablist">
-              <li class="page-item" :class="{ 'active': currentTab == 0 }" @click="currentTab = 0"><a class="page-link" data-toggle="tab" href="#link0" role="tablist" aria-expanded="true">1</a></li>
-              <li class="page-item" :class="{ 'active': currentTab == 1 }" @click="currentTab = 1"><a class="page-link" data-toggle="tab" href="#link1" role="tablist" aria-expanded="false">2</a></li>
-              <li class="page-item" :class="{ 'active': currentTab == 2 }" @click="currentTab = 2"><a class="page-link" data-toggle="tab" href="#link2" role="tablist" aria-expanded="false">3</a></li>
-              <li class="page-item" :class="{ 'active': currentTab == 3 }" @click="currentTab = 3"><a class="page-link" data-toggle="tab" href="#link3" role="tablist" aria-expanded="false">4</a></li>
-              <li class="page-item" :class="{ 'active': currentTab == 4 }" @click="currentTab = 4"><a class="page-link" data-toggle="tab" href="#link4" role="tablist" aria-expanded="false">5</a></li>
+              <template v-for="index in totalTabs">
+                <li class="page-item" :class="{'active': currentTab == index}" @click="changeTab(index)"><a class="page-link" data-toggle="tab" :href="'#tab'+index" role="tablist" aria-expanded="true">{{index}}</a></li>
+              </template>
             </ul>
             </div>
             <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
@@ -52,28 +50,53 @@ export default {
   name: 'backgroundForm',
   data () {
     return {
-      currentTab: 0
+      currentTab: 1,
+      totalTabs: 10,
+      imgData: ''
     }
   },
   methods:{
+     // ФОН 
+    changeBackground: function(value){
+      //img = document.getElementById('img' + value).src;
+      document.getElementById("backgroundDiv").style.backgroundImage=document.getElementById('img' + value).src;
   
+    },
+    changeTab(value){
+      this.currentTab = value;
+      axios
+        .get('public/my_entry.php?action=getBackgrounds&page=' + value)
+        .then(response => {
+          document.getElementById('img1').src = 'img/backgrounds/' + response.data[0].img;
+          document.getElementById('img2').src = 'img/backgrounds/' + response.data[1].img;
+          document.getElementById('img3').src = 'img/backgrounds/' + response.data[2].img;
+          document.getElementById('img4').src = 'img/backgrounds/' + response.data[3].img;            
+          document.getElementById('img5').src = 'img/backgrounds/' + response.data[4].img;  
+          document.getElementById('img6').src = 'img/backgrounds/' + response.data[5].img;  
+      });
+      
+    }
   },
   created() {
     eventEmitter.$on('showBackgroundForm', () => {
+      axios
+        .get('public/my_entry.php?action=totalTabs')
+        .then(response => {
+        this.totalTabs = response.data;
+      });
       $("#backgroundForm").modal('show');
-      this.currentTab = 0;
+      this.changeTab(1);
     })
   }
 }
 </script>
 
 <style lang="sass" scoped>
+.modal-dialog.form3
+	max-width: 1300px
 .pagination 
   .page-item.active
-    a, 
-    span, 
-    .page-link:focus, 
-    span:focus
+    a, span, .page-link:focus, span:focus
     	background-color: #9c27b0
 	    border-color: #9c27b0
 	    color: #fff

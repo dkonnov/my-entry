@@ -161,6 +161,29 @@ if ($action == 'addAvatar'){
         echo "true";
     }
 }
+// total Tabs background
+if ($action == 'totalTabs'){
+    $count = 0;
+    $dir = opendir('img/backgrounds');
+    while($file = readdir($dir)){
+        if($file != '.' && $file != '..'){$count++;}
+    }
+    $pages = (int) ($count / 6) + 1;
+    echo $pages;
+}
+if ($action == 'getBackgrounds'){
+    $count = 0;
+    $dir = opendir('img/backgrounds');
+    while($file = readdir($dir)){
+        if($file != '.' && $file != '..'){
+            $count++;
+            $img[$count] = $file;
+        }
+    }
+    $p = $_GET[page]-1;
+    echo "[{\"img\":\"" . $img[$p*6+1] . "\"},{\"img\":\"" . $img[$p*6+2] . "\"},{\"img\":\"" . $img[$p*6+3] . "\"},{\"img\":\"" . $img[$p*6+4] . "\"},{\"img\":\"" . $img[$p*6+5] . "\"},{\"img\":\"" . $img[$p*6+6] . "\"}]";
+}
+// get BGs
 
 // get info for main card
 if ($action == 'loadMainCard'){
