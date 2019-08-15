@@ -267,8 +267,8 @@ if  ($action == 'getService'){
 }
 // chengeBackground
 if ($action == 'changeBackground'){
-    echo  $_SESSION[user];
-    $result  = $link->query("update my_entry_users set background = '$_GET[backgroundfile]' WHERE email = '$_SESSION[user]'");
+    $result  = $link->query("update my_entry_users set background = '$_GET[img]' WHERE email = '$_SESSION[user]'");
+    echo  $_GET[img];
 }
 // set background
 if ($action == 'getBackground'){

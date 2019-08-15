@@ -10,15 +10,15 @@
           <div class="row">
      
             <template v-for="index in 6">
-              <div class="col-md-4" @click="changeBackground(index)">
-                      <div class="card card-plain">
-                        <div class="card-header card-header-image">
-                          <div class="card-header-image-bg"></div>
-                          <img :id="'img' + index" src="img/backgrounds/scott-webb-266121-unsplash.jpg">
-                          <div class="colored-shadow" style='background-image: url("img/backgrounds/scott-webb-266121-unsplash.jpg"); opacity: 1;'></div>
-                        </div>
-                      </div>
-                      </div>
+              <div :id="'imgDiv'+index" class="col-md-4" @click="changeBackground(index)">
+                <div class="card card-plain">
+                  <div class="card-header card-header-image">
+                    <div class="card-header-image-bg"></div>
+                    <img :id="'img' + index" src="img/backgrounds/scott-webb-266121-unsplash.jpg">
+                     <div class="colored-shadow" style='background-image: url("img/backgrounds/scott-webb-266121-unsplash.jpg"); opacity: 1;'></div>
+                  </div>
+                </div>
+              </div>
             </template>
 
      
@@ -52,27 +52,33 @@ export default {
     return {
       currentTab: 1,
       totalTabs: 10,
-      imgData: ''
+      imgData: '',
+      img6: false
     }
   },
   methods:{
      // ФОН 
-    changeBackground: function(value){
-      //img = document.getElementById('img' + value).src;
-      document.getElementById("backgroundDiv").style.backgroundImage=document.getElementById('img' + value).src;
-  
+    changeBackground(value){
+      var url = document.getElementById('img' + value).src;
+      var img = url.substr(url.lastIndexOf('/') + 1);
+      document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/' + img + '\')';
+      axios
+      .get('public/my_entry.php?action=changeBackground&img=' + img)
+      .then(response => {});
     },
     changeTab(value){
       this.currentTab = value;
       axios
         .get('public/my_entry.php?action=getBackgrounds&page=' + value)
         .then(response => {
-          document.getElementById('img1').src = 'img/backgrounds/' + response.data[0].img;
-          document.getElementById('img2').src = 'img/backgrounds/' + response.data[1].img;
-          document.getElementById('img3').src = 'img/backgrounds/' + response.data[2].img;
-          document.getElementById('img4').src = 'img/backgrounds/' + response.data[3].img;            
-          document.getElementById('img5').src = 'img/backgrounds/' + response.data[4].img;  
-          document.getElementById('img6').src = 'img/backgrounds/' + response.data[5].img;  
+          for (var i = 1; i <= 6; i++){
+            if (response.data[i-1].img){
+              document.getElementById('imgDiv' + i).style.visibility = 'visible';
+              document.getElementById('img' + i).src = 'img/backgrounds/' + response.data[i-1].img;
+            } else {
+              document.getElementById('imgDiv' + i).style.visibility = 'hidden';
+            }
+          }
       });
       
     }
