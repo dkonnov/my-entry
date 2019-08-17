@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -145,8 +145,11 @@ export default {
     // проверяет есть ли уже такое имя
     nameRegistrationCheck() {
       if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.nameRegistration)){
-        axios
-        .get('public/my_entry.php?action=nameRegistrationCheck&name=' + this.nameRegistration)
+        http.get('nameRegistrationCheck', {
+          params:{
+            name: this.nameRegistration
+          }
+        })
         .then(response => {
           if (response.data == true) {
             this.nameRegistrationOk = false;
@@ -166,8 +169,11 @@ export default {
     emailRegistrationCheck() {
       if (checkEmail(this.emailRegistration))
       {
-        axios
-        .get('public/my_entry.php?action=emailRegistrationCheck&email=' + this.emailRegistration)
+        http.get('emailRegistrationCheck', {
+          params:{
+            email: this.emailRegistration
+          }
+        })
         .then(response => {
           if (response.data == true) {this.emailRegistrationOk = false;}
         });

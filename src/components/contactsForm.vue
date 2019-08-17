@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -132,8 +132,17 @@ export default {
   },
   methods: {
     showUserInfoSocialSave() {
-      axios
-      .get('public/my_entry.php?action=showUserInfoSocialSave&userInfoInstagram=' + this.userInfoInstagram + '&userInfoWhatsApp=' + this.userInfoWhatsApp + '&userInfoEMail=' + this.userInfoEMail + '&userInfoPhone=' + this.userInfoPhone + '&userInfoWhatsAppText=' + this.userInfoWhatsAppText  + '&userInfoFacebook=' + this.userInfoFacebook  + '&userInfoVK=' + this.userInfoVK)
+      http.get('showUserInfoSocialSave', {
+        params:{
+          userInfoInstagram: this.userInfoInstagram,
+          userInfoWhatsApp: this.userInfoWhatsApp,
+          userInfoEMail: this.userInfoEMail,
+          userInfoPhone: this.userInfoPhone,
+          userInfoWhatsAppText: this.userInfoWhatsAppText,
+          userInfoFacebook: this.userInfoFacebook,
+          userInfoVK: this.userInfoVK
+        }
+      })
       .then(() => {
         $("#contactsForm").modal('hide');
       });
@@ -141,8 +150,7 @@ export default {
   },
   created(){
     eventEmitter.$on('showContactsForm', () => {
-      axios
-      .get('public/my_entry.php?action=showUserInfoSocialForm')
+      http.get('showUserInfoSocialForm')
       .then(response => {
         this.userInfoInstagram = response.data.userInfoInstagram;
         this.userInfoWhatsApp = response.data.userInfoWhatsApp;

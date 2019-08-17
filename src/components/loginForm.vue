@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 
@@ -65,8 +65,12 @@ export default {
       if (checkEmail(this.emailLogin)) {this.loginOk = true;} else {this.loginOk = false;}
     },
     login(){
-      axios
-      .get('public/my_entry.php?action=authorization&email=' + this.emailLogin + '&password=' + this.password)
+      http.get('authorization', {
+        params:{
+          email: this.emailLogin,
+          password: this.password
+        }
+      })
       .then(response => {
         if (response.data == false) {
           eventEmitter.$emit('showMessage', 'Такой пользователь не обнаружен. Пожалуйста, проверьте вводимые данные и попробуйте снова. Если вы не зарегистрированы, то мы будем рады, если вы станете частью нашей системы.', 'toRegistration');
@@ -81,13 +85,11 @@ export default {
           $("#loginForm").modal('hide');
           eventEmitter.$emit('showMessage', 'Привет! Рады видеть тебя!');
           // загрузим фон
-          axios
-          .get('public/my_entry.php?action=getBackground')
+          http.get('getBackground')
           .then(response => {
             // сменим фон
             if (response.data) {document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/'+response.data+'\')';}
-            axios
-            .get('public/my_entry.php?action=getUserName')
+            http.get('getUserName')
             .then(response => {
               if (response.data) {this.$router.push('/' + response.data);}
             });

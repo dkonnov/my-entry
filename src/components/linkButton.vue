@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -55,8 +55,12 @@ export default {
   },
   methods: {
     showlinkButtonSave: function(){
-      axios
-      .get('public/my_entry.php?action=showlinkButtonSave&linkButtonAction=' + this.linkButtonAction + '&linkButtonName=' + this.linkButtonName)
+      http.get('showlinkButtonSave', {
+        params:{
+          linkButtonAction: this.linkButtonAction,
+          linkButtonName: this.linkButtonName
+        }
+      })
       .then(response => {
         if (response.data){
           eventEmitter.$emit('reloadMainCard');
@@ -68,12 +72,11 @@ export default {
   },
   created(){
     eventEmitter.$on('linkButtonShow', () => {
-      axios
-        .get('public/my_entry.php?action=showlinkButton')
-        .then(response => {
-          $('#sel').val(response.data.userLinkButtonAction);
-          this.linkButtonName = response.data.userLinkButtonName;
-        });
+      http.get('showlinkButton')
+      .then(response => {
+        $('#sel').val(response.data.userLinkButtonAction);
+        this.linkButtonName = response.data.userLinkButtonName;
+      });
       $("#linkButton").modal('show');
     })
   }

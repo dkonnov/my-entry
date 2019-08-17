@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -56,8 +56,11 @@ export default {
   },
   methods: {
     changeLoginNameFormSave: function(){
-      axios
-      .get('public/my_entry.php?action=changeLoginNameFormSave&name=' + this.nameRegistration)
+      http.get('changeLoginNameFormSave',{
+        params:{
+          name: this.nameRegistration
+        }
+      })
       .then(() => {
         $("#addressChangeForm").modal('hide');
         this.nameRegistration = '';
@@ -67,8 +70,11 @@ export default {
     },
     nameRegistrationCheck() {
       if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.nameRegistration)){
-        axios
-        .get('public/my_entry.php?action=nameRegistrationCheck&name=' + this.nameRegistration)
+        http.get('nameRegistrationCheck',{
+          params:{
+            name: this.nameRegistration
+          }
+        })
         .then(response => {
           if (response.data == true) {
             this.nameRegistrationOk = false;

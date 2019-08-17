@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -90,8 +90,11 @@ export default {
   },
   methods:{
     loadMainCardInf: function(value){
-      axios
-      .get('public/my_entry.php?action=loadMainCard&userNameID=' + value)
+      http.get('loadMainCard', {
+        params:{
+          userNameID: value
+        }
+      })  
       .then(response => {
         if (response.data.userInfoName) {
           // аватар 
@@ -110,23 +113,28 @@ export default {
           this.linkButtonHref = response.data.userLinkButtonHref;
           this.footer = false;
           // загрузим соц сети
-          axios
-          .get('public/my_entry.php?action=loadUserSocButtons&userNameID=' + value)
+          http.get('loadUserSocButtons', {
+            params:{
+              userNameID: value
+            }
+          })  
           .then(response => {
             this.userInfoSoc = response.data;
           });
           // загрузим услуги
-          axios
-          .get('public/my_entry.php?action=loadServices&userNameID=' + value)
+          http.get('loadServices', {
+            params:{
+              userNameID: value
+            }
+          })  
           .then(response => {
             this.userServices = response.data;
           });
           // имя 
-          axios
-            .get('public/my_entry.php?action=getUserName')
-            .then(response => {
+          http.get('getUserName')
+          .then(response => {
             if (response.data == value) {this.ifLogined = true;}
-            });
+          });
           }
           //такой страницы не существует
           if (!this.mainCardName){
@@ -156,8 +164,7 @@ export default {
     this.user = this.$router.currentRoute.params['user'];
     this.loadMainCardInf(this.user);
     eventEmitter.$on('reloadMainCard', () => {
-       axios
-       .get('public/my_entry.php?action=getUserName')
+       http.get('getUserName')
        .then(response => {
          if (response.data) {
            this.$router.push('/' + response.data);

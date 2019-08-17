@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -62,32 +62,37 @@ export default {
       var url = document.getElementById('img' + value).src;
       var img = url.substr(url.lastIndexOf('/') + 1);
       document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/' + img + '\')';
-      axios
-      .get('public/my_entry.php?action=changeBackground&img=' + img)
+      http.get('changeBackground', {
+        params:{
+          img: img
+        }
+      })
       .then(response => {});
     },
     changeTab(value){
       this.currentTab = value;
-      axios
-        .get('public/my_entry.php?action=getBackgrounds&page=' + value)
-        .then(response => {
-          for (var i = 1; i <= 6; i++){
-            if (response.data[i-1].img){
-              document.getElementById('imgDiv' + i).style.visibility = 'visible';
-              document.getElementById('img' + i).src = 'img/backgrounds/' + response.data[i-1].img;
-            } else {
-              document.getElementById('imgDiv' + i).style.visibility = 'hidden';
-            }
+      http.get('getBackgrounds', {
+        params:{
+          page: value
+        }
+      })
+      .then(response => {
+        for (var i = 1; i <= 6; i++){
+           if (response.data[i-1].img){
+            document.getElementById('imgDiv' + i).style.visibility = 'visible';
+            document.getElementById('img' + i).src = 'img/backgrounds/' + response.data[i-1].img;
+          } else {
+            document.getElementById('imgDiv' + i).style.visibility = 'hidden';
           }
+        }
       });
       
     }
   },
   created() {
     eventEmitter.$on('showBackgroundForm', () => {
-      axios
-        .get('public/my_entry.php?action=totalTabs')
-        .then(response => {
+      http.get('totalTabs')
+      .then(response => {
         this.totalTabs = response.data;
       });
       $("#backgroundForm").modal('show');

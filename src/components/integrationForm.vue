@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -54,8 +54,11 @@ export default {
   },
   methods: {
     integrationFormSave() {
-      axios
-      .get('public/my_entry.php?action=integrationFormSave&integrationPixel=' + this.integrationPixel)
+      http.get('integrationFormSave', {
+        params:{
+          integrationPixel: this.integrationPixel
+        }
+      })
       .then(() => {
          $("#integrationForm").modal('hide'); 
       });

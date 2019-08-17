@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -55,8 +55,13 @@ export default {
   },
   methods:{
     showUserInfoSave() {
-      axios
-      .get('public/my_entry.php?action=showUserInfoSave&userInfoName=' + this.userInfoName + '&userInfoSpecialization=' + this.userInfoSpecialization + '&userInfoAbout=' + this.userInfoAbout)
+      http.get('showUserInfoSave', {
+        params:{
+          userInfoName: this.userInfoName,
+          userInfoSpecialization: this.userInfoSpecialization,
+          userInfoAbout: this.userInfoAbout
+        }
+      })
       .then(() => {
         eventEmitter.$emit('reloadMainCard');
         $("#aboutUserForm").modal('hide');
@@ -65,8 +70,7 @@ export default {
   },
   created() {
     eventEmitter.$on('showAboutUserForm', () => {
-      axios
-      .get('public/my_entry.php?action=showUserInfo')
+      http.get('showUserInfo')
       .then(response => {
         this.userInfoName = response.data.userInfoName;
         this.userInfoSpecialization = response.data.userInfoSpecialization;

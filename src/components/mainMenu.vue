@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -117,8 +117,7 @@ export default {
       eventEmitter.$emit('showLoginForm');
     },
     logout() {
-      axios
-      .get('public/my_entry.php?action=logout')
+      http.get('logout')
       .then(() => {
         this.buttonLogin = true;
         eventEmitter.$emit('showMessage', 'Надеемся вы скоро вернетесь!');
@@ -133,22 +132,19 @@ export default {
     eventEmitter.$on('showMenu', () => {
       this.buttonLogin  = false;
       // имя 
-      axios
-        .get('public/my_entry.php?action=getUserName')
-        .then(response => {
+      http.get('getUserName')
+      .then(response => {
         if (response.data) {this.userName = response.data;}
       });
     });
   },
   beforeMount(){
-    axios
-      .get('public/my_entry.php?action=authorizationOnStart')
+    http.get('authorizationOnStart')
       .then(response => {
         if (response.data > 0){
           eventEmitter.$emit('showMenu');
           if (!this.$router.currentRoute.params['user']){
-            axios
-            .get('public/my_entry.php?action=getUserName')
+            http.get('getUserName')
             .then(response => {
               if (response.data) {this.$router.push('/' + response.data);}
             });

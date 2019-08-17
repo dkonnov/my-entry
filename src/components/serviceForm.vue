@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -61,8 +61,14 @@ export default {
       if (this.addServiceFormName) {this.addServiceFormOk = true} else {this.addServiceFormOk = false}
     },
     addServiceFormSave: function(){
-      axios
-      .get('public/my_entry.php?action=addServiceFormSave&id_service=' + this.userSeviceId + '&name=' + this.addServiceFormName + '&description=' + this.addServiceFormDescription + '&price=' + this.addServiceFormPrice)
+      http.get('addServiceFormSave', {
+        params:{
+          id_service: this.userSeviceId,
+          name: this.addServiceWindowName,
+          description: this.addServiceFormDescription,
+          price: this.addServiceFormPrice
+        }
+      })
       .then(response => {
         eventEmitter.$emit('reloadMainCard');
         $("#serviceForm").modal('hide');
@@ -74,8 +80,11 @@ export default {
    },
   created() {
     eventEmitter.$on('deleteService', (value) => {
-      axios
-      .get('public/my_entry.php?action=deleteService&id_service=' + value)
+      http.get('deleteService', {
+        params:{
+          id_service: value
+        }
+      })
       .then(response => {
         if (response.data){
           eventEmitter.$emit('showMessage', 'Услуга удалена!');
@@ -87,14 +96,17 @@ export default {
       if (value){
         this.addServiceWindowName = "Услуга";
         this.addServiceWindowButton = "Сохранить";
-        axios
-          .get('public/my_entry.php?action=getService&id_service=' + value)
-          .then(response => {
-            this.addServiceFormName = response.data.name;
-            this.addServiceFormDescription = response.data.description;
-            this.addServiceFormPrice = response.data.price;
-            this.userSeviceId = value;
-            this.addServiceFormOk = true;
+        http.get('getService', {
+          params:{
+            id_service: value
+          }
+        })
+        .then(response => {
+          this.addServiceFormName = response.data.name;
+          this.addServiceFormDescription = response.data.description;
+          this.addServiceFormPrice = response.data.price;
+          this.userSeviceId = value;
+          this.addServiceFormOk = true;
           });
       } else {
         this.addServiceWindowName = "Новая услуга";

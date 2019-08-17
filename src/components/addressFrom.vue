@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -38,8 +38,7 @@ export default {
   },
   created(){
     eventEmitter.$on('showAddressFrom', () => {
-      axios
-      .get('public/my_entry.php?action=getUserName')
+      http.get('getUserName')
       .then(response => {
         if (response.data){
           document.getElementById('QRCodeImg').src = 'https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=http://my-entry.ru/' + response.data + '&chld=H&choe=UTF-8';

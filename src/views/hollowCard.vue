@@ -4,6 +4,7 @@
   <div class="row">
   <div class="col-md-6">
   <div class="info info-horizontal" stype="padding: 0px 0 30px;">
+    
     <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="1s"> 
       <div class="icon icon-primary">
         <i class="material-icons">accessibility_new</i>
@@ -107,7 +108,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
 export default {
@@ -123,11 +124,10 @@ export default {
     }
   },
   beforeMount(){ 
-    axios
-      .get('public/my_entry.php?action=getRandomBackground')
-      .then(response => {
-        document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/'+response.data+'\')';
-      })
+    http.get('getRandomBackground')
+    .then(response => {
+      document.getElementById("backgroundDiv").style.backgroundImage='url(\'img/backgrounds/'+response.data+'\')';
+    })
   }
 }
 </script>
