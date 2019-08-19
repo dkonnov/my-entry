@@ -169,4 +169,6 @@ export default {
 <style lang="sass" scoped>
 .modal-dialog 
   max-width: 1300px;
+.text-muted
+  padding-left: 15px;
 </style>

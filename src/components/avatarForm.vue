@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import {http} from "./../http"
 import {eventEmitter} from "./../main"
 
@@ -59,13 +58,13 @@ export default {
       var formData = new FormData();
       var imagefile = document.querySelector('#userfile');
       formData.append("image", imagefile.files[0]);
-      axios.post('public/my_entry.php?action=addAvatar', formData, {
+      http.post('addAvatar', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       })
       .then(response => {
-       // eventEmitter.$emit('showAvatarForm');
+        eventEmitter.$emit('showAvatarForm');
        // this.loadMainCard();
       });
     }

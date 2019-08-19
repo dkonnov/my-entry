@@ -14,9 +14,6 @@ $dbname = "my-entry";
 */
 $action = $_SERVER['PATH_INFO'];
 
-$userNameID = $_GET['userNameID'];*/
-
-
 $dbservername = "localhost";
 $dbusername = "root";
 $dbpassword = "123";
@@ -188,7 +185,7 @@ if ($action == '/getBackgrounds'){
 
 // get info for main card
 if ($action == '/loadMainCard'){
-    $result  = $link->query("SELECT id, background, avatar, userInfoName, userInfoSpecialization, userInfoAbout, userLinkButtonAction, userInfoEMail, userLinkButtonName, userInfoPhone, userInfoWhatsApp, userInfoWhatsAppText from my_entry_users WHERE name = '$userNameID'");
+    $result  = $link->query("SELECT id, background, avatar, userInfoName, userInfoSpecialization, userInfoAbout, userLinkButtonAction, userInfoEMail, userLinkButtonName, userInfoPhone, userInfoWhatsApp, userInfoWhatsAppText from my_entry_users WHERE name = '$_GET[userNameID]'");
     $row = $result->fetch_assoc();
  
         if ($row[userLinkButtonAction] == 'notShow'){$userLinkButtonHref = "";}

@@ -10,7 +10,7 @@
           <div class="row">
      
             <template v-for="index in 6">
-              <div :id="'imgDiv'+index" class="col-md-4" @click="changeBackground(index)">
+              <div :id="'imgDiv'+index" class="col-md-4" @click="changeBackground(index)" :key="index">
                 <div class="card card-plain">
                   <div class="card-header card-header-image">
                     <div class="card-header-image-bg"></div>
@@ -29,7 +29,7 @@
             <div width=100% style="display: flex;align-items: center; justify-content: center;">
             <ul class="pagination nav nav-pills nav-pills-primary" role="tablist">
               <template v-for="index in totalTabs">
-                <li class="page-item" :class="{'active': currentTab == index}" @click="changeTab(index)"><a class="page-link" data-toggle="tab" :href="'#tab'+index" role="tablist" aria-expanded="true">{{index}}</a></li>
+                <li class="page-item" :class="{'active': currentTab == index}" @click="changeTab(index)" :key="index"><a class="page-link" data-toggle="tab" :href="'#tab'+index" role="tablist" aria-expanded="true">{{index}}</a></li>
               </template>
             </ul>
             </div>

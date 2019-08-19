@@ -49,8 +49,8 @@ export default {
   name: 'linkButton',
   data () {
     return {
-      linkButtonName: '',
-      linkButtonAction: '' 
+      linkButtonAction: '',
+      linkButtonName: ''
     }
   },
   methods: {
@@ -76,6 +76,7 @@ export default {
       .then(response => {
         $('#sel').val(response.data.userLinkButtonAction);
         this.linkButtonName = response.data.userLinkButtonName;
+        $('#sel').val(response.data.userLinkButtonAction);
       });
       $("#linkButton").modal('show');
     })

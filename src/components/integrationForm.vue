@@ -66,8 +66,7 @@ export default {
   },
   created(){
     eventEmitter.$on('integrationFormShow', () => {
-      axios
-      .get('public/my_entry.php?action=integrationFormShow')
+      http.get('integrationFormShow')
       .then(response => {
         this.integrationPixel = response.data.integrationPixel;
         $("#integrationForm").modal('show'); 
@@ -76,3 +75,8 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.text-muted
+  padding-left: 15px
+</style>
