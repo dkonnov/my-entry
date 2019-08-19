@@ -1,10 +1,13 @@
 # **My Entry**
 
+<img src="http://dkonnov.ru/github/my-entry1.jpg">
+
+<img src="http://dkonnov.ru/github/my-entry2.png">
+
 Web-приложение для создания онлайн визиток.
 
 В основе интерфейса Bootstrap 4
 Разрабатывается на Vue по принципу SPA. 
-Сборка при помощи Vue CLI. 
 
 Работающая версия расположена по адресу: [http://my-entry.ru/](http://my-entry.ru/)
 
