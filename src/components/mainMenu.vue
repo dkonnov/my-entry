@@ -38,9 +38,9 @@
             <a href="#" class="dropdown-item" @click="showAddServiceForm()">
               <i class="material-icons">playlist_add</i> Добавить услугу
             </a>
-            <!--<a href="#" class="dropdown-item" @click="showAccessTimeForm()">
+            <a href="#" class="dropdown-item" @click="showAccessTimeForm()">
               <i class="material-icons">access_time</i> Рабочее время 
-            </a>-->
+            </a>
           </div>
         </li>
         
@@ -86,6 +86,9 @@ export default {
      }
   },
   methods: {
+    showAccessTimeForm(){
+      eventEmitter.$emit('showAccessTime');
+    },
     showBackgroundForm(){
       eventEmitter.$emit('showBackgroundForm');
     },
