@@ -14,8 +14,8 @@
                 <div class="card card-plain">
                   <div class="card-header card-header-image">
                     <div class="card-header-image-bg"></div>
-                    <img :id="'img' + index" src="img/backgrounds/scott-webb-266121-unsplash.jpg">
-                     <div class="colored-shadow" style='background-image: url("img/backgrounds/scott-webb-266121-unsplash.jpg"); opacity: 1;'></div>
+                    <img :id="'img' + index" src="img/animated-loading-bar.gif">
+                    <div :id="'img_s_' + index" class="colored-shadow" style='opacity: 1;'></div>
                   </div>
                 </div>
               </div>
@@ -78,9 +78,13 @@ export default {
       })
       .then(response => {
         for (var i = 1; i <= 6; i++){
+            document.getElementById('img' + i).src = 'img/animated-loading-bar.gif';
+        }
+        for (var i = 1; i <= 6; i++){
            if (response.data[i-1].img){
             document.getElementById('imgDiv' + i).style.visibility = 'visible';
             document.getElementById('img' + i).src = 'img/backgrounds/' + response.data[i-1].img;
+            document.getElementById('img_s_' + i).style.backgroundImage = "url(img/backgrounds/" + response.data[i-1].img + ")";
           } else {
             document.getElementById('imgDiv' + i).style.visibility = 'hidden';
           }
