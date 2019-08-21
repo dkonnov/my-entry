@@ -5,7 +5,7 @@
      <div class="col-lg-8 col-md-6 ml-auto mr-auto">  
       <div class="card card-signup" style="padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;">
 				<h2 class="card-title text-center">О себе</h2>
-          <div class="row">
+        <div class="row">
           <div class="card-body">
             <form>
 
@@ -31,7 +31,7 @@
             </center>
             
             </form>
-        </div>
+          </div>
         </div>
       </div>
     </div>

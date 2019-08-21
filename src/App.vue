@@ -25,21 +25,9 @@
 </template>
 
 <script>
-import integrationPixel from './components/integrationPixel'
-import mainMenu from './components/mainMenu'
-import avatarForm from './components/avatarForm'
-import loginForm from './components/loginForm'
-import registrationForm from './components/registrationForm'
-import modalWindow from './components/modalWindow'
-import addressFrom from './components/addressFrom'
-import addressChangeFrom from './components/addressChangeFrom'
-import aboutUserForm from './components/aboutUserForm'
-import contactsForm from './components/contactsForm'
-import integrationForm from './components/integrationForm'
-import linkButton from './components/linkButton'
-import serviceForm from './components/serviceForm'
-import backgroundForm from './components/backgroundForm'
-import accessTime from './components/accessTime'
+impport integrationPixel, mainMenu, avatarForm, loginForm, registrationForm, modalWindow,
+  addressFrom, addressChangeFrom, aboutUserForm, contactsForm, integrationForm, linkButton, 
+  serviceForm, backgroundForm, accessTime  from '@/components'
 
 export default {
   name: 'app',
