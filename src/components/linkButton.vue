@@ -28,7 +28,7 @@
 
           <br>
           <center>
-            <button type="submit" class="btn btn-primary btn-round" @click="showlinkButtonSave()">Сохранить</button>
+            <button type="submit" class="btn btn-primary btn-round" @click="showlinkButtonSave">Сохранить</button>
             <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
           </center>
         

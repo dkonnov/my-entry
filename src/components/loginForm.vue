@@ -29,10 +29,9 @@
                 </div>
               </div>
               <div class="footer text-center">
-                <button v-show="loginOk" v-on:click="login()" type="button" class="btn btn-primary btn-round" data-toggle="modal">Вход</button>
-                <button v-show="!loginOk" type="button" class="btn btn-primary btn-round" data-toggle="modal" disabled>Вход</button>
+                <button @click="login" type="button" class="btn btn-primary btn-round" data-toggle="modal" :disabled="!loginOk">Вход</button>
                 <br>
-                <a href="#" @click="showRegistrationForm()" class="btn btn-primary btn-link btn-wd">Регистрация</a>
+                <a href="#" @click="showRegistrationForm" class="btn btn-primary btn-link btn-wd">Регистрация</a>
               </div>
             </form>
           </div>

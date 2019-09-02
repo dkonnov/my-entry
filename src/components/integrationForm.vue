@@ -30,7 +30,7 @@
         
           <center>
             <br>
-            <button type="submit" class="btn btn-primary btn-round" @click="integrationFormSave()">Сохранить</button>
+            <button type="submit" class="btn btn-primary btn-round" @click="integrationFormSave">Сохранить</button>
             <a href="#pablo" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
           </center>
         </div>

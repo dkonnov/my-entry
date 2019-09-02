@@ -19,7 +19,7 @@
                     <span class="fileinput-exists">Заменить фото</span>
                     <input name="userfile" id="userfile" type="file" accept="image/jpeg" @change="addAvatar"><div class="ripple-container"></div>
                   </span>
-                  <a v-show="deleteAvatarButton" class="btn btn-info btn-round" @click="deleteAvatar()" href="#"><i class="fa fa-times"></i> Удалить</a>
+                  <a v-show="deleteAvatarButton" class="btn btn-info btn-round" @click="deleteAvatar" href="#"><i class="fa fa-times"></i> Удалить</a>
                 </div>
               </div>
               <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>

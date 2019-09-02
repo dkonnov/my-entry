@@ -54,15 +54,15 @@
             <i class="material-icons">face</i><b> {{ userName }} </b>
           </a>
           <div class="dropdown-menu dropdown-with-icons">
-            <a href="#" class="dropdown-item" @click="showAddressForm()">
+            <a href="#" class="dropdown-item" @click="showAddressForm">
             <i class="material-icons">code</i> QR-код и адрес</a>
-            <a href="#" class="dropdown-item" @click="showAddressChangeForm()">
+            <a href="#" class="dropdown-item" @click="showAddressChangeForm">
             <i class="material-icons">code</i> Сменить адрес</a>
-            <a href="#" class="dropdown-item" @click="integrationFormShow()">
+            <a href="#" class="dropdown-item" @click="integrationFormShow">
             <i class="material-icons">code</i> Интеграция</a>
-            <a href="#" class="dropdown-item" @click="showZoneRu()">
+            <a href="#" class="dropdown-item" @click="showZoneRu">
             <i class="material-icons">language</i> Создать визитку в зоне RU</a>
-            <a href="#" class="dropdown-item" @click="logout()">
+            <a href="#" class="dropdown-item" @click="logout">
             <i class="material-icons">meeting_room</i> Выход </a>
           </div>
         </li>

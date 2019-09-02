@@ -102,7 +102,7 @@
         
           <center>
             <br>
-            <button type="submit" class="btn btn-primary btn-round" @click="showUserInfoSocialSave()">Сохранить</button>
+            <button type="submit" class="btn btn-primary btn-round" @click="showUserInfoSocialSave">Сохранить</button>
             <a href="#pablo" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
           </center>
         </div>

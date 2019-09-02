@@ -4,29 +4,33 @@
    <div class="modal-content" style="background-color:transparent;box-shadow: none;" >
      <div class="col-lg-8 col-md-6 ml-auto mr-auto">  
       <div class="card card-signup" style="padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;">
-				<h2 class="card-title text-center">{{ addServiceWindowName }}</h2>
+				<h2 class="card-title text-center">{{ WindowName }}</h2>
           <div class="row">
           <div class="card-body">
           <form>
           <div class="form-group">
               <label>Название услуги</label>
-              <input type="text" v-model="addServiceFormName" @input="addServiceFormNameCheck" class="form-control">
+              <input type="text" v-model="name" @input="addServiceFormNameCheck" class="form-control">
               <small id="emailHelp" class="form-text text-muted">Обязательное поле</small>
           </div>
           <div class="form-group">
               <label>Описание услуги</label>
-              <textarea class="form-control" v-model="addServiceFormDescription" rows="4" placeholder=""></textarea>
+              <textarea class="form-control" v-model="description" rows="4" placeholder=""></textarea>
               <small id="emailHelp" class="form-text text-muted">Опишите подробности оказываемой услуги</small>
           </div>
           <div class="form-group">
               <label>Стоимость</label>
-              <input type="text" v-model="addServiceFormPrice" class="form-control">
+              <input type="text" v-model="price" class="form-control">
+          </div>
+          <div class="form-group">
+              <label>Время оказания услуги</label>
+              <input type="text" v-model="time" class="form-control">
+              <small id="emailHelp" class="form-text text-muted">Данное поле необходимо для записи через интерент на ваши услуги. Если оно заполнено, то функция записи через интернет включена. Так же необходимо заполнить ваш режим работы.</small>
           </div>
         </form>
         <br>
         <center>
-          <button v-show="addServiceFormOk" type="submit" class="btn btn-primary btn-round" @click="addServiceFormSave()">{{ addServiceWindowButton }}</button>
-          <button v-show="!addServiceFormOk" type="submit" class="btn btn-primary btn-round" disabled>{{ addServiceWindowButton }}</button>
+          <button :disabled="!formOk" type="submit" class="btn btn-primary btn-round" @click="addServiceFormSave">{{ WindowButton }}</button>
           <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
         </center>
         
@@ -47,34 +51,35 @@ export default {
   name: 'aboutUserForm',
   data () {
     return {
-      addServiceFormDescription: '',
-      addServiceWindowName: '',
-      addServiceWindowButton: '',
-      addServiceFormName: '',
-      addServiceFormPrice: '',
+      description: '',
+      WindowName: '',
+      WindowButton: '',
+      name: '',
+      price: '',
       userSeviceId: '',
-      addServiceFormOk: false
+      formOk: false,
+      time: ''
     }
   },
   methods:{
     addServiceFormNameCheck: function(){
-      if (this.addServiceFormName) {this.addServiceFormOk = true} else {this.addServiceFormOk = false}
+      if (this.name) {this.formOk = true} else {this.formOk = false}
     },
     addServiceFormSave: function(){
       http.get('addServiceFormSave', {
         params:{
           id_service: this.userSeviceId,
-          name: this.addServiceWindowName,
-          description: this.addServiceFormDescription,
-          price: this.addServiceFormPrice
+          name: this.name,
+          description: this.description,
+          price: this.price
         }
       })
       .then(response => {
         eventEmitter.$emit('reloadMainCard');
         $("#serviceForm").modal('hide');
-        this.addServiceFormName = '';
-        this.addServiceFormDescription = '';
-        this.addServiceFormPrice = '';
+        this.name = '';
+        this.description = '';
+        this.price = '';
       });
     },
    },
@@ -94,28 +99,28 @@ export default {
     });
     eventEmitter.$on('showServiceForm', (value) => {
       if (value){
-        this.addServiceWindowName = "Услуга";
-        this.addServiceWindowButton = "Сохранить";
+        this.WindowName = "Услуга";
+        this.WindowButton = "Сохранить";
         http.get('getService', {
           params:{
             id_service: value
           }
         })
         .then(response => {
-          this.addServiceFormName = response.data.name;
-          this.addServiceFormDescription = response.data.description;
-          this.addServiceFormPrice = response.data.price;
+          this.name = response.data.name;
+          this.description = response.data.description;
+          this.price = response.data.price;
           this.userSeviceId = value;
-          this.addServiceFormOk = true;
+          this.formOk = true;
           });
       } else {
-        this.addServiceWindowName = "Новая услуга";
-        this.addServiceWindowButton = "Добавить";
+        this.WindowName = "Новая услуга";
+        this.WindowButton = "Добавить";
         this.userSeviceId = '';
-        this.addServiceFormOk = false;
-        this.addServiceFormName = '';
-        this.addServiceFormDescription = '';
-        this.addServiceFormPrice = '';
+        this.formOk = false;
+        this.name = '';
+        this.description = '';
+        this.price = '';
       }
       $("#serviceForm").modal('show');
     });

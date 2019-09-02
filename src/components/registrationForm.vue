@@ -99,8 +99,7 @@
   
                 <br>
                 <center>
-                  <button v-show="registrationOk" @click="registration()" type="button" class="btn btn-primary btn-round" data-toggle="modal">Регистрация</button>
-                  <button v-show="!registrationOk" type="button" class="btn btn-primary btn-round" data-toggle="modal" disabled>Регистрация</button>
+                  <button :disabled="!registrationOk" @click="registration" type="button" class="btn btn-primary btn-round" data-toggle="modal">Регистрация</button>
                   <br>
                   <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
                 </center>

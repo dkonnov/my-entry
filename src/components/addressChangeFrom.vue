@@ -28,8 +28,7 @@
             <br>
             <div v-show="nameRegistrationOk">Адрес вашей страницы будет:<br><b>http://my-entry.ru/{{ nameRegistration }}</b></div>
             <br>
-            <button v-show="nameRegistrationOk" @click="changeLoginNameFormSave()" type="button" class="btn btn-primary btn-round" data-toggle="modal">Сохранить</button>
-            <button v-show="!nameRegistrationOk" type="button" class="btn btn-primary btn-round" data-toggle="modal" disabled>Сохранить</button>
+            <button :disabled="!nameRegistrationOk" @click="changeLoginNameFormSave" type="button" class="btn btn-primary btn-round" data-toggle="modal">Сохранить</button>
             <br>
             <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
           </center>

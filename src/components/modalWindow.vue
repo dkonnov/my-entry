@@ -12,8 +12,8 @@
           {{ messageText }}
        </div>
         <div class="modal-footer">
-         <div v-show="sendPassword" v-on:click="sendPasswordF()"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Отправить пароль</button></div>
-         <div v-show="toRegistration" v-on:click="showRegistrationForm()"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Регистрация</button></div>
+         <div v-show="sendPassword" @click="sendPasswordF()"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Отправить пароль</button></div>
+         <div v-show="toRegistration" @click="showRegistrationForm"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Регистрация</button></div>
          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
          </div>
      </div>
