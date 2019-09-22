@@ -83,21 +83,19 @@ export default {
       } else {
         this.nameRegistrationOk = false;
       }
-      this.checkRegistrationForm();
     }
   },
   created(){
     eventEmitter.$on('showAddressChangeFrom', () => {
       $("#addressChangeForm").modal('show');
-
     })
-  },
+  }
 }
 </script>
 
 <style lang="sass" scoped>
 .form-control-feedback
-  margin-top: -28px
+  margin-top: -52px
 </style>
 
 
