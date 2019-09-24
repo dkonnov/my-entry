@@ -1,7 +1,7 @@
 <template>
-   <div class="modal fade" id="registrationForm" tabindex="-1" role="dialog" aria-labelledby="registrationForm" aria-hidden="false"> 
-   <div class="modal-dialog" role="document">
-   <div class="modal-content" style="background-color:transparent;box-shadow: none;">
+  <div class="modal fade" id="registrationForm" tabindex="-1" role="dialog" aria-labelledby="registrationForm" aria-hidden="false"> 
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="background-color:transparent;box-shadow: none;">
           <div class="card card-login">
               <div class="card-header card-header-primary text-center">
                 <h4 class="card-title">Регистрация</h4>
@@ -10,7 +10,7 @@
               <div class="card-body" style="padding-left: 50px;">
               <div class="row">
               <div class="col-md-6">
-              <div class="info info-horizontal" stype="padding: 0px 0 30px;">
+                <div class="info info-horizontal" stype="padding: 0px 0 30px;">
                   <div class="icon icon-primary">
                    <i class="material-icons">accessibility_new</i>
                   </div>
@@ -118,7 +118,7 @@
 
 <script>
 import {http} from "./../http"
- import {eventEmitter} from "./../main" 
+import {eventEmitter} from "./../main" 
 
 export default {
   name: 'registrationForm',
@@ -214,15 +214,14 @@ export default {
         });
     },
     // проверет равны ли пароли
-  password2Check(){
+    password2Check(){
       if (this.password == this.password2){this.password2Ok = true;} else {this.password2Ok = false;}
       this.checkRegistrationForm();
-  },
-  // проверяет регистрационную форму, все ли галочки стоят
-  checkForm(){
+    },
+    // проверяет регистрационную форму, все ли галочки стоят
+    checkForm(){
       if (this.nameOk == true && this.emailOk == true && this.passwordOk == true && this.password2Ok == true){this.registrationOk = true;} else {this.registrationOk = false;}
-  },
-
+    }
   }
 }
 /*Check is email or not*/

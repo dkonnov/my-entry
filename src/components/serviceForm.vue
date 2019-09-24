@@ -24,7 +24,7 @@
           </div>
           <div class="form-group">
               <label>Время оказания услуги</label>
-              <input type="text" v-model="time" class="form-control">
+              <input type="text" id="timeServiseForm" class="form-control datetimepicker">
               <small id="emailHelp" class="form-text text-muted">Данное поле необходимо для записи через интерент на ваши услуги. Если оно заполнено, то функция записи через интернет включена. Так же необходимо заполнить ваш режим работы.</small>
           </div>
         </form>
@@ -66,12 +66,13 @@ export default {
       if (this.name) {this.formOk = true} else {this.formOk = false}
     },
     addServiceFormSave: function(){
-      http.get('addServiceFormSave', {
+       http.get('addServiceFormSave', {
         params:{
           id_service: this.userSeviceId,
           name: this.name,
           description: this.description,
-          price: this.price
+          price: this.price,
+          time: document.getElementById('timeServiseForm').value
         }
       })
       .then(response => {
@@ -80,9 +81,31 @@ export default {
         this.name = '';
         this.description = '';
         this.price = '';
-      });
-    },
+        this.time = '';
+      }); 
+    }
    },
+  mounted(){
+    var piker = $('.datetimepicker').datetimepicker({
+      format: 'LT',
+      locale: 'ru',
+      stepping: 15,
+      showClose: true,
+      toolbarPlacement: 'bottom',
+      enabledHours: [0, 1, 2, 3],
+      icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-check'
+        }
+    });
+  },
   created() {
     eventEmitter.$on('deleteService', (value) => {
       http.get('deleteService', {
@@ -98,6 +121,7 @@ export default {
       });
     });
     eventEmitter.$on('showServiceForm', (value) => {
+      
       if (value){
         this.WindowName = "Услуга";
         this.WindowButton = "Сохранить";
@@ -107,6 +131,7 @@ export default {
           }
         })
         .then(response => {
+          document.getElementById('timeServiseForm').value = response.data.time;
           this.name = response.data.name;
           this.description = response.data.description;
           this.price = response.data.price;
@@ -114,6 +139,7 @@ export default {
           this.formOk = true;
           });
       } else {
+        document.getElementById('timeServiseForm').value = '00:00';
         this.WindowName = "Новая услуга";
         this.WindowButton = "Добавить";
         this.userSeviceId = '';
