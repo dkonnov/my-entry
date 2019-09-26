@@ -42,19 +42,27 @@
               <div :id="userService.collapse" class="collapse" role="tabpanel" :aria-labelledby="userService.heading">
                 <div class="card-body wow fadeIn" data-wow-duration="2s" >
                   {{ userService.description }}
-
-                  <div class="dropdown wow fadeIn" data-wow-duration="2s" data-wow-delay="1s" align=right style="margin-right: -4px;">
-                    <!-- <button class="btn btn-primary btn-sm btn-round">Заказать</button> -->
-                    <template v-if="ifLogined">
-                    <button class="btn btn-secondary btn-fab btn-fab-mini btn-round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     <i class="material-icons">more_horiz</i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#" @click="showAddServiceForm(userService.id)">Редактировать</a>
-                      <a class="dropdown-item" href="#" @click="deleteService(userService.id)">Удалить</a>
+                  <div class="row" style="backgroundcolor=yellow">
+                  <div class="col-md-6">
+                    <div class="dropdown wow fadeIn" data-wow-duration="2s" data-wow-delay="1s" align="left">
+                      <i class="far fa-clock"></i> {{ userService.time }}
                     </div>
-                    </template>
                   </div>
+                  <div class="col-md-6">
+                    <div class="dropdown wow fadeIn" data-wow-duration="2s" data-wow-delay="1s" align="right" style="margin-right: -4px;">
+                      <!-- <button class="btn btn-primary btn-sm btn-round">Заказать</button> -->
+                      <template v-if="ifLogined">
+                      <button class="btn btn-secondary btn-fab btn-fab-mini btn-round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       <i class="material-icons">more_horiz</i>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" @click="showAddServiceForm(userService.id)">Редактировать</a>
+                        <a class="dropdown-item" href="#" @click="deleteService(userService.id)">Удалить</a>
+                      </div>
+                      </template>
+                    </div>
+                  </div>
+                </div>
 
                 </div>
               </div>
