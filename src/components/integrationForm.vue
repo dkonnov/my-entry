@@ -23,7 +23,7 @@
               <input v-model="integrationPixel" type="number" class="form-control" placeholder="Facebook Pixel ...">
             </div>
             <div style="margin-top:-10px; margin-left:30px">
-              <small id="emailHelp" class="form-text text-muted">Укажите код счетчика Facebook Pixel. Создать счетчик на страницк <a href="https://www.facebook.com/events_manager/" target=new>Facebook Events Manager</a></small>
+              <small id="emailHelp" class="form-text text-muted">Укажите код счетчика Facebook Pixel. Создать счетчик можно на странице <a href="https://www.facebook.com/events_manager/" target=new>Facebook Events Manager</a></small>
             </div>
 
             </div>

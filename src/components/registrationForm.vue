@@ -178,7 +178,7 @@ export default {
         });
         this.emailOk = true;
       } else {this.emailOk = false;}
-      this.checkRegistrationForm();
+      this.checkForm();
     },
     // проверяет требования к паролю (более 6 символов, латиница, цифры, символы)
     passwordCheck(){
@@ -188,7 +188,7 @@ export default {
         this.passwordOk = false;
       }
       if (this.password == this.password2){this.password2Ok = true;} else {this.password2Ok = false;}
-      this.checkRegistrationForm();
+      this.checkForm();
     },
     registration (){
        http.get('registration', {
@@ -208,7 +208,7 @@ export default {
           this.passwordOk = false;
           this.password2Ok = false;
           this.registrationOk = false;
-          eventEmitter.$emit('showMessage', 'Спасибо за регистрацию. На указанный вами адрес электронной почты отправлено письмо для подтверждения регистрации.');
+          eventEmitter.$emit('showMessage', 'Спасибо за регистрацию. Теперь можно войти в систему и приступить к настройке своей страницы.');
           $("#registrationForm").modal('hide');
           
         });
@@ -216,7 +216,7 @@ export default {
     // проверет равны ли пароли
     password2Check(){
       if (this.password == this.password2){this.password2Ok = true;} else {this.password2Ok = false;}
-      this.checkRegistrationForm();
+      this.checkForm();
     },
     // проверяет регистрационную форму, все ли галочки стоят
     checkForm(){
