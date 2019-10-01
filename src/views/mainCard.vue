@@ -43,8 +43,8 @@
                 <div class="card-body wow fadeIn" data-wow-duration="2s" >
                   {{ userService.description }}
                   <div class="row" style="backgroundcolor=yellow">
-                  <div class="col-md-6">
-                    <div class="dropdown wow fadeIn" data-wow-duration="2s" data-wow-delay="1s" align="left">
+                  <div class="col-md-6" style=" opacity: 0.5;">
+                    <div v-show="userService.time" class="dropdown wow fadeIn" data-wow-duration="2s" data-wow-delay="1s" align="left">
                       <i class="far fa-clock"></i> {{ userService.time }}
                     </div>
                   </div>
