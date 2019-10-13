@@ -11,25 +11,26 @@
               </div>
               <p class="description text-center">Введите учетные данные</p>
               <div class="card-body">
-                <div class="input-group">
+                <div class="input-group" :class="{'has-danger': $v.login.$error}">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">mail</i>
                     </span>
                   </div>
-                  <input v-model="emailLogin" @input="emailLoginCheck" type="email" class="form-control" placeholder="Электронная почта ...">
+                  <input v-model="login" id="login" @input="$v.login.$touch" type="email" class="form-control" placeholder="Электронная почта ...">
                 </div>
-                <div class="input-group">
+                <div class="input-group" :class="{'has-danger': $v.password.$error}">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input v-model="password" type="password" class="form-control" placeholder="Пароль ...">
+                  <input v-model="password" id="password" @input="$v.password.$touch" type="password" class="form-control" placeholder="Пароль ...">
                 </div>
               </div>
+             
               <div class="footer text-center">
-                <button @click="login" type="button" class="btn btn-primary btn-round" data-toggle="modal" :disabled="!loginOk">Вход</button>
+                <button @click="login" type="button" class="btn btn-primary btn-round" data-toggle="modal" :disabled="$v.$invalid">Вход</button>
                 <br>
                 <a href="#" @click="showRegistrationForm" class="btn btn-primary btn-link btn-wd">Регистрация</a>
               </div>
@@ -45,23 +46,27 @@
 <script>
 import {http} from "./../http"
 import {eventEmitter} from "./../main"
-
-
+import {email, required} from "vuelidate/lib/validators/"
+ 
 export default {
   name: 'loginForm',
   data () {
     return {
-      loginOk: false,
-      emailLogin: '',
+      login: '',
       password: ''
      }
+  },
+  validations: {
+    login: {
+      email
+    },
+    password: {
+      required
+    }
   },
   methods: {
     showRegistrationForm() {
       eventEmitter.$emit('showRegistrationForm');
-    },
-    emailLoginCheck() {
-      if (checkEmail(this.emailLogin)) {this.loginOk = true;} else {this.loginOk = false;}
     },
     login(){
       http.get('authorization', {
@@ -105,12 +110,8 @@ export default {
   created(){
     eventEmitter.$on('showLoginForm', () => {
       $("#loginForm").modal('show'); 
-    })
+    });
   }
-}
-/*Check is email or not*/
-function checkEmail(value){
-  return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/.test(value))
 }
 </script>
 
