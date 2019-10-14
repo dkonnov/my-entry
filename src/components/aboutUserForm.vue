@@ -9,9 +9,9 @@
           <div class="card-body">
             <form>
 
-            <div class="form-group">
+            <div class="form-group" :class="{'has-danger': $v.name.$error}">
               <label>Имя</label>
-              <input type="text" v-model="name" class="form-control" aria-describedby="name" placeholder="Отображаемое имя ...">
+              <input type="text" v-model="name" id="name" @input="$v.name.$touch" class="form-control" aria-describedby="name" placeholder="Отображаемое имя ...">
             </div>
 
             <div class="form-group">
@@ -26,7 +26,7 @@
             </div>
 
             <center>
-              <button type="submit" class="btn btn-primary btn-round" @click="save">Сохранить</button>
+              <button type="submit" class="btn btn-primary btn-round" @click="save" :disabled="$v.$invalid">Сохранить</button>
               <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
             </center>
             
@@ -54,8 +54,10 @@ export default {
       about: ''
     }
   },
-  validations(){
-
+  validations: {
+    name: {
+      required
+    }
   },
   methods:{
     save() {
