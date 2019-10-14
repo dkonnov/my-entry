@@ -30,7 +30,7 @@
               </div>
              
               <div class="footer text-center">
-                <button @click="login" type="button" class="btn btn-primary btn-round" data-toggle="modal" :disabled="$v.$invalid">Вход</button>
+                <button @click="authorization" type="button" class="btn btn-primary btn-round" data-toggle="modal" :disabled="$v.$invalid">Вход</button>
                 <br>
                 <a href="#" @click="showRegistrationForm" class="btn btn-primary btn-link btn-wd">Регистрация</a>
               </div>
@@ -68,10 +68,10 @@ export default {
     showRegistrationForm() {
       eventEmitter.$emit('showRegistrationForm');
     },
-    login(){
+    authorization(){
       http.get('authorization', {
         params:{
-          email: this.emailLogin,
+          email: this.login,
           password: this.password
         }
       })
@@ -97,13 +97,10 @@ export default {
             .then(response => {
               if (response.data) {this.$router.push('/' + response.data);}
             });
-            //this.$router.push('/dima');
             // покажем меню
             eventEmitter.$emit('showMenu');
           });
-
         }
-
       });
     }
   },

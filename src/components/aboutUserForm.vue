@@ -11,23 +11,23 @@
 
             <div class="form-group">
               <label>Имя</label>
-              <input type="text" v-model="userInfoName" class="form-control" aria-describedby="userInfoName" placeholder="Отображаемое имя ...">
+              <input type="text" v-model="name" class="form-control" aria-describedby="name" placeholder="Отображаемое имя ...">
             </div>
 
             <div class="form-group">
               <label>Специализация</label>
-              <input type="text" v-model="userInfoSpecialization" class="form-control" aria-describedby="userInfoNameSpecialization" placeholder="Чем вы занимаетесь...">
+              <input type="text" v-model="specialization" class="form-control" aria-describedby="specialization" placeholder="Чем вы занимаетесь...">
               <small id="emailHelp" class="form-text text-muted">Ваша професиия или специализация. Например, "Web дизайнер", "Мастер депиляции", "Маркетолог".</small>
             </div>
   
             <div class="form-group">
               <label>О себе</label>
-              <textarea class="form-control" v-model="userInfoAbout" rows="5" placeholder="Опишите чем вы занимаетесь, что предлагаете ..."></textarea>
+              <textarea class="form-control" v-model="about" rows="5" placeholder="Опишите чем вы занимаетесь, что предлагаете ..."></textarea>
             </div>
 
             <center>
-              <button type="submit" class="btn btn-primary btn-round" @click="showUserInfoSave">Сохранить</button>
-              <a href="#pablo" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
+              <button type="submit" class="btn btn-primary btn-round" @click="save">Сохранить</button>
+              <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
             </center>
             
             </form>
@@ -43,23 +43,27 @@
 <script>
 import {http} from "./../http"
 import {eventEmitter} from "./../main"
+import {required} from "vuelidate/lib/validators/"
 
 export default {
   name: 'aboutUserForm',
   data () {
     return {
-      userInfoName: '',
-      userInfoSpecialization: '',
-      userInfoAbout: ''
+      name: '',
+      specialization: '',
+      about: ''
     }
   },
+  validations(){
+
+  },
   methods:{
-    showUserInfoSave() {
+    save() {
       http.get('showUserInfoSave', {
         params:{
-          userInfoName: this.userInfoName,
-          userInfoSpecialization: this.userInfoSpecialization,
-          userInfoAbout: this.userInfoAbout
+          name: this.name,
+          specialization: this.specialization,
+          about: this.about
         }
       })
       .then(() => {
@@ -72,9 +76,9 @@ export default {
     eventEmitter.$on('showAboutUserForm', () => {
       http.get('showUserInfo')
       .then(response => {
-        this.userInfoName = response.data.userInfoName;
-        this.userInfoSpecialization = response.data.userInfoSpecialization;
-        this.userInfoAbout = response.data.userInfoAbout;
+        this.name = response.data.name;
+        this.specialization = response.data.specialization;
+        this.about = response.data.about;
         $("#aboutUserForm").modal('show');
       });
     })
