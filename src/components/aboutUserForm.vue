@@ -7,7 +7,7 @@
 				<h2 class="card-title text-center">О себе</h2>
         <div class="row">
           <div class="card-body">
-            <form>
+            <form @submit.prevent="save">
 
             <div class="form-group" :class="{'has-danger': $v.name.$error}">
               <label>Имя</label>
@@ -26,7 +26,7 @@
             </div>
 
             <center>
-              <button type="submit" class="btn btn-primary btn-round" @click="save" :disabled="$v.$invalid">Сохранить</button>
+              <button type="submit" class="btn btn-primary btn-round" :disabled="$v.$invalid">Сохранить</button>
               <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
             </center>
             

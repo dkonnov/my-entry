@@ -4,7 +4,7 @@
    <div class="modal-content" style="background-color:transparent;box-shadow: none;">
         <div class="col-lg-8 col-md-6 ml-auto mr-auto">
           <div class="card card-login">
-            <form class="form" method="" action="">
+            <form class="form" @submit.prevent="authorization">
               <div class="card-header card-header-primary text-center">
                 <h4 class="card-title">Авторизация</h4>
                 <div class="social-line"></div>
@@ -30,7 +30,7 @@
               </div>
              
               <div class="footer text-center">
-                <button @click="authorization" type="button" class="btn btn-primary btn-round" data-toggle="modal" :disabled="$v.$invalid">Вход</button>
+                <button type="submit" class="btn btn-primary btn-round" data-toggle="modal" :disabled="$v.$invalid">Вход</button>
                 <br>
                 <a href="#" @click="showRegistrationForm" class="btn btn-primary btn-link btn-wd">Регистрация</a>
               </div>
