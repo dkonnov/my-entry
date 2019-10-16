@@ -153,6 +153,7 @@ export default {
         }
       })
       .then(() => {
+        eventEmitter.$emit('reloadMainCard');
         $("#contactsForm").modal('hide');
       });
     }
