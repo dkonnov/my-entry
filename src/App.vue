@@ -2,10 +2,18 @@
   <div id="app">
     <integrationPixel />
     <mainMenu />
-    <div id="backgroundDiv" class="page-header header-filter" style="background-size: cover; background-position: top center;">
-      <!-- Desktop -->  
-      <div class="container wow fadeIn" data-wow-duration="2s" style="display: flex;  align-items: center; flex-direction: column;">
-        <router-view></router-view> 
+    <div
+      id="backgroundDiv"
+      class="page-header header-filter"
+      style="background-size: cover; background-position: top center;"
+    >
+      <!-- Desktop -->
+      <div
+        class="container wow fadeIn"
+        data-wow-duration="2s"
+        style="display: flex;  align-items: center; flex-direction: column;"
+      >
+        <router-view></router-view>
       </div>
     </div>
     <loginForm />
@@ -25,30 +33,42 @@
 </template>
 
 <script>
-import integrationPixel from './components/integrationPixel'
-import mainMenu from './components/mainMenu'
-import avatarForm from './components/avatarForm'
-import loginForm from './components/loginForm'
-import registrationForm from './components/registrationForm'
-import modalWindow from './components/modalWindow'
-import addressFrom from './components/addressFrom'
-import addressChangeFrom from './components/addressChangeFrom'
-import aboutUserForm from './components/aboutUserForm'
-import contactsForm from './components/contactsForm'
-import integrationForm from './components/integrationForm'
-import linkButton from './components/linkButton' 
-import serviceForm from './components/serviceForm' 
-import backgroundForm from './components/backgroundForm'
-import accessTime from './components/accessTime'
+import integrationPixel from "./components/integrationPixel";
+import mainMenu from "./components/mainMenu";
+import avatarForm from "./components/avatarForm";
+import loginForm from "./components/loginForm";
+import registrationForm from "./components/registrationForm";
+import modalWindow from "./components/modalWindow";
+import addressFrom from "./components/addressFrom";
+import addressChangeFrom from "./components/addressChangeFrom";
+import aboutUserForm from "./components/aboutUserForm";
+import contactsForm from "./components/contactsForm";
+import integrationForm from "./components/integrationForm";
+import linkButton from "./components/linkButton";
+import serviceForm from "./components/serviceForm";
+import backgroundForm from "./components/backgroundForm";
+import accessTime from "./components/accessTime";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    mainMenu, avatarForm, loginForm, registrationForm, modalWindow,
-    addressFrom, addressChangeFrom, aboutUserForm, contactsForm, integrationForm, integrationPixel,
-    linkButton, serviceForm, backgroundForm, accessTime
+    mainMenu,
+    avatarForm,
+    loginForm,
+    registrationForm,
+    modalWindow,
+    addressFrom,
+    addressChangeFrom,
+    aboutUserForm,
+    contactsForm,
+    integrationForm,
+    integrationPixel,
+    linkButton,
+    serviceForm,
+    backgroundForm,
+    accessTime
   }
-}
+};
 </script>
 
 <style lang="sass">

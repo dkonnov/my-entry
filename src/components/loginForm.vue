@@ -12,7 +12,7 @@
               <p class="description text-center">Введите учетные данные</p>
               <div class="card-body">
                 <div class="input-group" :class="{'has-danger': $v.login.$error}">
-                  <div class="input-group-prepend">
+                  <div class="input-group-prepend"> 
                     <span class="input-group-text">
                       <i class="material-icons">mail</i>
                     </span>
