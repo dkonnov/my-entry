@@ -29,7 +29,7 @@
 
            </div>
         
-          <center>
+          <center> 
             <br>
             <button type="submit" class="btn btn-primary btn-round" :disabled="$v.$invalid">Сохранить</button>
             <a href="#pablo" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
