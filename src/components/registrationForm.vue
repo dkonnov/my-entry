@@ -133,7 +133,7 @@
                       <input
                         v-model="password2"
                         type="password"
-                        v-on:input="password2Check"
+                        @input="password2Check"
                         class="form-control"
                         placeholder="Пароль еще раз ..."
                       />

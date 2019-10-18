@@ -14,15 +14,19 @@
                   <p
                     class="card-description"
                   >Вам не нравиться адрес вашей страницы, и вы хотите его сменить? В поле ниже вы можете подобрать новое имя!</p>
-                  <div class="input-group form-group label-floating has-success">
+                  <div
+                    class="input-group form-group label-floating"
+                    :class="{'has-danger': $v.name.$error}"
+                  >
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="material-icons" style="margin-left: -15px;">face</i>
                       </span>
                     </div>
                     <input
-                      v-model="nameRegistration"
-                      v-on:input="nameRegistrationCheck"
+                      v-model="name"
+                      id="id"
+                      @input="$v.name.$touch"
                       type="text"
                       class="form-control"
                       placeholder="Имя (my-entry.ru\имя)"
@@ -44,7 +48,7 @@
                   <div v-show="nameRegistrationOk">
                     Адрес вашей страницы будет:
                     <br />
-                    <b>http://my-entry.ru/{{ nameRegistration }}</b>
+                    <b>http://my-entry.ru/{{ name }}</b>
                   </div>
                   <br />
                   <button
@@ -56,6 +60,7 @@
                   >Сохранить</button>
                   <br />
                   <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
+                  {{$v}}
                 </center>
               </div>
             </div>
@@ -69,26 +74,32 @@
 <script>
 import { http } from "./../http";
 import { eventEmitter } from "./../main";
+import { required } from "vuelidate/lib/validators/";
 
 export default {
   name: "addressChangeFrom",
   data() {
     return {
-      nameRegistration: "",
+      name: "",
       nameRegistrationOk: false
     };
+  },
+  validations: {
+    name: {
+      required
+    }
   },
   methods: {
     changeLoginNameFormSave: function() {
       http
         .get("changeLoginNameFormSave", {
           params: {
-            name: this.nameRegistration
+            name: this.name
           }
         })
         .then(() => {
           $("#addressChangeForm").modal("hide");
-          this.nameRegistration = "";
+          this.name = "";
           this.nameRegistrationOk = false;
           eventEmitter.$emit(
             "showMessage",
@@ -97,11 +108,11 @@ export default {
         });
     },
     nameRegistrationCheck() {
-      if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.nameRegistration)) {
+      if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.name)) {
         http
           .get("nameRegistrationCheck", {
             params: {
-              name: this.nameRegistration
+              name: this.name
             }
           })
           .then(response => {
@@ -125,7 +136,7 @@ export default {
 
 <style lang="sass" scoped>
 .form-control-feedback
-  margin-top: -52px
+  margin-top: -26px
 </style>
 
 
