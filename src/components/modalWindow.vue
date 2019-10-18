@@ -33,7 +33,7 @@
     </div>
   </div>
 </template>
-
+ 
 <script>
 import { eventEmitter } from "./../main";
 
