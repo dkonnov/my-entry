@@ -31,18 +31,17 @@
                       class="form-control"
                       placeholder="Имя (my-entry.ru\имя)"
                     />
-                    <button v-show="nameRegistrationOk" class="form-control-feedback">
+                    <button v-show="$v.$invalid" class="form-control-feedback">
                       <i class="material-icons" style="margin-top: 28px;">done</i>
                     </button>
-                    <button
-                      v-show="!nameRegistrationOk"
-                      class="form-control-feedback"
-                      data-toggle="tooltip"
-                      data-placement="right"
-                      title="Имя страницы должно быть уникальным, начинаться с латинской буквы и может содержать только латинские буквы и цифры."
-                    >
+                    <button v-show="!$v.$invalid" class="form-control-feedback">
                       <i class="material-icons" style="margin-top: 28px;">clear</i>
                     </button>
+                    <small
+                      v-show="!$v.name.required"
+                      id="emailHelp"
+                      class="form-text text-muteds small-alert"
+                    >Имя страницы должно быть уникальным, начинаться с латинской буквы и может содержать только латинские буквы и цифры.</small>
                   </div>
                   <br />
                   <div v-show="nameRegistrationOk">
@@ -52,7 +51,7 @@
                   </div>
                   <br />
                   <button
-                    :disabled="!nameRegistrationOk"
+                    :disabled="$v.$invalid"
                     @click="changeLoginNameFormSave"
                     type="button"
                     class="btn btn-primary btn-round"
@@ -74,7 +73,7 @@
 <script>
 import { http } from "./../http";
 import { eventEmitter } from "./../main";
-import { required } from "vuelidate/lib/validators/";
+import { required, alphaNum } from "vuelidate/lib/validators/";
 
 export default {
   name: "addressChangeFrom",
@@ -86,7 +85,22 @@ export default {
   },
   validations: {
     name: {
-      required
+      required,
+      alphaNum,
+      uniqLoginName: function() {
+        setTimeout(1000);
+        http
+          .get("nameRegistrationCheck", {
+            params: {
+              name: this.name
+            }
+          })
+          .then(response => {
+            return response.data;
+            console;
+          });
+        return true;
+      }
     }
   },
   methods: {
@@ -98,7 +112,7 @@ export default {
           }
         })
         .then(() => {
-          $("#addressChangeForm").modal("hide");
+          //$("#addressChangeForm").modal("hide");
           this.name = "";
           this.nameRegistrationOk = false;
           eventEmitter.$emit(
@@ -108,22 +122,18 @@ export default {
         });
     },
     nameRegistrationCheck() {
-      if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.name)) {
-        http
-          .get("nameRegistrationCheck", {
-            params: {
-              name: this.name
-            }
-          })
-          .then(response => {
-            if (response.data == true) {
-              this.nameRegistrationOk = false;
-            }
-          });
-        this.nameRegistrationOk = true;
-      } else {
-        this.nameRegistrationOk = false;
-      }
+      http
+        .get("nameRegistrationCheck", {
+          params: {
+            name: this.name
+          }
+        })
+        .then(response => {
+          if (response.data == true) {
+            this.nameRegistrationOk = false;
+          }
+        });
+      this.nameRegistrationOk = true;
     }
   },
   created() {
@@ -136,7 +146,10 @@ export default {
 
 <style lang="sass" scoped>
 .form-control-feedback
-  margin-top: -26px
+  margin-top: -52px
+.small-alert
+  padding-left: 40px
+  text-align: left
 </style>
 
 
