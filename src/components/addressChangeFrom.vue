@@ -31,20 +31,19 @@
                       class="form-control"
                       placeholder="Имя (my-entry.ru\имя)"
                     />
-                    <button v-show="$v.$invalid" class="form-control-feedback">
+                    <button v-show="!$v.$invalid" class="form-control-feedback">
                       <i class="material-icons" style="margin-top: 28px;">done</i>
                     </button>
-                    <button v-show="!$v.$invalid" class="form-control-feedback">
+                    <button v-show="$v.$invalid" class="form-control-feedback">
                       <i class="material-icons" style="margin-top: 28px;">clear</i>
                     </button>
                     <small
-                      v-show="!$v.name.required"
-                      id="emailHelp"
+                      v-show="$v.$invalid"
                       class="form-text text-muteds small-alert"
-                    >Имя страницы должно быть уникальным, начинаться с латинской буквы и может содержать только латинские буквы и цифры.</small>
+                    >Имя страницы должно быть уникальным? от двух символов, начинаться с латинской буквы и может содержать только латинские буквы и цифры.</small>
                   </div>
                   <br />
-                  <div v-show="nameRegistrationOk">
+                  <div v-show="!$v.$invalid">
                     Адрес вашей страницы будет:
                     <br />
                     <b>http://my-entry.ru/{{ name }}</b>
@@ -59,7 +58,6 @@
                   >Сохранить</button>
                   <br />
                   <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
-                  {{$v}}
                 </center>
               </div>
             </div>
@@ -73,22 +71,27 @@
 <script>
 import { http } from "./../http";
 import { eventEmitter } from "./../main";
-import { required, alphaNum } from "vuelidate/lib/validators/";
+import { required } from "vuelidate/lib/validators/";
 
 export default {
   name: "addressChangeFrom",
   data() {
     return {
       name: "",
-      nameRegistrationOk: false
+      uniqName: ""
     };
   },
   validations: {
     name: {
       required,
-      alphaNum,
+      validLogin: function() {
+        if (this.name.match(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
       uniqLoginName: function() {
-        setTimeout(1000);
         http
           .get("nameRegistrationCheck", {
             params: {
@@ -96,10 +99,9 @@ export default {
             }
           })
           .then(response => {
-            return response.data;
-            console;
+            this.uniqName = response.data;
           });
-        return true;
+        return this.uniqName;
       }
     }
   },
@@ -112,7 +114,7 @@ export default {
           }
         })
         .then(() => {
-          //$("#addressChangeForm").modal("hide");
+          $("#addressChangeForm").modal("hide");
           this.name = "";
           this.nameRegistrationOk = false;
           eventEmitter.$emit(
@@ -120,20 +122,6 @@ export default {
             "Адрес вашей страницы изменен. Не забудьте поменять его в ваших социальных сетях и рекламных материалах!"
           );
         });
-    },
-    nameRegistrationCheck() {
-      http
-        .get("nameRegistrationCheck", {
-          params: {
-            name: this.name
-          }
-        })
-        .then(response => {
-          if (response.data == true) {
-            this.nameRegistrationOk = false;
-          }
-        });
-      this.nameRegistrationOk = true;
     }
   },
   created() {
