@@ -15,7 +15,7 @@
                   <div class="form-group">
                     <label>Действие при нажатии</label>
                     <select
-                      v-model="linkButtonAction"
+                      v-model="action"
                       id="sel"
                       class="form-control"
                       data-style="btn btn-link"
@@ -31,17 +31,13 @@
                   </div>
                   <div class="form-group">
                     <label>Текст на кнопке</label>
-                    <input type="text" v-model="linkButtonName" class="form-control" />
+                    <input type="text" v-model="name" class="form-control" />
                   </div>
                 </form>
 
                 <br />
                 <center>
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-round"
-                    @click="showlinkButtonSave"
-                  >Сохранить</button>
+                  <button type="submit" class="btn btn-primary btn-round" @click="save">Сохранить</button>
                   <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
                 </center>
               </div>
@@ -61,17 +57,17 @@ export default {
   name: "linkButton",
   data() {
     return {
-      linkButtonAction: "",
-      linkButtonName: ""
+      action: "",
+      name: ""
     };
   },
   methods: {
-    showlinkButtonSave: function() {
+    save: function() {
       http
         .get("showlinkButtonSave", {
           params: {
-            linkButtonAction: this.linkButtonAction,
-            linkButtonName: this.linkButtonName
+            action: this.action,
+            name: this.name
           }
         })
         .then(response => {
@@ -85,9 +81,9 @@ export default {
   created() {
     eventEmitter.$on("linkButtonShow", () => {
       http.get("showlinkButton").then(response => {
-        $("#sel").val(response.data.userLinkButtonAction);
-        this.linkButtonName = response.data.userLinkButtonName;
-        $("#sel").val(response.data.userLinkButtonAction);
+        $("#sel").val(response.data.action);
+        this.name = response.data.name;
+        $("#sel").val(response.data.action);
       });
       $("#linkButton").modal("show");
     });
