@@ -181,12 +181,14 @@
 <script>
 import { http } from "./../http";
 import { eventEmitter } from "./../main";
+import { required, email } from "vuelidate/lib/validators/";
 
 export default {
   name: "registrationForm",
   data() {
     return {
       name: "",
+      uniqName: "",
       nameOk: false,
       emailOk: false,
       passwordOk: false,
@@ -197,6 +199,30 @@ export default {
       registrationOk: false
     };
   },
+  validations: {
+    name: {
+      required,
+      validLogin: function() {
+        if (this.name.match(/^[a-zA-Z](.[a-zA-Z0-9_-]*)$/)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      uniqLoginName: function() {
+        http
+          .get("nameRegistrationCheck", {
+            params: {
+              name: this.name
+            }
+          })
+          .then(response => {
+            this.uniqName = response.data;
+          });
+        return this.uniqName;
+      }
+    }
+  },
   created() {
     eventEmitter.$on("showRegistrationForm", () => {
       $("#registrationForm").modal("show");
@@ -205,45 +231,45 @@ export default {
   methods: {
     // проверяет есть ли уже такое имя
     nameCheck() {
-      if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.name)) {
-        http
-          .get("nameRegistrationCheck", {
-            params: {
-              name: this.name
-            }
-          })
-          .then(response => {
-            if (response.data == true) {
-              this.nameOk = false;
-              this.registrationOk = false; // костыль
-            } else {
-              this.nameOk = true;
-            }
-          });
-      } else {
-        this.nameOk = false;
-        this.registrationOk = false; // костыль
-      }
+      // if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.name)) {
+      http
+        .get("nameRegistrationCheck", {
+          params: {
+            name: this.name
+          }
+        })
+        .then(response => {
+          if (response.data == true) {
+            this.nameOk = false;
+            this.registrationOk = false; // костыль
+          } else {
+            this.nameOk = true;
+          }
+        });
+      // } else {
+      //   this.nameOk = false;
+      //   this.registrationOk = false; // костыль
+      //  }
       this.checkForm();
     },
     // проверяет есть ли уже такой email
     emailCheck() {
-      if (checkEmail(this.email)) {
-        http
-          .get("emailRegistrationCheck", {
-            params: {
-              email: this.email
-            }
-          })
-          .then(response => {
-            if (response.data == true) {
-              this.emailOk = false;
-            }
-          });
-        this.emailOk = true;
-      } else {
-        this.emailOk = false;
-      }
+      //if (checkEmail(this.email)) {
+      http
+        .get("emailRegistrationCheck", {
+          params: {
+            email: this.email
+          }
+        })
+        .then(response => {
+          if (response.data == true) {
+            this.emailOk = false;
+          }
+        });
+      this.emailOk = true;
+      //} else {
+      //  this.emailOk = false;
+      //}
       this.checkForm();
     },
     // проверяет требования к паролю (более 6 символов, латиница, цифры, символы)
@@ -310,10 +336,6 @@ export default {
     }
   }
 };
-/*Check is email or not*/
-function checkEmail(value) {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$/.test(value);
-}
 </script>
 
 <style lang="sass" scoped>

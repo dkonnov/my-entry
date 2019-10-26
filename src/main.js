@@ -4,6 +4,8 @@ import App from "./App.vue";
 import VueRouter from "vue-router";
 import router from "./router";
 import store from "./store";
+import "./css/material-kit.min.css";
+import "./css/animate.min.css";
 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
