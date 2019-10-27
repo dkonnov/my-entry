@@ -130,7 +130,8 @@ export default {
     });
   },
   mounted() {
-    var piker = $(".datetimepicker").datetimepicker({
+    //var piker =
+    $(".datetimepicker").datetimepicker({
       format: "LT",
       locale: "ru",
       stepping: 15,

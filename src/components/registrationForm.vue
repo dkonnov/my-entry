@@ -43,7 +43,10 @@
                 <form class="form2" method action>
                   <p class="description text-center">Введите учетные данные</p>
                   <div class="card-body">
-                    <div class="input-group form-group label-floating has-success">
+                    <div
+                      class="input-group form-group label-floating"
+                      :class="{'has-danger': $v.name.$error}"
+                    >
                       <div class="input-group-prepend">
                         <span class="input-group-text">
                           <i class="material-icons">face</i>
@@ -51,26 +54,24 @@
                       </div>
                       <input
                         v-model="name"
-                        @input="nameCheck"
+                        @input="$v.name.$touch"
                         type="text"
                         class="form-control"
                         placeholder="Адрес (my-entry.ru\имя)"
                       />
-                      <button v-show="nameOk" class="form-control-feedback">
-                        <i class="material-icons">done</i>
-                      </button>
-                      <button
-                        v-show="!nameOk"
-                        class="form-control-feedback"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Имя страницы должно быть уникальным, начинаться с латинской буквы и может содержать только латинские буквы и цифры."
-                      >
+                      <button v-if="$v.name.$error" class="form-control-feedback">
                         <i class="material-icons">clear</i>
                       </button>
+                      <small
+                        v-if="$v.name.$error"
+                        class="form-text text-muteds small-alert"
+                      >Имя страницы должно быть уникальным? от двух символов, начинаться с латинской буквы и может содержать только латинские буквы и цифры.</small>
                     </div>
 
-                    <div class="input-group form-group label-floating has-success">
+                    <div
+                      class="input-group form-group label-floating"
+                      :class="{'has-danger': $v.email.$error}"
+                    >
                       <div class="input-group-prepend">
                         <span class="input-group-text">
                           <i class="material-icons">mail</i>
@@ -78,23 +79,18 @@
                       </div>
                       <input
                         v-model="email"
-                        @input="emailCheck"
+                        @blur="$v.email.$touch"
                         type="email"
                         class="form-control"
                         placeholder="Электронная почта ..."
                       />
-                      <button v-show="emailOk" class="form-control-feedback">
-                        <i class="material-icons">done</i>
-                      </button>
-                      <button
-                        v-show="!emailOk"
-                        class="form-control-feedback"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Необходимо ввести адрес электронной почты, которого нет в системе. Возможны вы ранее уже регистрировались, попробуйте войти или восстановить пароль."
-                      >
+                      <button v-show="!emailOk" class="form-control-feedback">
                         <i class="material-icons">clear</i>
                       </button>
+                      <small
+                        v-if="$v.email.$error"
+                        class="form-text text-muteds small-alert"
+                      >Необходимо ввести адрес электронной почты, которого нет в системе.</small>
                     </div>
 
                     <div class="input-group form-group label-floating has-success">
@@ -221,6 +217,9 @@ export default {
           });
         return this.uniqName;
       }
+    },
+    email: {
+      email
     }
   },
   created() {
@@ -229,29 +228,6 @@ export default {
     });
   },
   methods: {
-    // проверяет есть ли уже такое имя
-    nameCheck() {
-      // if (/^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$/.test(this.name)) {
-      http
-        .get("nameRegistrationCheck", {
-          params: {
-            name: this.name
-          }
-        })
-        .then(response => {
-          if (response.data == true) {
-            this.nameOk = false;
-            this.registrationOk = false; // костыль
-          } else {
-            this.nameOk = true;
-          }
-        });
-      // } else {
-      //   this.nameOk = false;
-      //   this.registrationOk = false; // костыль
-      //  }
-      this.checkForm();
-    },
     // проверяет есть ли уже такой email
     emailCheck() {
       //if (checkEmail(this.email)) {
@@ -295,7 +271,7 @@ export default {
             password: this.password
           }
         })
-        .then(response => {
+        .then(() => {
           this.nameRegistration = "";
           this.emailRegistration = "";
           this.password = "";
@@ -345,6 +321,9 @@ export default {
 	min-height: 500px
 .form-control-feedback
     margin-top: -28px
+.small-alert
+  padding-left: 40px
+  text-align: left
 </style>
 
 
