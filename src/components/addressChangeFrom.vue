@@ -31,19 +31,19 @@
                       class="form-control"
                       placeholder="Имя (my-entry.ru\имя)"
                     />
-                    <button v-show="!$v.$invalid" class="form-control-feedback">
+                    <button v-if="!$v.$invalid" class="form-control-feedback">
                       <i class="material-icons" style="margin-top: 28px;">done</i>
                     </button>
-                    <button v-show="$v.$invalid" class="form-control-feedback">
+                    <button v-else class="form-control-feedback">
                       <i class="material-icons" style="margin-top: 28px;">clear</i>
                     </button>
                     <small
-                      v-show="$v.$invalid"
+                      v-if="$v.$invalid"
                       class="form-text text-muteds small-alert"
                     >Имя страницы должно быть уникальным? от двух символов, начинаться с латинской буквы и может содержать только латинские буквы и цифры.</small>
                   </div>
                   <br />
-                  <div v-show="!$v.$invalid">
+                  <div v-if="!$v.$invalid">
                     Адрес вашей страницы будет:
                     <br />
                     <b>http://my-entry.ru/{{ name }}</b>
