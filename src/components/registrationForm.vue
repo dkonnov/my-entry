@@ -62,11 +62,11 @@
                       <button v-if="$v.name.$error" class="form-control-feedback">
                         <i class="material-icons">clear</i>
                       </button>
-                      <small
-                        v-if="$v.name.$error"
-                        class="form-text text-muteds small-alert"
-                      >Имя страницы должно быть уникальным, начинаться с буквы и может содержать только латинские буквы и цифры.</small>
                     </div>
+                    <small
+                      v-if="$v.name.$error"
+                      class="form-text text-muteds small-alert"
+                    >Имя страницы должно быть уникальным, начинаться с буквы и может содержать только латинские буквы и цифры.</small>
 
                     <div
                       class="input-group form-group label-floating"
@@ -93,7 +93,10 @@
                       >Необходимо ввести адрес электронной почты, которого нет в системе.</small>
                     </div>
 
-                    <div class="input-group form-group label-floating has-success">
+                    <div
+                      class="input-group form-group label-floating"
+                      :class="{'has-danger': $v.password.$error}"
+                    >
                       <div class="input-group-prepend">
                         <span class="input-group-text">
                           <i class="material-icons">lock_outline</i>
@@ -102,25 +105,23 @@
                       <input
                         v-model="password"
                         type="password"
-                        @input="passwordCheck"
+                        @input="$v.password.$touch"
                         class="form-control"
                         placeholder="Пароль ..."
                       />
-                      <button v-show="passwordOk" class="form-control-feedback">
-                        <i class="material-icons">done</i>
-                      </button>
-                      <button
-                        v-show="!passwordOk"
-                        class="form-control-feedback"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Пароль дожен состоять минимум из 6 символов"
-                      >
+                      <button v-if="$v.password.$error" class="form-control-feedback">
                         <i class="material-icons">clear</i>
                       </button>
                     </div>
+                    <small
+                      v-if="$v.password.$error"
+                      class="form-text text-muteds small-alert"
+                    >Минимум 6 символов.</small>
 
-                    <div class="input-group form-group label-floating has-success">
+                    <div
+                      class="input-group form-group label-floating"
+                      :class="{'has-danger': $v.password2.$error}"
+                    >
                       <div class="input-group-prepend">
                         <span class="input-group-text">
                           <i class="material-icons">lock_outline</i>
@@ -129,24 +130,18 @@
                       <input
                         v-model="password2"
                         type="password"
-                        @input="password2Check"
+                        @input="$v.password2.$touch"
                         class="form-control"
                         placeholder="Пароль еще раз ..."
                       />
-                      <button v-show="password2Ok" class="form-control-feedback">
-                        <i class="material-icons">done</i>
-                      </button>
-                      <button
-                        v-show="!password2Ok"
-                        class="form-control-feedback"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Пароли не совпадают"
-                      >
+                      <button v-if="$v.password2.$error" class="form-control-feedback">
                         <i class="material-icons">clear</i>
                       </button>
                     </div>
-
+                    <small
+                      v-if="$v.password2.$error"
+                      class="form-text text-muteds small-alert"
+                    >Пароли не совпадают.</small>
                     <br />
                     <center>
                       <button
@@ -177,7 +172,7 @@
 <script>
 import { http } from "./../http";
 import { eventEmitter } from "./../main";
-import { required, email } from "vuelidate/lib/validators/";
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators/";
 
 export default {
   name: "registrationForm",
@@ -220,6 +215,12 @@ export default {
     },
     email: {
       email
+    },
+    password: {
+      minLength: minLength(6)
+    },
+    password2: {
+      sameAs: sameAs("password")
     }
   },
   created() {
@@ -246,10 +247,6 @@ export default {
       //} else {
       //  this.emailOk = false;
       //}
-      this.checkForm();
-    },
-    // проверяет требования к паролю (более 6 символов, латиница, цифры, символы)
-    passwordCheck() {
       this.checkForm();
     },
     registration() {
