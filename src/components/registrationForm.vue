@@ -65,7 +65,7 @@
                       <small
                         v-if="$v.name.$error"
                         class="form-text text-muteds small-alert"
-                      >Имя страницы должно быть уникальным? от двух символов, начинаться с латинской буквы и может содержать только латинские буквы и цифры.</small>
+                      >Имя страницы должно быть уникальным, начинаться с буквы и может содержать только латинские буквы и цифры.</small>
                     </div>
 
                     <div
@@ -250,16 +250,6 @@ export default {
     },
     // проверяет требования к паролю (более 6 символов, латиница, цифры, символы)
     passwordCheck() {
-      if (/[0-9a-zA-Z!@#$%^&*]{6,}/.test(this.password)) {
-        this.passwordOk = true;
-      } else {
-        this.passwordOk = false;
-      }
-      if (this.password == this.password2) {
-        this.password2Ok = true;
-      } else {
-        this.password2Ok = false;
-      }
       this.checkForm();
     },
     registration() {
@@ -322,7 +312,7 @@ export default {
 .form-control-feedback
     margin-top: -28px
 .small-alert
-  padding-left: 40px
+  padding-left: 55px
   text-align: left
 </style>
 
