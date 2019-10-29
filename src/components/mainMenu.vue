@@ -160,14 +160,11 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch("getCurrentUserName");
     eventEmitter.$on("showMenu", () => {
       this.buttonLogin = false;
       // имя
-      http.get("getUserName").then(response => {
-        if (response.data) {
-          this.userName = response.data;
-        }
-      });
+      this.userName = this.$store.state.currentUserName;
     });
   },
   beforeMount() {
@@ -175,11 +172,9 @@ export default {
       if (response.data > 0) {
         eventEmitter.$emit("showMenu");
         if (!this.$router.currentRoute.params["user"]) {
-          http.get("getUserName").then(response => {
-            if (response.data) {
-              this.$router.push("/" + response.data);
-            }
-          });
+          if (this.$store.state.currentUserName) {
+            this.$router.push("/" + this.$store.state.currentUserName);
+          }
         }
       }
     });

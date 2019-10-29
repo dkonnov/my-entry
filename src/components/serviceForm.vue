@@ -98,7 +98,7 @@ export default {
             time: document.getElementById("timeServiseForm").value
           }
         })
-        .then(response => {
+        .then(() => {
           eventEmitter.$emit("reloadMainCard");
           $("#serviceForm").modal("hide");
           this.name = "";
@@ -109,7 +109,7 @@ export default {
     }
   },
   mounted() {
-    var piker = $(".datetimepicker").datetimepicker({
+    $(".datetimepicker").datetimepicker({
       format: "LT",
       locale: "ru",
       stepping: 15,

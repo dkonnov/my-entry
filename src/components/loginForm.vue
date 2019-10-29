@@ -136,11 +136,10 @@ export default {
                 document.getElementById("backgroundDiv").style.backgroundImage =
                   "url('img/backgrounds/" + response.data + "')";
               }
-              http.get("getUserName").then(response => {
-                if (response.data) {
-                  this.$router.push("/" + response.data);
-                }
-              });
+              if (this.$store.state.currentUserName) {
+                this.$router.push("/" + this.$store.state.currentUserName);
+              }
+
               // покажем меню
               eventEmitter.$emit("showMenu");
             });
