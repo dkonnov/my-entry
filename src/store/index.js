@@ -19,7 +19,7 @@ export default new Vuex.Store({
   actions: {
     getCurrentUser(context) {
       alert(123);
-      http.get("getUserName").then(response => {
+      http.get("getCurrentUser").then(response => {
         if (response.data) {
           context.commit("setCurrentUser", response.data);
         }
