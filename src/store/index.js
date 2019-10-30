@@ -6,22 +6,22 @@ import { http } from "./../http";
 
 export default new Vuex.Store({
   state: {
-    currentUserName: ""
+    currentUser: {}
   },
   mutations: {
     setLogined(state) {
       state.logined = "true";
     },
-    setCurrentUserName(state, payload) {
-      state.currentUserName = payload;
+    setCurrentUser(state, payload) {
+      state.currentUser = payload;
     }
   },
   actions: {
-    getCurrentUserName(context) {
+    getCurrentUser(context) {
       alert(123);
       http.get("getUserName").then(response => {
         if (response.data) {
-          context.commit("setCurrentUserName", response.data);
+          context.commit("setCurrentUser", response.data);
         }
       });
     }

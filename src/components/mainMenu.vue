@@ -160,11 +160,12 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("getCurrentUserName");
+    this.$store.dispatch("getCurrentUser");
     eventEmitter.$on("showMenu", () => {
       this.buttonLogin = false;
       // имя
-      this.userName = this.$store.state.currentUserName;
+      this.userName = this.$store.state.currentUser.name;
+      alert(this.userName);
     });
   },
   beforeMount() {
@@ -172,8 +173,8 @@ export default {
       if (response.data > 0) {
         eventEmitter.$emit("showMenu");
         if (!this.$router.currentRoute.params["user"]) {
-          if (this.$store.state.currentUserName) {
-            this.$router.push("/" + this.$store.state.currentUserName);
+          if (this.$store.state.currentUser.name) {
+            this.$router.push("/" + this.$store.state.currentUser.name);
           }
         }
       }

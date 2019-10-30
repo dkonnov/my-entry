@@ -46,10 +46,10 @@ export default {
     eventEmitter.$on("showAddressFrom", () => {
       document.getElementById("QRCodeImg").src =
         "https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=http://my-entry.ru/" +
-        this.$store.state.currentUserName +
+        this.$store.state.currentUser.name +
         "&chld=H&choe=UTF-8";
       this.userPageURL =
-        "http://my-entry.ru/" + this.$store.state.currentUserName;
+        "http://my-entry.ru/" + this.$store.state.currentUser.name;
       $("#addressFrom").modal("show");
     });
   }

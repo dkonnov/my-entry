@@ -136,8 +136,8 @@ export default {
                 document.getElementById("backgroundDiv").style.backgroundImage =
                   "url('img/backgrounds/" + response.data + "')";
               }
-              if (this.$store.state.currentUserName) {
-                this.$router.push("/" + this.$store.state.currentUserName);
+              if (this.$store.state.currentUser.name) {
+                this.$router.push("/" + this.$store.state.currentUser.name);
               }
 
               // покажем меню
