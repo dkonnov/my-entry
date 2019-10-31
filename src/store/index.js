@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import objectAssign from "object-assign";
 
 Vue.use(Vuex);
 import { http } from "./../http";
@@ -11,6 +12,9 @@ export default new Vuex.Store({
   mutations: {
     setCurrentUser(state, payload) {
       state.currentUser = payload;
+    },
+    updateCurrentUserM(state, payload) {
+      objectAssign(state.currentUser, payload);
     }
   },
   actions: {
@@ -20,6 +24,9 @@ export default new Vuex.Store({
           context.commit("setCurrentUser", response.data);
         }
       });
+    },
+    updateCurrentUser({ commit }, payload) {
+      commit("updateCurrentUserM", payload);
     }
   }
 });

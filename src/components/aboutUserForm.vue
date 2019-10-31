@@ -15,8 +15,8 @@
                     <label>Имя</label>
                     <input
                       type="text"
-                      :value="user.userInfoName"
                       id="name"
+                      v-model="name"
                       @input="$v.name.$touch"
                       class="form-control"
                       aria-describedby="name"
@@ -28,7 +28,8 @@
                     <label>Специализация</label>
                     <input
                       type="text"
-                      :value="user.userInfoSpecialization"
+                      v-model="specialization"
+                      @input="$v.name.$touch"
                       class="form-control"
                       aria-describedby="specialization"
                       placeholder="Чем вы занимаетесь..."
@@ -43,13 +44,15 @@
                     <label>О себе</label>
                     <textarea
                       class="form-control"
-                      :value="user.userInfoAbout"
+                      v-model="about"
+                      @input="$v.name.$touch"
                       rows="5"
                       placeholder="Опишите чем вы занимаетесь, что предлагаете ..."
                     ></textarea>
                   </div>
 
                   <center>
+                    {{$v.name}}
                     <button
                       type="submit"
                       class="btn btn-primary btn-round"
@@ -97,7 +100,10 @@ export default {
           }
         })
         .then(() => {
-          eventEmitter.$emit("reloadMainCard");
+          //eventEmitter.$emit("reloadMainCard");
+          this.$store.dispatch("updateCurrentUser", {
+            userInfoName: this.name
+          });
           $("#aboutUserForm").modal("hide");
         });
     }
@@ -109,6 +115,9 @@ export default {
   },
   created() {
     eventEmitter.$on("showAboutUserForm", () => {
+      this.name = this.user.userInfoName;
+      this.specialization = this.user.userInfoSpecialization;
+      this.about = this.user.userInfoAbout;
       $("#aboutUserForm").modal("show");
     });
   }

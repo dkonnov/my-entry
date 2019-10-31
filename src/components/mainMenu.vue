@@ -164,7 +164,6 @@ export default {
       this.buttonLogin = false;
       // имя
       this.userName = this.$store.state.currentUser.name;
-      alert(this.userName);
     });
   },
   beforeMount() {
