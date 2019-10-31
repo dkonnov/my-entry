@@ -17,5 +17,8 @@ export const eventEmitter = new Vue();
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    this.$store.dispatch("getCurrentUser");
+  }
 }).$mount("#app");

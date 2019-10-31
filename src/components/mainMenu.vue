@@ -160,7 +160,6 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("getCurrentUser");
     eventEmitter.$on("showMenu", () => {
       this.buttonLogin = false;
       // имя
@@ -169,6 +168,7 @@ export default {
     });
   },
   beforeMount() {
+    //this.$store.dispatch("getCurrentUser");
     http.get("authorizationOnStart").then(response => {
       if (response.data > 0) {
         eventEmitter.$emit("showMenu");

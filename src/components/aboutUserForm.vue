@@ -15,7 +15,7 @@
                     <label>Имя</label>
                     <input
                       type="text"
-                      v-model="name"
+                      :value="user.userInfoName"
                       id="name"
                       @input="$v.name.$touch"
                       class="form-control"
@@ -28,7 +28,7 @@
                     <label>Специализация</label>
                     <input
                       type="text"
-                      v-model="specialization"
+                      :value="user.userInfoSpecialization"
                       class="form-control"
                       aria-describedby="specialization"
                       placeholder="Чем вы занимаетесь..."
@@ -43,7 +43,7 @@
                     <label>О себе</label>
                     <textarea
                       class="form-control"
-                      v-model="about"
+                      :value="user.userInfoAbout"
                       rows="5"
                       placeholder="Опишите чем вы занимаетесь, что предлагаете ..."
                     ></textarea>
@@ -102,14 +102,14 @@ export default {
         });
     }
   },
+  computed: {
+    user() {
+      return this.$store.state.currentUser;
+    }
+  },
   created() {
     eventEmitter.$on("showAboutUserForm", () => {
-      http.get("showUserInfo").then(response => {
-        this.name = response.data.name;
-        this.specialization = response.data.specialization;
-        this.about = response.data.about;
-        $("#aboutUserForm").modal("show");
-      });
+      $("#aboutUserForm").modal("show");
     });
   }
 };
