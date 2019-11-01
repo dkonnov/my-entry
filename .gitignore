@@ -3,6 +3,7 @@ node_modules
 public/img/avatars
 public
 /dist
+_kits
 
 # local env files
 .env.local
