@@ -67,6 +67,18 @@ export default {
     serviceForm,
     backgroundForm,
     accessTime
+  },
+  computed: {
+    background() {
+      return this.$store.state.currentUser.background;
+    }
+  },
+  watch: {
+    background: () => {
+      // сменим фон, если он изменился в state
+      //  document.getElementById("backgroundDiv").style.backgroundImage =
+      //   "url('img/backgrounds/" + this.background + "')";
+    }
   }
 };
 </script>

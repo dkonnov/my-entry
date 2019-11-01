@@ -7,7 +7,8 @@ import { http } from "./../http";
 
 export default new Vuex.Store({
   state: {
-    currentUser: {}
+    currentUser: {},
+    currentPage: {}
   },
   mutations: {
     setCurrentUser(state, payload) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     updateCurrentUser({ commit }, payload) {
       commit("updateStateUser", payload);
+      http.get("saveCurrentUser", {
+        params: this.state.currentUser
+      });
     }
   }
 });

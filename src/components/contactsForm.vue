@@ -213,18 +213,21 @@ export default {
         });
     }
   },
+  computed: {
+    user() {
+      return this.$store.state.currentUser;
+    }
+  },
   created() {
     eventEmitter.$on("showContactsForm", () => {
-      http.get("showUserInfoSocialForm").then(response => {
-        this.instagram = response.data.instagram;
-        this.whatsApp = response.data.whatsApp;
-        this.whatsAppText = response.data.whatsAppText;
-        this.facebook = response.data.facebook;
-        this.vk = response.data.vk;
-        this.phone = response.data.phone;
-        this.email = response.data.email;
-        $("#contactsForm").modal("show");
-      });
+      this.instagram = this.user.userInfoInstagram;
+      this.whatsApp = this.user.userInfoWhatsApp;
+      this.whatsAppText = this.user.userInfoWhatsAppText;
+      this.facebook = this.user.userInfoFacebook;
+      this.vk = this.user.userInfoVK;
+      this.phone = this.user.userInfoPhone;
+      this.email = this.user.email;
+      $("#contactsForm").modal("show");
     });
   }
 };

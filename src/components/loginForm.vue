@@ -129,20 +129,12 @@ export default {
           if (response.data == true) {
             $("#loginForm").modal("hide");
             eventEmitter.$emit("showMessage", "Привет! Рады видеть тебя!");
+            // получим первоначальные сведения о пользователе, вошедшем в систему
+            this.$store.dispatch("getCurrentUser");
             // загрузим фон
-            http.get("getBackground").then(response => {
-              // сменим фон
-              if (response.data) {
-                document.getElementById("backgroundDiv").style.backgroundImage =
-                  "url('img/backgrounds/" + response.data + "')";
-              }
-              if (this.$store.state.currentUser.name) {
-                this.$router.push("/" + this.$store.state.currentUser.name);
-              }
-
-              // покажем меню
-              eventEmitter.$emit("showMenu");
-            });
+            if (this.$store.state.currentUser.name) {
+              this.$router.push("/" + this.$store.state.currentUser.name);
+            }
           }
         });
     }

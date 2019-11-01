@@ -52,7 +52,6 @@
                   </div>
 
                   <center>
-                    {{$v.name}}
                     <button
                       type="submit"
                       class="btn btn-primary btn-round"
@@ -71,7 +70,6 @@
 </template>
 
 <script>
-import { http } from "./../http";
 import { eventEmitter } from "./../main";
 import { required } from "vuelidate/lib/validators/";
 
@@ -91,21 +89,12 @@ export default {
   },
   methods: {
     save() {
-      http
-        .get("showUserInfoSave", {
-          params: {
-            name: this.name,
-            specialization: this.specialization,
-            about: this.about
-          }
-        })
-        .then(() => {
-          //eventEmitter.$emit("reloadMainCard");
-          this.$store.dispatch("updateCurrentUser", {
-            userInfoName: this.name
-          });
-          $("#aboutUserForm").modal("hide");
-        });
+      this.$store.dispatch("updateCurrentUser", {
+        userInfoName: this.name,
+        userInfoSpecialization: this.specialization,
+        userInfoAbout: this.about
+      });
+      $("#aboutUserForm").modal("hide");
     }
   },
   computed: {

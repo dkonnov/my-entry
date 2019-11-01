@@ -25,7 +25,7 @@
 
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          <li class="dropdown nav-item" v-show="!buttonLogin" style="margin-top: 22px;">
+          <li class="dropdown nav-item" v-show="loginedUser" style="margin-top: 22px;">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <i class="material-icons">gesture</i> Оформление
             </a>
@@ -56,7 +56,7 @@
 
           <li
             class="nav-item"
-            v-show="buttonLogin"
+            v-show="!loginedUser"
             style="margin-top: 22px;margin-right: 15px;margin-left: 15px;"
           >
             <a
@@ -66,14 +66,15 @@
               href="#"
               @click="showLoginForm()"
             >
-              <i class="material-icons">meeting_room</i> Вход
+              <i class="material-icons">meeting_room</i>
+              Вход
             </a>
           </li>
 
-          <li class="dropdown nav-item" v-show="!buttonLogin" style="margin-top: 22px;">
+          <li class="dropdown nav-item" v-show="loginedUser" style="margin-top: 22px;">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <i class="material-icons">face</i>
-              <b>{{ userName }}</b>
+              <b>{{ loginedUser }}</b>
             </a>
             <div class="dropdown-menu dropdown-with-icons">
               <a href="#" class="dropdown-item" @click="showAddressForm">
@@ -107,8 +108,7 @@ export default {
   name: "mainMenu",
   data() {
     return {
-      buttonLogin: true,
-      userName: ""
+      buttonLogin: true
     };
   },
   methods: {
@@ -159,15 +159,12 @@ export default {
       eventEmitter.$emit("integrationFormShow");
     }
   },
-  created() {
-    eventEmitter.$on("showMenu", () => {
-      this.buttonLogin = false;
-      // имя
-      this.userName = this.$store.state.currentUser.name;
-    });
+  computed: {
+    loginedUser() {
+      return this.$store.state.currentUser.name;
+    }
   },
   beforeMount() {
-    //this.$store.dispatch("getCurrentUser");
     http.get("authorizationOnStart").then(response => {
       if (response.data > 0) {
         eventEmitter.$emit("showMenu");

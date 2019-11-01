@@ -48,8 +48,6 @@
                   @click="showRegistrationForm()"
                   href="#"
                 >Создать страницу</a>
-
-                <h2>Counter {{counter}}</h2>
               </center>
             </div>
           </div>
@@ -140,11 +138,6 @@ export default {
   methods: {
     showRegistrationForm() {
       eventEmitter.$emit("showRegistrationForm");
-    }
-  },
-  computed: {
-    counter() {
-      return this.$store.state.logined;
     }
   },
   beforeMount() {

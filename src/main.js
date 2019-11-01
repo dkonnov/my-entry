@@ -19,6 +19,7 @@ new Vue({
   store,
   render: h => h(App),
   created() {
+    // получим первоначальные сведения о пользователе, вошедшем в систему
     this.$store.dispatch("getCurrentUser");
   }
 }).$mount("#app");
