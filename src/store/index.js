@@ -13,7 +13,7 @@ export default new Vuex.Store({
     setCurrentUser(state, payload) {
       state.currentUser = payload;
     },
-    updateCurrentUserM(state, payload) {
+    updateStateUser(state, payload) {
       objectAssign(state.currentUser, payload);
     }
   },
@@ -26,7 +26,7 @@ export default new Vuex.Store({
       });
     },
     updateCurrentUser({ commit }, payload) {
-      commit("updateCurrentUserM", payload);
+      commit("updateStateUser", payload);
     }
   }
 });
