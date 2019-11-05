@@ -149,11 +149,7 @@ export default {
       eventEmitter.$emit("showLoginForm");
     },
     logout() {
-      http.get("logout").then(() => {
-        this.buttonLogin = true;
-        eventEmitter.$emit("showMessage", "Надеемся вы скоро вернетесь!");
-        this.$router.push("/");
-      });
+      this.$store.dispatch("logoutUser");
     },
     integrationFormShow() {
       eventEmitter.$emit("integrationFormShow");

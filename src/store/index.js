@@ -4,6 +4,7 @@ import objectAssign from "object-assign";
 
 Vue.use(Vuex);
 import { http } from "./../http";
+import { eventEmitter } from "./../main";
 
 export default new Vuex.Store({
   state: {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     updateStateUser(state, payload) {
       objectAssign(state.currentUser, payload);
+    },
+    logout(state) {
+      state.currentUser = {};
     }
   },
   actions: {
@@ -30,6 +34,13 @@ export default new Vuex.Store({
       commit("updateStateUser", payload);
       http.get("saveCurrentUser", {
         params: this.state.currentUser
+      });
+    },
+    logoutUser({ commit }) {
+      http.get("logout").then(() => {
+        commit("logout");
+        eventEmitter.$emit("showMessage", "Надеемся вы скоро вернетесь!");
+        this.$router.push("/");
       });
     }
   }
