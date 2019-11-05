@@ -65,12 +65,13 @@ export default {
   },
   methods: {
     deleteAvatar: function() {
-      http.get("deleteAvatar").then(response => {
-        document.getElementById("avatarimgform").src = "img/placeholder.jpg";
-        document.getElementById("avatarimg").src = "img/placeholder.jpg";
-        this.avatar = false;
-        this.deleteAvatarButton = false;
+      this.$store.dispatch("updateCurrentUser", {
+        avatar: ""
       });
+      document.getElementById("avatarimgform").src = "img/placeholder.jpg";
+      //document.getElementById("avatarimg").src = "img/placeholder.jpg";
+      this.avatar = false;
+      this.deleteAvatarButton = false;
     },
     addAvatar() {
       var formData = new FormData();
@@ -82,25 +83,20 @@ export default {
             "Content-Type": "multipart/form-data"
           }
         })
-        .then(response => {
-          eventEmitter.$emit("showAvatarForm");
-          // this.loadMainCard();
-        });
+        .then(() => {});
     }
   },
   created() {
     eventEmitter.$on("showAvatarForm", () => {
-      http.get("showUserAvatarGetSrc").then(response => {
-        if (response.data.avatar) {
-          document.getElementById("avatarimgform").src =
-            "img/avatars/" + response.data.avatar;
-          this.deleteAvatarButton = true;
-        } else {
-          document.getElementById("avatarimgform").src = "img/placeholder.jpg";
-          this.deleteAvatarButton = false;
-        }
-        $("#userAvatar").modal("show");
-      });
+      if (this.$store.state.currentUser.avatar) {
+        document.getElementById("avatarimgform").src =
+          "img/avatars/" + this.$store.state.currentUser.avatar;
+        this.deleteAvatarButton = true;
+      } else {
+        document.getElementById("avatarimgform").src = "img/placeholder.jpg";
+        this.deleteAvatarButton = false;
+      }
+      $("#userAvatar").modal("show");
     });
   }
 };

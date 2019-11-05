@@ -93,7 +93,7 @@
                 <div class="card-body wow fadeIn" data-wow-duration="2s">
                   {{ userService.description }}
                   <div class="row" style="backgroundcolor=yellow">
-                    <div class="col-md-6" style=" opacity: 0.5;">
+                    <div class="col-md-6" style="opacity: 0.5;">
                       <div
                         v-show="userService.time"
                         class="dropdown wow fadeIn"
