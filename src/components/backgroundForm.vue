@@ -1,7 +1,7 @@
 <template>
   <!-- Background Modal -->
   <div class="modal fade" id="backgroundForm" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog form3" role="document">
+    <div class="modal-dialog" role="document">
       <div class="modal-content" style="background-color:transparent;box-shadow: none;">
         <div class="col-lg-8 col-md-6 ml-auto mr-auto">
           <div
@@ -79,15 +79,11 @@ export default {
     changeBackground(value) {
       var url = document.getElementById("img" + value).src;
       var img = url.substr(url.lastIndexOf("/") + 1);
-      document.getElementById("backgroundDiv").style.backgroundImage =
-        "url('img/backgrounds/" + img + "')";
-      http
-        .get("changeBackground", {
-          params: {
-            img: img
-          }
-        })
-        .then(response => {});
+      //document.getElementById("backgroundDiv").style.backgroundImage =
+      //"url('img/backgrounds/" + img + "')";
+      this.$store.dispatch("updateCurrentUser", {
+        background: img
+      });
     },
     changeTab(value) {
       this.currentTab = value;
@@ -102,7 +98,7 @@ export default {
             document.getElementById("img" + i).src =
               "img/animated-loading-bar.gif";
           }
-          for (var i = 1; i <= 6; i++) {
+          for (i = 1; i <= 6; i++) {
             if (response.data[i - 1].img) {
               document.getElementById("imgDiv" + i).style.visibility =
                 "visible";
@@ -130,18 +126,18 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.modal-dialog.form3
+.modal-dialog
 	max-width: 1300px
-.pagination 
+.pagination
   .page-item.active
     a, span, .page-link:focus, span:focus
-    	background-color: #9c27b0
-	    border-color: #9c27b0
-	    color: #fff
-	    box-shadow: 0 4px 5px 0 rgba(156,39,176,.14),0 1px 10px 0 rgba(156,39,176,.12),0 2px 4px -1px rgba(156,39,176,.2)
+      background-color: #9c27b0
+      border-color: #9c27b0
+      color: #fff
+      box-shadow: 0 4px 5px 0 rgba(156,39,176,.14),0 1px 10px 0 rgba(156,39,176,.12),0 2px 4px -1px rgba(156,39,176,.2)
   .page-item 
     span:hover, .page-link:hover 
-	    background-color: rgb(243, 241, 241)
-	    border-color: rgb(243, 241, 241)
+      background-color: rgb(243, 241, 241)
+      border-color: rgb(243, 241, 241)
 </style>
 

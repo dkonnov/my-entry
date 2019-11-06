@@ -8,6 +8,7 @@
       style="background-size: cover; background-position: top center;"
     >
       <!-- Desktop -->
+
       <div
         class="container wow fadeIn"
         data-wow-duration="2s"
@@ -72,10 +73,10 @@ export default {
     }
   },
   watch: {
-    background: () => {
+    background: value => {
       // сменим фон, если он изменился в state
-      //  document.getElementById("backgroundDiv").style.backgroundImage =
-      //   "url('img/backgrounds/" + this.background + "')";
+      document.getElementById("backgroundDiv").style.backgroundImage =
+        "url('img/backgrounds/" + value + "')";
     }
   }
 };

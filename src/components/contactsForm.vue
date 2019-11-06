@@ -226,7 +226,7 @@ export default {
       this.facebook = this.user.userInfoFacebook;
       this.vk = this.user.userInfoVK;
       this.phone = this.user.userInfoPhone;
-      this.email = this.user.email;
+      this.userInfoEMail = this.user.email;
       $("#contactsForm").modal("show");
     });
   }

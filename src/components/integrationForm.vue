@@ -13,7 +13,7 @@
               <form class="form" @submit.prevent="save">
                 <div class="row">
                   <p class="card-description">
-                    <center>Для отслеживания статистики и повышения конверсии от ваших рекламных компаний, используйте интеграцию. Вставьте номера счетчиков, которые вы используете.</center>
+                    <center>Для отслеживания статистики и повышения конверсии от ваших рекламных компаний, используйте интеграцию.</center>
                   </p>
 
                   <div class="input-group" :class="{'has-danger': $v.pixel.$error}">
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import { http } from "./../http";
 import { eventEmitter } from "./../main";
 import { required } from "vuelidate/lib/validators/";
 
@@ -82,15 +81,10 @@ export default {
   },
   methods: {
     save() {
-      http
-        .get("integrationFormSave", {
-          params: {
-            pixel: this.pixel
-          }
-        })
-        .then(() => {
-          $("#integrationForm").modal("hide");
-        });
+      this.$store.dispatch("updateCurrentUser", {
+        integrationPixel: this.pixel
+      });
+      $("#integrationForm").modal("hide");
     }
   },
   created() {
