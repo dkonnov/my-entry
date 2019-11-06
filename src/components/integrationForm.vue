@@ -95,10 +95,8 @@ export default {
   },
   created() {
     eventEmitter.$on("integrationFormShow", () => {
-      http.get("integrationFormShow").then(response => {
-        this.pixel = response.data.pixel;
-        $("#integrationForm").modal("show");
-      });
+      this.pixel = this.$store.state.currentUser.integrationPixel;
+      $("#integrationForm").modal("show");
     });
   }
 };

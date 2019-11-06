@@ -6,6 +6,8 @@ import router from "./router";
 import store from "./store";
 import "./css/material-kit.min.css";
 import "./css/animate.min.css";
+import VueFacebookPixel from "vue-analytics-facebook-pixel";
+Vue.use(VueFacebookPixel);
 
 Vue.use(VueRouter);
 Vue.use(Vuelidate);
@@ -13,6 +15,13 @@ Vue.use(Vuelidate);
 Vue.config.productionTip = false;
 
 export const eventEmitter = new Vue();
+
+/**
+ * Init facebook tracking pixel
+ * @param  {String} appId
+ * @param  {object} [data={}]
+ */
+Vue.analytics.fbq.init("2394012147354021");
 
 new Vue({
   router,

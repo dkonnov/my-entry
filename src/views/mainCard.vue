@@ -32,6 +32,7 @@
             :data-wow-delay="userSocButton.delay"
             :href="userSocButton.href"
             :key="userSocButton"
+            @click="fbEvent('Иконка связи: ' + userSocButton.icon)"
             target="new"
           >
             <i :class="userSocButton.icon"></i>
@@ -51,7 +52,9 @@
           class="btn btn-info btn-round wow fadeIn"
           data-wow-duration="2s"
           data-wow-delay="2s"
+          target="new"
           :href="linkButtonHref"
+          @click="fbEvent('Кнопка связи')"
         >{{ linkButtonName }}</a>
 
         <div id="accordion" role="tablist" aria-multiselectable="false" class="card-collapse">
@@ -174,7 +177,14 @@ export default {
     };
   },
   methods: {
-    loadMainCardInf: function(value) {
+    fbEvent(value) {
+      this.$analytics.fbq.event("Contact", {
+        content_name: value
+      });
+    },
+    loadMainCardInf(value) {
+      // Добавим собитые для пикселя
+      this.$analytics.fbq.event("PageView");
       http
         .get("loadMainCard", {
           params: {

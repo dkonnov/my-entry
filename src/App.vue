@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import integrationPixel from "./components/integrationPixel";
 import mainMenu from "./components/mainMenu";
 import avatarForm from "./components/avatarForm";
 import loginForm from "./components/loginForm";
@@ -62,7 +61,6 @@ export default {
     aboutUserForm,
     contactsForm,
     integrationForm,
-    integrationPixel,
     linkButton,
     serviceForm,
     backgroundForm,
