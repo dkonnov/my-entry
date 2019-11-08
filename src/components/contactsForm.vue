@@ -28,12 +28,11 @@
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
                       <small
-                        id="emailHelp"
                         class="form-text text-muted"
                       >Введите имя профиля Instagram без использования символа "@".</small>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" :class="{'has-danger': $v.whatsApp.$error}">
                       <div class="input-group-prepend">
                         <span class="input-group-text userInfoSocial">
                           <i class="fab fab fa-whatsapp"></i>
@@ -43,8 +42,12 @@
                         v-model="whatsApp"
                         type="text"
                         class="form-control"
+                        @input="$v.whatsApp.$touch"
                         placeholder="Номер телефона для WhatsApp ..."
                       />
+                      <button v-if="$v.whatsApp.$error" class="form-control-feedback">
+                        <i class="material-icons">clear</i>
+                      </button>
                     </div>
 
                     <div class="input-group" style="margin-top: 0px;">
@@ -82,15 +85,15 @@
                         class="form-control"
                         placeholder="Электронная почта ..."
                       />
+                      <button v-if="$v.email.$error" class="form-control-feedback">
+                        <i class="material-icons">clear</i>
+                      </button>
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
-                      <small
-                        id="emailHelp"
-                        class="form-text text-muted"
-                      >Укажите адрес электронной почты</small>
+                      <small class="form-text text-muted">Укажите адрес электронной почты</small>
                     </div>
 
-                    <div class="input-group">
+                    <div class="input-group" :class="{'has-danger': $v.phone.$error}">
                       <div class="input-group-prepend">
                         <span class="input-group-text userInfoSocial">
                           <i class="fas fa-phone"></i>
@@ -100,14 +103,15 @@
                         v-model="phone"
                         type="text"
                         class="form-control"
+                        @input="$v.phone.$touch"
                         placeholder="Телефон ..."
                       />
+                      <button v-if="$v.phone.$error" class="form-control-feedback">
+                        <i class="material-icons">clear</i>
+                      </button>
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
-                      <small
-                        id="emailHelp"
-                        class="form-text text-muted"
-                      >Укажите номер телефона для связи</small>
+                      <small class="form-text text-muted">Укажите номер телефона для связи</small>
                     </div>
 
                     <div class="input-group">
@@ -125,7 +129,6 @@
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
                       <small
-                        id="emailHelp"
                         class="form-text text-muted"
                       >Укажите только имя пользовятеля, которое идет после адреса "facebook.com\"</small>
                     </div>
@@ -145,7 +148,6 @@
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
                       <small
-                        id="emailHelp"
                         class="form-text text-muted"
                       >Укажите только имя пользовятеля, которое идет после адреса "vk.com\"</small>
                     </div>
@@ -154,7 +156,11 @@
 
                 <center>
                   <br />
-                  <button type="submit" class="btn btn-primary btn-round">Сохранить</button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-round"
+                    :disabled="$v.$invalid"
+                  >Сохранить</button>
                   <a
                     href="#pablo"
                     class="btn btn-primary btn-link btn-wd"
@@ -173,7 +179,7 @@
 <script>
 import { http } from "./../http";
 import { eventEmitter } from "./../main";
-import { email } from "vuelidate/lib/validators/";
+import { email, numeric } from "vuelidate/lib/validators/";
 
 export default {
   name: "contactsForm",
@@ -191,6 +197,12 @@ export default {
   validations: {
     email: {
       email
+    },
+    phone: {
+      numeric
+    },
+    whatsApp: {
+      numeric
     }
   },
   methods: {
@@ -238,4 +250,6 @@ export default {
   max-width: 1300px;
 .text-muted
   padding-left: 15px;
+.form-control-feedback
+    margin-top: -28px
 </style>
