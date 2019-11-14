@@ -30,5 +30,6 @@ new Vue({
   created() {
     // получим первоначальные сведения о пользователе, вошедшем в систему
     this.$store.dispatch("getCurrentUser");
+    this.$store.dispatch("getBackgrounds");
   }
 }).$mount("#app");

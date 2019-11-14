@@ -1,8 +1,17 @@
 <template>
   <!-- Background Modal -->
-  <div class="modal fade" id="backgroundForm" tabindex="-1" role="dialog" aria-hidden="false">
+  <div
+    class="modal fade"
+    id="backgroundForm"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="false"
+  >
     <div class="modal-dialog" role="document">
-      <div class="modal-content" style="background-color:transparent;box-shadow: none;">
+      <div
+        class="modal-content"
+        style="background-color:transparent;box-shadow: none;"
+      >
         <div class="col-lg-8 col-md-6 ml-auto mr-auto">
           <div
             class="card card-signup"
@@ -11,18 +20,23 @@
             <h2 class="card-title text-center">Фон</h2>
             <div class="card-body">
               <div class="row">
-                <template v-for="index in 6">
-                  <div
-                    :id="'imgDiv'+index"
-                    class="col-md-4"
-                    @click="changeBackground(index)"
-                    :key="index"
-                  >
+                <template v-for="img in this.$store.state.backgrounds">
+                  <div class="col-md-4" :key="img">
                     <div class="card card-plain">
                       <div class="card-header card-header-image">
                         <div class="card-header-image-bg"></div>
-                        <img :id="'img' + index" src="img/animated-loading-bar.gif" />
-                        <div :id="'img_s_' + index" class="colored-shadow" style="opacity: 1;"></div>
+                        <div v-if="img.src == currentBackground">current</div>
+
+                        <img :src="'img/backgrounds/' + img.src" />
+                        <div
+                          class="colored-shadow"
+                          style="opacity: 1;"
+                          :style="
+                            'background-image: url(img/backgrounds/' +
+                              img.src +
+                              ')'
+                          "
+                        ></div>
                       </div>
                     </div>
                   </div>
@@ -31,27 +45,38 @@
             </div>
 
             <center>
-              <div width="100%" style="display: flex;align-items: center; justify-content: center;">
-                <ul class="pagination nav nav-pills nav-pills-primary" role="tablist">
+              <div
+                width="100%"
+                style="display: flex;align-items: center; justify-content: center;"
+              >
+                <ul
+                  class="pagination nav nav-pills nav-pills-primary"
+                  role="tablist"
+                >
                   <template v-for="index in totalTabs">
                     <li
                       class="page-item"
-                      :class="{'active': currentTab == index}"
-                      @click="changeTab(index)"
+                      :class="{ active: currentTab == index }"
                       :key="index"
                     >
                       <a
                         class="page-link"
                         data-toggle="tab"
-                        :href="'#tab'+index"
+                        :href="'#tab' + index"
                         role="tablist"
                         aria-expanded="true"
-                      >{{index}}</a>
+                        >{{ index }}</a
+                      >
                     </li>
                   </template>
                 </ul>
               </div>
-              <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
+              <a
+                href="#"
+                class="btn btn-primary btn-link btn-wd"
+                data-dismiss="modal"
+                >Закрыть</a
+              >
             </center>
           </div>
         </div>
@@ -74,43 +99,18 @@ export default {
       img6: false
     };
   },
+  computed: {
+    currentBackground: function() {
+      return this.$store.state.currentUser.background;
+    }
+  },
   methods: {
-    // ФОН
     changeBackground(value) {
       var url = document.getElementById("img" + value).src;
       var img = url.substr(url.lastIndexOf("/") + 1);
-      //document.getElementById("backgroundDiv").style.backgroundImage =
-      //"url('img/backgrounds/" + img + "')";
       this.$store.dispatch("updateCurrentUser", {
         background: img
       });
-    },
-    changeTab(value) {
-      this.currentTab = value;
-      http
-        .get("getBackgrounds", {
-          params: {
-            page: value
-          }
-        })
-        .then(response => {
-          for (var i = 1; i <= 6; i++) {
-            document.getElementById("img" + i).src =
-              "img/animated-loading-bar.gif";
-          }
-          for (i = 1; i <= 6; i++) {
-            if (response.data[i - 1].img) {
-              document.getElementById("imgDiv" + i).style.visibility =
-                "visible";
-              document.getElementById("img" + i).src =
-                "img/backgrounds/" + response.data[i - 1].img;
-              document.getElementById("img_s_" + i).style.backgroundImage =
-                "url(img/backgrounds/" + response.data[i - 1].img + ")";
-            } else {
-              document.getElementById("imgDiv" + i).style.visibility = "hidden";
-            }
-          }
-        });
     }
   },
   created() {
@@ -135,9 +135,8 @@ export default {
       border-color: #9c27b0
       color: #fff
       box-shadow: 0 4px 5px 0 rgba(156,39,176,.14),0 1px 10px 0 rgba(156,39,176,.12),0 2px 4px -1px rgba(156,39,176,.2)
-  .page-item 
-    span:hover, .page-link:hover 
+  .page-item
+    span:hover, .page-link:hover
       background-color: rgb(243, 241, 241)
       border-color: rgb(243, 241, 241)
 </style>
-

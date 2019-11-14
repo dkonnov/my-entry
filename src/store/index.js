@@ -9,7 +9,19 @@ import { eventEmitter } from "./../main";
 export default new Vuex.Store({
   state: {
     currentUser: {},
-    currentPage: {}
+    currentPage: {},
+    backgrounds: {}
+  },
+  getters: {
+    thisCurrenBackground(state, value) {
+      let rez;
+      if (state.currentUser.background == value) {
+        rez = true;
+      } else {
+        rez = false;
+      }
+      return rez;
+    }
   },
   mutations: {
     setCurrentUser(state, payload) {
@@ -20,6 +32,9 @@ export default new Vuex.Store({
     },
     logout(state) {
       state.currentUser = {};
+    },
+    setBackgrounds(state, payload) {
+      state.backgrounds = payload;
     }
   },
   actions: {
@@ -27,6 +42,13 @@ export default new Vuex.Store({
       http.get("getCurrentUser").then(response => {
         if (response.data) {
           context.commit("setCurrentUser", response.data);
+        }
+      });
+    },
+    getBackgrounds(context) {
+      http.get("getBackgrounds").then(response => {
+        if (response.data) {
+          context.commit("setBackgrounds", response.data);
         }
       });
     },

@@ -8,7 +8,10 @@
     aria-hidden="false"
   >
     <div class="modal-dialog" role="document">
-      <div class="modal-content" style="background-color:transparent;box-shadow: none;">
+      <div
+        class="modal-content"
+        style="background-color:transparent;box-shadow: none;"
+      >
         <div class="col-lg-8 col-md-6 ml-auto mr-auto">
           <div class="card card-login">
             <form class="form" @submit.prevent="authorization">
@@ -18,7 +21,10 @@
               </div>
               <p class="description text-center">Введите учетные данные</p>
               <div class="card-body">
-                <div class="input-group" :class="{'has-danger': $v.login.$error}">
+                <div
+                  class="input-group"
+                  :class="{ 'has-danger': $v.login.$error }"
+                >
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">mail</i>
@@ -33,7 +39,10 @@
                     placeholder="Электронная почта ..."
                   />
                 </div>
-                <div class="input-group" :class="{'has-danger': $v.password.$error}">
+                <div
+                  class="input-group"
+                  :class="{ 'has-danger': $v.password.$error }"
+                >
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">lock_outline</i>
@@ -56,13 +65,16 @@
                   class="btn btn-primary btn-round"
                   data-toggle="modal"
                   :disabled="$v.$invalid"
-                >Вход</button>
+                >
+                  Вход
+                </button>
                 <br />
                 <a
                   href="#"
                   @click="showRegistrationForm"
                   class="btn btn-primary btn-link btn-wd"
-                >Регистрация</a>
+                  >Регистрация</a
+                >
               </div>
             </form>
           </div>
@@ -131,6 +143,7 @@ export default {
             eventEmitter.$emit("showMessage", "Привет! Рады видеть тебя!");
             // получим первоначальные сведения о пользователе, вошедшем в систему
             this.$store.dispatch("getCurrentUser");
+
             // очистим поля формы
             this.login = "";
             this.password = "";
@@ -154,4 +167,3 @@ export default {
 .card-login
     max-height: 370px
 </style>
-
