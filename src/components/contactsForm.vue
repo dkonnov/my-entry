@@ -1,7 +1,16 @@
 <template>
-  <div class="modal fade" id="contactsForm" tabindex="-1" role="dialog" aria-hidden="false">
+  <div
+    class="modal fade"
+    id="contactsForm"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="false"
+  >
     <div class="modal-dialog form4" role="document">
-      <div class="modal-content" style="background-color:transparent;box-shadow: none;">
+      <div
+        class="modal-content"
+        style="background-color:transparent;box-shadow: none;"
+      >
         <div class="col-lg-8 col-md-6 ml-auto mr-auto">
           <div
             class="card card-signup"
@@ -27,12 +36,16 @@
                       />
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
-                      <small
-                        class="form-text text-muted"
-                      >Введите имя профиля Instagram без использования символа "@".</small>
+                      <small class="form-text text-muted"
+                        >Введите имя профиля Instagram без использования символа
+                        "@".</small
+                      >
                     </div>
 
-                    <div class="input-group" :class="{'has-danger': $v.whatsApp.$error}">
+                    <div
+                      class="input-group"
+                      :class="{ 'has-danger': $v.whatsApp.$error }"
+                    >
                       <div class="input-group-prepend">
                         <span class="input-group-text userInfoSocial">
                           <i class="fab fab fa-whatsapp"></i>
@@ -45,7 +58,10 @@
                         @input="$v.whatsApp.$touch"
                         placeholder="Номер телефона для WhatsApp ..."
                       />
-                      <button v-if="$v.whatsApp.$error" class="form-control-feedback">
+                      <button
+                        v-if="$v.whatsApp.$error"
+                        class="form-control-feedback"
+                      >
                         <i class="material-icons">clear</i>
                       </button>
                     </div>
@@ -64,15 +80,18 @@
                       ></textarea>
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
-                      <small
-                        id="emailHelp"
-                        class="form-text text-muted"
-                      >Например, «Привет! Меня заинтересовал Ваш товар.»</small>
+                      <small id="emailHelp" class="form-text text-muted"
+                        >Например, «Привет! Меня заинтересовал Ваш
+                        товар.»</small
+                      >
                     </div>
                   </div>
 
                   <div class="col-md-6">
-                    <div class="input-group" :class="{'has-danger': $v.email.$error}">
+                    <div
+                      class="input-group"
+                      :class="{ 'has-danger': $v.email.$error }"
+                    >
                       <div class="input-group-prepend">
                         <span class="input-group-text userInfoSocial">
                           <i class="fas fa-envelope"></i>
@@ -85,15 +104,23 @@
                         class="form-control"
                         placeholder="Электронная почта ..."
                       />
-                      <button v-if="$v.email.$error" class="form-control-feedback">
+                      <button
+                        v-if="$v.email.$error"
+                        class="form-control-feedback"
+                      >
                         <i class="material-icons">clear</i>
                       </button>
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
-                      <small class="form-text text-muted">Укажите адрес электронной почты</small>
+                      <small class="form-text text-muted"
+                        >Укажите адрес электронной почты</small
+                      >
                     </div>
 
-                    <div class="input-group" :class="{'has-danger': $v.phone.$error}">
+                    <div
+                      class="input-group"
+                      :class="{ 'has-danger': $v.phone.$error }"
+                    >
                       <div class="input-group-prepend">
                         <span class="input-group-text userInfoSocial">
                           <i class="fas fa-phone"></i>
@@ -106,12 +133,17 @@
                         @input="$v.phone.$touch"
                         placeholder="Телефон ..."
                       />
-                      <button v-if="$v.phone.$error" class="form-control-feedback">
+                      <button
+                        v-if="$v.phone.$error"
+                        class="form-control-feedback"
+                      >
                         <i class="material-icons">clear</i>
                       </button>
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
-                      <small class="form-text text-muted">Укажите номер телефона для связи</small>
+                      <small class="form-text text-muted"
+                        >Укажите номер телефона для связи</small
+                      >
                     </div>
 
                     <div class="input-group">
@@ -128,9 +160,10 @@
                       />
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
-                      <small
-                        class="form-text text-muted"
-                      >Укажите только имя пользовятеля, которое идет после адреса "facebook.com\"</small>
+                      <small class="form-text text-muted"
+                        >Укажите только имя пользовятеля, которое идет после
+                        адреса "facebook.com\"</small
+                      >
                     </div>
 
                     <div class="input-group">
@@ -147,9 +180,10 @@
                       />
                     </div>
                     <div style="margin-top:-10px; margin-left:30px">
-                      <small
-                        class="form-text text-muted"
-                      >Укажите только имя пользовятеля, которое идет после адреса "vk.com\"</small>
+                      <small class="form-text text-muted"
+                        >Укажите только имя пользовятеля, которое идет после
+                        адреса "vk.com\"</small
+                      >
                     </div>
                   </div>
                 </div>
@@ -160,12 +194,15 @@
                     type="submit"
                     class="btn btn-primary btn-round"
                     :disabled="$v.$invalid"
-                  >Сохранить</button>
+                  >
+                    Сохранить
+                  </button>
                   <a
                     href="#pablo"
                     class="btn btn-primary btn-link btn-wd"
                     data-dismiss="modal"
-                  >Закрыть</a>
+                    >Закрыть</a
+                  >
                 </center>
               </form>
             </div>
@@ -177,7 +214,6 @@
 </template>
 
 <script>
-import { http } from "./../http";
 import { eventEmitter } from "./../main";
 import { email, numeric } from "vuelidate/lib/validators/";
 
@@ -207,22 +243,16 @@ export default {
   },
   methods: {
     save() {
-      http
-        .get("showUserInfoSocialSave", {
-          params: {
-            instagram: this.instagram,
-            whatsApp: this.whatsApp,
-            email: this.email,
-            phone: this.phone,
-            whatsAppText: this.whatsAppText,
-            facebook: this.facebook,
-            vk: this.vk
-          }
-        })
-        .then(() => {
-          eventEmitter.$emit("reloadMainCard");
-          $("#contactsForm").modal("hide");
-        });
+      this.$store.dispatch("updateCurrentUser", {
+        userInfoInstagram: this.instagram,
+        userInfoWhatsApp: this.whatsApp,
+        userInfoWhatsAppText: this.whatsAppText,
+        userInfoEMail: this.email,
+        userInfoPhone: this.phone,
+        userInfoFacebook: this.facebook,
+        userInfoVK: this.vk
+      });
+      $("#contactsFor").modal("hide");
     }
   },
   computed: {
@@ -246,7 +276,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.modal-dialog 
+.modal-dialog
   max-width: 1300px;
 .text-muted
   padding-left: 15px;

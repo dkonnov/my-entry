@@ -1,7 +1,16 @@
 <template>
-  <div class="modal fade" id="accessTime" tabindex="-1" role="dialog" aria-hidden="false">
+  <div
+    class="modal fade"
+    id="accessTime"
+    tabindex="-1"
+    role="dialog"
+    aria-hidden="false"
+  >
     <div class="modal-dialog form5" role="document">
-      <div class="modal-content" style="background-color:transparent;box-shadow: none;">
+      <div
+        class="modal-content"
+        style="background-color:transparent;box-shadow: none;"
+      >
         <div class="col-lg-8 col-md-6 ml-auto mr-auto">
           <div
             class="card card-signup"
@@ -23,12 +32,14 @@
                     <tbody>
                       <template v-for="index in 7">
                         <tr :key="index">
-                          <td class="text-center">{{ dayOfWeek[index-1] }}</td>
+                          <td class="text-center">
+                            {{ dayOfWeek[index - 1] }}
+                          </td>
                           <td width="200">
                             <div class="row">
                               <div class="col-md-6">
                                 <input
-                                  :id="'id_timepicker1_'+ index"
+                                  :id="'id_timepicker1_' + index"
                                   v-model="s_date"
                                   type="text"
                                   class="form-control datetimepicker"
@@ -37,8 +48,8 @@
 
                               <div class="col-md-6">
                                 <input
-                                  v-show="'timepicker2_'+ index"
-                                  :id="'id_timepicker2_'+ index"
+                                  v-show="'timepicker2_' + index"
+                                  :id="'id_timepicker2_' + index"
                                   v-model="s_date"
                                   type="text"
                                   class="form-control datetimepicker"
@@ -50,7 +61,7 @@
                             <div class="row">
                               <div class="col-md-6">
                                 <input
-                                  :id="'id_timepicker3_'+ index"
+                                  :id="'id_timepicker3_' + index"
                                   v-model="s_date"
                                   type="text"
                                   class="form-control datetimepicker"
@@ -59,7 +70,7 @@
 
                               <div class="col-md-6">
                                 <input
-                                  :id="'id_timepicker4_'+ index"
+                                  :id="'id_timepicker4_' + index"
                                   v-model="s_date"
                                   type="text"
                                   class="form-control datetimepicker"
@@ -70,7 +81,11 @@
                           <td class="td-actions text-right">
                             <div class="togglebutton" @click="hideDay(index)">
                               <label>
-                                <input :id="'id_togle_'+ index" type="checkbox" checked />
+                                <input
+                                  :id="'id_togle_' + index"
+                                  type="checkbox"
+                                  checked
+                                />
                                 <span class="toggle"></span>
                               </label>
                             </div>
@@ -80,7 +95,12 @@
                     </tbody>
                   </table>
 
-                  <a href="#" class="btn btn-primary btn-link btn-wd" data-dismiss="modal">Закрыть</a>
+                  <a
+                    href="#"
+                    class="btn btn-primary btn-link btn-wd"
+                    data-dismiss="modal"
+                    >Закрыть</a
+                  >
                 </center>
               </div>
             </div>
@@ -130,7 +150,6 @@ export default {
     });
   },
   mounted() {
-    //var piker =
     $(".datetimepicker").datetimepicker({
       format: "LT",
       locale: "ru",
