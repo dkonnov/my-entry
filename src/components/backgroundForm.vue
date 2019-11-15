@@ -18,14 +18,30 @@
             style="padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;"
           >
             <h2 class="card-title text-center">Фон</h2>
+            {{ this.$store.state.backgrounds.length }}
             <div class="card-body">
               <div class="row">
                 <template v-for="img in this.$store.state.backgrounds">
-                  <div class="col-md-4" :key="img">
+                  <div
+                    class="col-md-4"
+                    :key="img"
+                    @click="changeBackground(img.src)"
+                  >
                     <div class="card card-plain">
                       <div class="card-header card-header-image">
                         <div class="card-header-image-bg"></div>
-                        <div v-if="img.src == currentBackground">current</div>
+
+                        <div
+                          v-if="img.src == currentBackground"
+                          class="currentBackground"
+                        ></div>
+
+                        <div
+                          v-if="img.src == currentBackground"
+                          class="currentBackground2"
+                        >
+                          <i class="material-icons">done</i>
+                        </div>
 
                         <img :src="'img/backgrounds/' + img.src" />
                         <div
@@ -58,6 +74,7 @@
                       class="page-item"
                       :class="{ active: currentTab == index }"
                       :key="index"
+                      @click="currentTab = index"
                     >
                       <a
                         class="page-link"
@@ -94,22 +111,23 @@ export default {
   data() {
     return {
       currentTab: 1,
-      totalTabs: 10,
-      imgData: "",
-      img6: false
+      itemsOnPage: 6
     };
   },
   computed: {
     currentBackground: function() {
       return this.$store.state.currentUser.background;
+    },
+    totalTabs: function() {
+      return (
+        Math.trunc(this.$store.state.backgrounds.length / this.itemsOnPage) + 1
+      );
     }
   },
   methods: {
     changeBackground(value) {
-      var url = document.getElementById("img" + value).src;
-      var img = url.substr(url.lastIndexOf("/") + 1);
       this.$store.dispatch("updateCurrentUser", {
-        background: img
+        background: value
       });
     }
   },
@@ -126,6 +144,26 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.currentBackground
+  display: flex
+  flex-flow: column
+  height: 100%
+  width: 100%
+  position: absolute
+  background-color: #9c27b0
+  opacity: .5
+  border-radius: 6px
+.currentBackground2
+  display: flex
+  flex-flow: column
+  height: 100%
+  width: 100%
+  opacity: 1
+  text-align: center
+  justify-content: center
+  position: absolute
+.material-icons
+  font-size: 48px
 .modal-dialog
 	max-width: 1300px
 .pagination
