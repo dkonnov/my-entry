@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import objectAssign from "object-assign";
+import _ from "lodash";
 
 Vue.use(Vuex);
 import { http } from "./../http";
@@ -28,7 +28,7 @@ export default new Vuex.Store({
       state.currentUser = payload;
     },
     updateStateUser(state, payload) {
-      objectAssign(state.currentUser, payload);
+      _.assign(state.currentUser, payload);
     },
     logout(state) {
       state.currentUser = {};
