@@ -18,10 +18,9 @@
             style="padding-left: 15px;padding-right: 15px;padding-top: 15px;padding-bottom: 15px;"
           >
             <h2 class="card-title text-center">Фон</h2>
-            {{ this.$store.state.backgrounds.length }}
             <div class="card-body">
               <div class="row">
-                <template v-for="img in this.$store.state.backgrounds">
+                <template v-for="img in itemsOnPageArray">
                   <div
                     class="col-md-4"
                     :key="img"
@@ -103,6 +102,7 @@
 </template>
 
 <script>
+import _ from "lodash";
 import { http } from "./../http";
 import { eventEmitter } from "./../main";
 
@@ -115,6 +115,13 @@ export default {
     };
   },
   computed: {
+    itemsOnPageArray: function() {
+      return _.slice(
+        this.$store.state.backgrounds,
+        this.itemsOnPage * this.currentTab - this.itemsOnPage,
+        this.itemsOnPage * this.currentTab
+      );
+    },
     currentBackground: function() {
       return this.$store.state.currentUser.background;
     },
