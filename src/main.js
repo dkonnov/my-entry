@@ -6,6 +6,7 @@ import router from "./router";
 import store from "./store";
 import "./css/material-kit.min.css";
 import "./css/animate.min.css";
+
 import VueFacebookPixel from "vue-analytics-facebook-pixel";
 Vue.use(VueFacebookPixel);
 
