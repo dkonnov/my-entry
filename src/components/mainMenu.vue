@@ -25,7 +25,11 @@
 
       <div id="main-nav" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          <li class="dropdown nav-item" v-show="loginedUser" style="margin-top: 22px;">
+          <li
+            class="dropdown nav-item"
+            v-show="loginedUser"
+            style="margin-top: 22px;"
+          >
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <i class="material-icons">gesture</i> Оформление
             </a>
@@ -40,7 +44,8 @@
                 <i class="material-icons">insert_photo</i> Фон
               </a>
               <a href="#" class="dropdown-item" @click="showUserInfoSocial()">
-                <i class="material-icons">recent_actors</i> Соцсети и способы связи
+                <i class="material-icons">recent_actors</i> Соцсети и способы
+                связи
               </a>
               <a href="#" class="dropdown-item" @click="showlinkButton()">
                 <i class="material-icons">screen_share</i> Кнопка связи
@@ -71,7 +76,11 @@
             </a>
           </li>
 
-          <li class="dropdown nav-item" v-show="loginedUser" style="margin-top: 22px;">
+          <li
+            class="dropdown nav-item"
+            v-show="loginedUser"
+            style="margin-top: 22px;"
+          >
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <i class="material-icons">face</i>
               <b>{{ loginedUser }}</b>
@@ -101,7 +110,7 @@
 </template>
 
 <script>
-import { http } from "./../http";
+//import { http } from "./../http";
 import { eventEmitter } from "./../main";
 
 export default {
@@ -159,19 +168,18 @@ export default {
     loginedUser() {
       return this.$store.state.currentUser.name;
     }
-  },
-  beforeMount() {
-    http.get("authorizationOnStart").then(response => {
-      if (response.data > 0) {
-        eventEmitter.$emit("showMenu");
-        if (!this.$router.currentRoute.params["user"]) {
-          if (this.$store.state.currentUser.name) {
-            this.$router.push("/" + this.$store.state.currentUser.name);
-          }
-        }
-      }
-    });
-  }
+  } //,
+  // beforeMount() {
+  //   // http.get("authorizationOnStart").then(response => {
+  //   //   if (response.data > 0) {
+  //   //     eventEmitter.$emit("showMenu");
+  //   //     // if (!this.$router.currentRoute.params["user"]) {
+  //   //     //   if (this.$store.state.currentUser.name) {
+  //   //     //     //this.$router.push("/" + this.$store.state.currentUser.name);
+  //   //     //   }
+  //   //     // }
+  //   //   }
+  //   // });
+  // }
 };
 </script>
-

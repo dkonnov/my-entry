@@ -2,6 +2,7 @@
   <div id="app">
     <integrationPixel />
     <mainMenu />
+    123 {{ currentRouteName }} 456 {{ currentUser }}
     <div
       id="backgroundDiv"
       class="page-header header-filter"
@@ -70,6 +71,12 @@ export default {
   computed: {
     background() {
       return this.$store.state.currentUser.background;
+    },
+    currentUser() {
+      return this.$store.state.currentUser.name;
+    },
+    currentRouteName() {
+      return this.$router.currentRoute.params["user"];
     }
   },
   watch: {
@@ -77,6 +84,18 @@ export default {
       // сменим фон, если он изменился в state
       document.getElementById("backgroundDiv").style.backgroundImage =
         "url('img/backgrounds/" + value + "')";
+    },
+    currentUser: function(value) {
+      if (value) {
+        // если мы на странице другого пользователя, то ни чего не делаем
+        // если на главной, то прыгаем на свою
+        if (!this.currentRouteName) {
+          this.$router.push("/" + value);
+        }
+      } else {
+        // при выходе из профиля идем на главную
+        this.$router.push("/");
+      }
     }
   }
 };

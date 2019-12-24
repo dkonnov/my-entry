@@ -143,14 +143,9 @@ export default {
             eventEmitter.$emit("showMessage", "Привет! Рады видеть тебя!");
             // получим первоначальные сведения о пользователе, вошедшем в систему
             this.$store.dispatch("getCurrentUser");
-
             // очистим поля формы
             this.login = "";
             this.password = "";
-            // загрузим фон
-            if (this.$store.state.currentUser.name) {
-              this.$router.push("/" + this.$store.state.currentUser.name);
-            }
           }
         });
     }
