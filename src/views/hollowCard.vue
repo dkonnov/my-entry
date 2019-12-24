@@ -11,7 +11,9 @@
               <div class="description">
                 <h4 class="info-title">Онлайн визитки бесплатно</h4>
                 <p class="description">
-                  Создайте вашу онлайн визитку за несколько минут. Добавляйте ссылку на нее в Instagram, на визитки и т.д. Это значительно улучшит взаимодействие с вашими клиентами. Кроме того,
+                  Создайте вашу онлайн визитку за несколько минут. Добавляйте
+                  ссылку на нее в Instagram, на визитки и т.д. Это значительно
+                  улучшит взаимодействие с вашими клиентами. Кроме того,
                   <b>это бесплатно</b>.
                 </p>
               </div>
@@ -23,9 +25,11 @@
               </div>
               <div class="description">
                 <h4 class="info-title">Все необходимое</h4>
-                <p
-                  class="description"
-                >Добавьте ссылки на ваши социальные сети, аватар, фон, необходимые кнопки, описание услуг, товаров или просто вашей неповторимой личности.</p>
+                <p class="description">
+                  Добавьте ссылки на ваши социальные сети, аватар, фон,
+                  необходимые кнопки, описание услуг, товаров или просто вашей
+                  неповторимой личности.
+                </p>
               </div>
             </div>
 
@@ -35,19 +39,25 @@
               </div>
               <div class="description">
                 <h4 class="info-title">На всех устройствах</h4>
-                <p
-                  class="description"
-                >Ваша страница, будет выглядеть хорошо на всех устройствах! Как на больших мониторах, так и на маленьких смартфонах.</p>
+                <p class="description">
+                  Ваша страница, будет выглядеть хорошо на всех устройствах! Как
+                  на больших мониторах, так и на маленьких смартфонах.
+                </p>
               </div>
             </div>
             <br />
-            <div class="wow fadeInUp" data-wow-duration="2s" data-wow-delay="4s">
+            <div
+              class="wow fadeInUp"
+              data-wow-duration="2s"
+              data-wow-delay="4s"
+            >
               <center>
                 <a
                   class="btn btn-info btn-round"
                   @click="showRegistrationForm()"
                   href="#"
-                >Создать страницу</a>
+                  >Создать страницу</a
+                >
               </center>
             </div>
           </div>
@@ -55,19 +65,32 @@
 
         <div class="col-md-6">
           <div class="card card-raised card-carousel">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div
+              id="carouselExampleIndicators"
+              class="carousel slide"
+              data-ride="carousel"
+            >
               <div class="carousel-inner">
                 <div class="carousel-item active" style="height:100%">
-                  <img class="d-block w-100 h-100" src="img/slides/slide1.jpg" alt="Первый слайд" />
+                  <img
+                    class="d-block w-100 h-100"
+                    src="img/slides/slide1.jpg"
+                    alt="Первый слайд"
+                  />
                   <div class="carousel-caption d-none d-md-block">
                     <h4>
                       <i class="material-icons">contacts</i>
-                      Бесплатные онлайн-визитки, которые смотрятся красиво на любом устройстве
+                      Бесплатные онлайн-визитки, которые смотрятся красиво на
+                      любом устройстве
                     </h4>
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 h-100" src="img/slides/slide2.jpg" alt="Второй слайд" />
+                  <img
+                    class="d-block w-100 h-100"
+                    src="img/slides/slide2.jpg"
+                    alt="Второй слайд"
+                  />
                   <div class="carousel-caption d-none d-md-block">
                     <h4>
                       <i class="material-icons">call</i>
@@ -76,7 +99,11 @@
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100 h-100" src="img/slides/slide3.jpg" alt="Третий слайд" />
+                  <img
+                    class="d-block w-100 h-100"
+                    src="img/slides/slide3.jpg"
+                    alt="Третий слайд"
+                  />
                   <div class="carousel-caption d-none d-md-block">
                     <h4>
                       <i class="material-icons">panorama</i>
@@ -104,7 +131,10 @@
                 role="button"
                 data-slide="prev"
               >
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
                 <span class="sr-only">Previous</span>
               </a>
               <a
@@ -113,7 +143,10 @@
                 role="button"
                 data-slide="next"
               >
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
                 <span class="sr-only">Next</span>
               </a>
             </div>
@@ -148,3 +181,10 @@ export default {
   }
 };
 </script>
+
+<style lang="sass">
+.login-page
+  .page-header
+    .container
+      padding-top: 12vh
+</style>

@@ -8,7 +8,10 @@
     aria-hidden="false"
   >
     <div class="modal-dialog" role="document">
-      <div class="modal-content" style="background-color:transparent;box-shadow: none;">
+      <div
+        class="modal-content"
+        style="background-color:transparent;box-shadow: none;"
+      >
         <div class="card card-login">
           <div class="card-header card-header-primary text-center">
             <h4 class="card-title">Регистрация</h4>
@@ -23,9 +26,10 @@
                   </div>
                   <div class="description">
                     <h4 class="info-title">Добро пожаловать</h4>
-                    <p
-                      class="description"
-                    >Зарегистрируйтесь сейчас и используйте больше возможностей системы.</p>
+                    <p class="description">
+                      Зарегистрируйтесь сейчас и используйте больше возможностей
+                      системы.
+                    </p>
                   </div>
 
                   <div class="icon icon-rose">
@@ -33,9 +37,10 @@
                   </div>
                   <div class="description">
                     <h4 class="info-title">Это бесплатно</h4>
-                    <p
-                      class="description"
-                    >Наш сервис для вас полностью бесплатен! Вы можете пользоваться всеми его функциями.</p>
+                    <p class="description">
+                      Наш сервис для вас полностью бесплатен! Вы можете
+                      пользоваться всеми его функциями.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -45,7 +50,7 @@
                   <div class="card-body">
                     <div
                       class="input-group form-group label-floating"
-                      :class="{'has-danger': $v.name.$error}"
+                      :class="{ 'has-danger': $v.name.$error }"
                     >
                       <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -59,18 +64,23 @@
                         class="form-control"
                         placeholder="Адрес (my-entry.ru\имя)"
                       />
-                      <button v-if="$v.name.$error" class="form-control-feedback">
+                      <button
+                        v-if="$v.name.$error"
+                        class="form-control-feedback"
+                      >
                         <i class="material-icons">clear</i>
                       </button>
                     </div>
                     <small
                       v-if="$v.name.$error"
                       class="form-text text-muteds small-alert"
-                    >Имя страницы должно быть уникальным, начинаться с буквы и может содержать только латинские буквы и цифры.</small>
+                      >Имя страницы должно быть уникальным, начинаться с буквы и
+                      может содержать только латинские буквы и цифры.</small
+                    >
 
                     <div
                       class="input-group form-group label-floating"
-                      :class="{'has-danger': $v.email.$error}"
+                      :class="{ 'has-danger': $v.email.$error }"
                     >
                       <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -79,23 +89,28 @@
                       </div>
                       <input
                         v-model="email"
-                        @blur="$v.email.$touch"
+                        @input="$v.email.$touch"
                         type="email"
                         class="form-control"
                         placeholder="Электронная почта ..."
                       />
-                      <button v-show="!emailOk" class="form-control-feedback">
+                      <button
+                        v-if="$v.email.$error"
+                        class="form-control-feedback"
+                      >
                         <i class="material-icons">clear</i>
                       </button>
                       <small
                         v-if="$v.email.$error"
                         class="form-text text-muteds small-alert"
-                      >Необходимо ввести адрес электронной почты, которого нет в системе.</small>
+                        >Необходимо ввести адрес электронной почты, которого нет
+                        в системе.</small
+                      >
                     </div>
 
                     <div
                       class="input-group form-group label-floating"
-                      :class="{'has-danger': $v.password.$error}"
+                      :class="{ 'has-danger': $v.password.$error }"
                     >
                       <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -109,18 +124,22 @@
                         class="form-control"
                         placeholder="Пароль ..."
                       />
-                      <button v-if="$v.password.$error" class="form-control-feedback">
+                      <button
+                        v-if="$v.password.$error"
+                        class="form-control-feedback"
+                      >
                         <i class="material-icons">clear</i>
                       </button>
                     </div>
                     <small
                       v-if="$v.password.$error"
                       class="form-text text-muteds small-alert"
-                    >Минимум 6 символов.</small>
+                      >Минимум 6 символов.</small
+                    >
 
                     <div
                       class="input-group form-group label-floating"
-                      :class="{'has-danger': $v.password2.$error}"
+                      :class="{ 'has-danger': $v.password2.$error }"
                     >
                       <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -134,29 +153,36 @@
                         class="form-control"
                         placeholder="Пароль еще раз ..."
                       />
-                      <button v-if="$v.password2.$error" class="form-control-feedback">
+                      <button
+                        v-if="$v.password2.$error"
+                        class="form-control-feedback"
+                      >
                         <i class="material-icons">clear</i>
                       </button>
                     </div>
                     <small
                       v-if="$v.password2.$error"
                       class="form-text text-muteds small-alert"
-                    >Пароли не совпадают.</small>
+                      >Пароли не совпадают.</small
+                    >
                     <br />
                     <center>
                       <button
-                        :disabled="!registrationOk"
+                        :disabled="$v.$invalid"
                         @click="registration"
                         type="button"
                         class="btn btn-primary btn-round"
                         data-toggle="modal"
-                      >Регистрация</button>
+                      >
+                        Регистрация
+                      </button>
                       <br />
                       <a
                         href="#"
                         class="btn btn-primary btn-link btn-wd"
                         data-dismiss="modal"
-                      >Закрыть</a>
+                        >Закрыть</a
+                      >
                     </center>
                   </div>
                 </form>
@@ -180,14 +206,10 @@ export default {
     return {
       name: "",
       uniqName: "",
-      nameOk: false,
-      emailOk: false,
-      passwordOk: false,
-      password2Ok: false,
+      uniqEmail: "",
       email: "",
       password: "",
-      password2: "",
-      registrationOk: false
+      password2: ""
     };
   },
   validations: {
@@ -214,7 +236,19 @@ export default {
       }
     },
     email: {
-      email
+      email,
+      uniqEmail: function() {
+        http
+          .get("emailRegistrationCheck", {
+            params: {
+              email: this.email
+            }
+          })
+          .then(response => {
+            this.uniqEmail = response.data;
+          });
+        return this.uniqEmail;
+      }
     },
     password: {
       minLength: minLength(6)
@@ -229,26 +263,6 @@ export default {
     });
   },
   methods: {
-    // проверяет есть ли уже такой email
-    emailCheck() {
-      //if (checkEmail(this.email)) {
-      http
-        .get("emailRegistrationCheck", {
-          params: {
-            email: this.email
-          }
-        })
-        .then(response => {
-          if (response.data == true) {
-            this.emailOk = false;
-          }
-        });
-      this.emailOk = true;
-      //} else {
-      //  this.emailOk = false;
-      //}
-      this.checkForm();
-    },
     registration() {
       http
         .get("registration", {
@@ -263,39 +277,12 @@ export default {
           this.emailRegistration = "";
           this.password = "";
           this.password2 = "";
-          this.nameRegistrationOk = false;
-          this.emailRegistrationOk = false;
-          this.passwordOk = false;
-          this.password2Ok = false;
-          this.registrationOk = false;
           eventEmitter.$emit(
             "showMessage",
             "Спасибо за регистрацию. Теперь можно войти в систему и приступить к настройке своей страницы."
           );
           $("#registrationForm").modal("hide");
         });
-    },
-    // проверет равны ли пароли
-    password2Check() {
-      if (this.password == this.password2) {
-        this.password2Ok = true;
-      } else {
-        this.password2Ok = false;
-      }
-      this.checkForm();
-    },
-    // проверяет регистрационную форму, все ли галочки стоят
-    checkForm() {
-      if (
-        this.nameOk == true &&
-        this.emailOk == true &&
-        this.passwordOk == true &&
-        this.password2Ok == true
-      ) {
-        this.registrationOk = true;
-      } else {
-        this.registrationOk = false;
-      }
     }
   }
 };
@@ -312,6 +299,3 @@ export default {
   padding-left: 55px
   text-align: left
 </style>
-
-
-
