@@ -2,7 +2,7 @@
   <div id="app">
     <integrationPixel />
     <mainMenu />
-    123 {{ currentRouteName }} 456 {{ currentUser }}
+
     <div
       id="backgroundDiv"
       class="page-header header-filter"
