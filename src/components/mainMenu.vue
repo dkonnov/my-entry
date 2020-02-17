@@ -7,7 +7,7 @@
     <div class="container">
       <div class="navbar-translate" style=" position: relative;">
         <a class="navbar-brand" href="http://my-entry.ru">
-          <h4 class="card-title" style="color:white">My-Entry</h4>
+          <h4 class="card-title" style="color:unset">My-Entry</h4>
         </a>
         <button
           class="navbar-toggler"
